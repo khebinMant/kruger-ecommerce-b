@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="config-microservice/src/main/java"/>
+	<classpathentry kind="src" path="config-microservice/src/test/java"/>
+	<classpathentry kind="src" path="customer-microservice/src/main/java"/>
+	<classpathentry kind="src" path="customer-microservice/src/test/java"/>
+	<classpathentry kind="src" path="order-microservice/src/main/java"/>
+	<classpathentry kind="src" path="order-microservice/src/test/java"/>
+	<classpathentry kind="src" path="product-microservice/src/main/java"/>
+	<classpathentry kind="src" path="registry-microservice/src/main/java"/>
+	<classpathentry kind="src" path="registry-microservice/src/test/java"/>
+	<classpathentry kind="lib" path="config-microservice/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="lib" path="customer-microservice/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="order-microservice/.mvn/wrapper/maven-wrapper.jar"/>
+	<classpathentry kind="lib" path="product-microservice/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="lib" path="registry-microservice/gradle/wrapper/gradle-wrapper.jar"/>
+	<classpathentry kind="src" path="gateway-microservice/src/main/java/krugers/microservicio/gateway/gatewaymicroservice"/>
+	<classpathentry kind="output" path="config-microservice/bin/main"/>
+</classpath>
