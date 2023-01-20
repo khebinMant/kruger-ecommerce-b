@@ -28,6 +28,10 @@ public class Cart {
     @Column(name="user_id")
     private Long userId;
 
+    //private String status;
+    //PAGADO, ACEPTADO, EN VIAJE, RECIBIDO, CANCELADO, 
+    //mejor ENUM
+
     // @JoinColumn(name = "user_id", insertable = false, updatable = false)
     // @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
     // private User user;   

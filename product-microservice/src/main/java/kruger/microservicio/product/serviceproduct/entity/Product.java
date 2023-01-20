@@ -54,6 +54,8 @@ public class Product {
     @Positive(message = "El stock debe ser mayor que cero")
     private Double stock;
 
+    //POPULAR // NORMAL
+    //Para determinar si sale en los productos destacados
     private String status;
 
     @Column(name = "sales_counter")

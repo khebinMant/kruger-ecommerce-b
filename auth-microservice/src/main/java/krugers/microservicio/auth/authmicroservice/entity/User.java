@@ -50,7 +50,7 @@ public class User {
     @Column(name = "sign_date")
     private Date signDate;
 
-    private Boolean verified;
+    private Boolean verified; //TRUE OR FALSE EMAIL VERIFICATION
     
     @Column(name = "role", nullable = false)
     private Role role;

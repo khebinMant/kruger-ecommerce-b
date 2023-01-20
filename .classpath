@@ -16,5 +16,6 @@
 	<classpathentry kind="lib" path="product-microservice/gradle/wrapper/gradle-wrapper.jar"/>
 	<classpathentry kind="lib" path="registry-microservice/gradle/wrapper/gradle-wrapper.jar"/>
 	<classpathentry kind="src" path="gateway-microservice/src/main/java/krugers/microservicio/gateway/gatewaymicroservice"/>
+	<classpathentry kind="src" path="company-microservice/src/main/java/krugers/microservicio/company/companymicroservice"/>
 	<classpathentry kind="output" path="config-microservice/bin/main"/>
 </classpath>
