@@ -35,8 +35,8 @@ public class Company implements Serializable{
 
     private String description;
     
-    @Column(name="logo_image")
-    private String logoImage;
+    @Column(name="image_url")
+    private String imageUrl;
 
     private String status;
 

@@ -33,7 +33,7 @@ public class CompanyServiceImpl implements ICompanyService{
         }
         companyDB.setCompanyName(company.getCompanyName());
         companyDB.setUpdateAt(new Date());
-        companyDB.setLogoImage(company.getLogoImage());
+        companyDB.setImageUrl(company.getImageUrl());
         companyDB.setDescription(company.getDescription());
         companyDB.setCompanyName(company.getCompanyName());
         
