@@ -18,7 +18,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import krugers.microservicio.auth.authmicroservice.dto.OrderRequest;
 import krugers.microservicio.auth.authmicroservice.entity.Cart;
 import krugers.microservicio.auth.authmicroservice.entity.User;
-import krugers.microservicio.auth.authmicroservice.service.CartServiceImpl;
+import krugers.microservicio.auth.authmicroservice.service.cart.CartServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.*;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

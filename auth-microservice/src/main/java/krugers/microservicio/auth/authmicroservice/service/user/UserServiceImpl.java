@@ -1,4 +1,4 @@
-package krugers.microservicio.auth.authmicroservice.service;
+package krugers.microservicio.auth.authmicroservice.service.user;
 
 import java.util.Date;
 import java.util.List;
@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.netflix.discovery.converters.Auto;
+
 import krugers.microservicio.auth.authmicroservice.dto.LoginRequest;
 import krugers.microservicio.auth.authmicroservice.dto.LoginResponse;
 import krugers.microservicio.auth.authmicroservice.entity.User;
 import krugers.microservicio.auth.authmicroservice.entity.TokenDto;
 import krugers.microservicio.auth.authmicroservice.repository.UserRepository;
 import krugers.microservicio.auth.authmicroservice.security.JwtProvider;
+import krugers.microservicio.auth.authmicroservice.service.address.AddressServiceImpl;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,6 +28,9 @@ public class UserServiceImpl implements UserService {
     PasswordEncoder passwordEncoder;
 
     @Autowired
+    AddressServiceImpl addressServiceImpl;
+
+    @Autowired
     JwtProvider jwtProvider;
 
     public User save(User authUser) {
@@ -33,21 +39,21 @@ public class UserServiceImpl implements UserService {
             return null;
         }
         String password = passwordEncoder.encode(authUser.getPassword());
-        User authUserCreated = User.builder()
-                .email(authUser.getEmail())
-                .password(password)
-                .userName(authUser.getUserName())
-                .firstName(authUser.getUserName())
-                .imageUrl(authUser.getImageUrl())
-                .companyId(authUser.getCompanyId())
-                .cellPhone(authUser.getCellPhone())
-                .lastName(authUser.getLastName())
-                .signDate(new Date())
-                .verified(false)
-                .role(authUser.getRole())// poner el resto
-                .build();
+        authUser.setPassword(password);
+        authUser.setVerified(false);
+        
+        Long customerId;
+        User userDB =  new User();
+        userDB = userRepository.save(authUser);
+        customerId = userDB.getId();
 
-        return userRepository.save(authUserCreated);
+        if(!authUser.getAddresses().isEmpty()){
+            authUser.getAddresses().forEach(userAddress->{
+                addressServiceImpl.createAddress(userAddress, customerId);
+            });
+        }
+
+        return userRepository.save(userDB);
     }
 
     public LoginResponse login(LoginRequest dto) {

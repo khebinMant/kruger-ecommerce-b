@@ -1,4 +1,4 @@
-package krugers.microservicio.auth.authmicroservice.service;
+package krugers.microservicio.auth.authmicroservice.service.user;
 
 import java.util.List;
 

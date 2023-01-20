@@ -28,8 +28,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import krugers.microservicio.auth.authmicroservice.dto.LoginRequest;
 import krugers.microservicio.auth.authmicroservice.dto.LoginResponse;
 import krugers.microservicio.auth.authmicroservice.entity.User;
+import krugers.microservicio.auth.authmicroservice.service.user.UserServiceImpl;
 import krugers.microservicio.auth.authmicroservice.entity.TokenDto;
-import krugers.microservicio.auth.authmicroservice.service.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 
 import io.swagger.v3.oas.annotations.Operation;
