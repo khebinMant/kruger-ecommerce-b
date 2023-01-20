@@ -169,7 +169,7 @@ public class UserController {
 	@Operation(description = "get specific user", summary = "calling this endpoint will allow you to fetch a user by passing its email in the url as a path variable")
 	@Tag(name = "Retrieve Single user")
 	@GetMapping(value="/email/{email}", produces = "application/json")
-	public ResponseEntity<?> getUserByEmail (@PathVariable String email) {
+	public ResponseEntity<?> getUserByEmail (@PathVariable("email") String email) {
 		User user = userServiceImpl.findByEmail(email);
 		if (user != null)
 			return ResponseEntity.ok(user);

@@ -31,7 +31,15 @@ public class LoginResponse {
 
     private String lastName;
 
+    private String cellPhone;
+
+    private Date birthDate;
+
     private Date signDate;
+
+    private String imageUrl;
+    
+    private Long companyId;
 
     private Boolean verified;
     

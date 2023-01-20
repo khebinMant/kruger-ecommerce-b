@@ -38,6 +38,9 @@ public class UserServiceImpl implements UserService {
                 .password(password)
                 .userName(authUser.getUserName())
                 .firstName(authUser.getUserName())
+                .imageUrl(authUser.getImageUrl())
+                .companyId(authUser.getCompanyId())
+                .cellPhone(authUser.getCellPhone())
                 .lastName(authUser.getLastName())
                 .signDate(new Date())
                 .verified(false)
@@ -58,8 +61,11 @@ public class UserServiceImpl implements UserService {
                     .email(user.get().getEmail())
                     .password(user.get().getPassword())
                     .userName(user.get().getUserName())
+                    .birthDate(user.get().getBirthDate())
                     .firstName(user.get().getFirstName())
                     .lastName(user.get().getLastName())
+                    .cellPhone(user.get().getCellPhone())
+                    .companyId(user.get().getCompanyId())
                     .signDate(user.get().getSignDate())
                     .verified(user.get().getVerified())
                     .role(user.get().getRole())
@@ -100,6 +106,9 @@ public class UserServiceImpl implements UserService {
             userDB.setLastName(user.getLastName());
             userDB.setUserName(user.getUserName());
             userDB.setVerified(user.getVerified());
+            userDB.setImageUrl(user.getImageUrl());
+            userDB.setBirthDate(user.getBirthDate());
+            userDB.setCellPhone(user.getCellPhone());
             userDB.setEmail(user.getEmail());
             userDB.setPassword(password);
             User userUpdated = userRepository.save(userDB);

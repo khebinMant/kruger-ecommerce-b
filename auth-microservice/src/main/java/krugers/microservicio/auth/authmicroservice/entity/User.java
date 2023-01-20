@@ -46,27 +46,27 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
+    @Column(name = "cell_phone")
+    private String cellPhone;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "birth_date")
+    private Date birthDate;
+
     @Temporal(TemporalType.DATE)
     @Column(name = "sign_date")
     private Date signDate;
+
+    @Column(name = "image_url")
+    private String imageUrl;
+
+    //Compañia a la que representa el cliente
+    @Column(name = "company_id")
+    private Long companyId;
 
     private Boolean verified; //TRUE OR FALSE EMAIL VERIFICATION
     
     @Column(name = "role", nullable = false)
     private Role role;
-
-//     @OneToMany(mappedBy = "userId",cascade = CascadeType.ALL)
-//    private List<Cart> carts;
-
-//    public void addCard(Cart cart){
-//         if(carts==null){
-//             carts=new ArrayList(){};
-//         }
-//         if(!carts.contains(cart)){
-//             carts.add(cart);
-//             cart.setUserId(this.getId());
-//         }
-//     }
-
 
 }
