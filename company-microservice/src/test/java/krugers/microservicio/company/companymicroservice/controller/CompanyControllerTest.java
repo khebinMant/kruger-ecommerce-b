@@ -55,7 +55,7 @@ public class CompanyControllerTest {
     @Order(2)
     public void test_createBranch() throws Exception  {
 
-        Company customCompany = new Company(100L,"PizzaHut", "CREATED", new Date(), new Date());
+        Company customCompany = new Company(1L,"PizzaHut", "de pizzas", "logo", "CREATED", new Date(), new Date());
 
         HttpEntity<Company> entity = new HttpEntity<>(customCompany, headers);
         ResponseEntity<String> response = restTemplate.exchange(

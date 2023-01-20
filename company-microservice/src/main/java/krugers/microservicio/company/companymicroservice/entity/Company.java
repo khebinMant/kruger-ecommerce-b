@@ -33,10 +33,10 @@ public class Company implements Serializable{
     @Column(name="company_name", nullable=false)
     private String companyName;
 
+    private String description;
+    
     @Column(name="logo_image")
     private String logoImage;
-
-    private String description;
 
     private String status;
 
