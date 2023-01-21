@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import kruger.microservicio.product.serviceproduct.entity.Category;
 import kruger.microservicio.product.serviceproduct.entity.Product;
+import kruger.microservicio.product.serviceproduct.entity.Status;
 import kruger.microservicio.product.serviceproduct.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 /**
@@ -33,7 +34,7 @@ public class ProductServiceImpl implements IProductService{
 
     @Override
     public Product createProduct(Product product) {
-        product.setStatus("CREATES");
+        product.setStatus(Status.NOT_POPULAR);
         product.setSalesCounter(0.0);
         product.setCreated(new Date());
         return productRepository.save(product);
@@ -45,8 +46,13 @@ public class ProductServiceImpl implements IProductService{
         if(productDB == null){
             return null;
         }
-        productDB.setPhotoUrl(product.getPhotoUrl());
+        productDB.setImages(product.getImages());
         productDB.setName(product.getName());
+        productDB.setType(product.getType());
+        productDB.setBrand(product.getBrand());
+        productDB.setWeight(product.getWeight());
+        productDB.setProcessor(product.getProcessor());
+        productDB.setStatus(product.getStatus());
         productDB.setDescription(product.getDescription());
         productDB.setCategory(product.getCategory());
         productDB.setPrice(product.getPrice());

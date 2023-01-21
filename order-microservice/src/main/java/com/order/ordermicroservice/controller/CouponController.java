@@ -65,7 +65,7 @@ public class CouponController {
 	// })
     // @Operation(summary = "Return a branch by Id", description = "Returns a JSON response branch information")
     // @Tag(name = "GET branch by Id ", description = "Retrieve information of branch by Id")
-    // @GetMapping(value="/{id}")
+    @GetMapping(value="/{id}")
     public ResponseEntity<?> getCoupon(@PathVariable(name="id") Long id){
         Coupon coupon = couponService.getCoupon(id);
 

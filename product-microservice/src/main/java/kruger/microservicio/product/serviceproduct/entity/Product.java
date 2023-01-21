@@ -54,15 +54,18 @@ public class Product {
     @Positive(message = "El stock debe ser mayor que cero")
     private Double stock;
 
-    //POPULAR // NORMAL
-    //Para determinar si sale en los productos destacados
-    private String status;
+    private Status status;
+
+    private Type type;
+
+    private String brand;
+
+    private Double weight;
+
+    private String processor;
 
     @Column(name = "sales_counter")
     private Double salesCounter;
-
-    @Column(name = "photo_url")
-    private String photoUrl;
 
     @Column(name = "created")
     @Temporal(TemporalType.TIMESTAMP)
@@ -79,4 +82,10 @@ public class Product {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private List<Review> reviews;
+
+    @Valid
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id")
+    private List<Image> images;
 }

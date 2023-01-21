@@ -10,13 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
@@ -24,73 +22,70 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import kruger.microservicio.product.serviceproduct.entity.Review;
-import kruger.microservicio.product.serviceproduct.service.review.IReviewService;
+import kruger.microservicio.product.serviceproduct.entity.Image;
+import kruger.microservicio.product.serviceproduct.service.image.IImageService;
 
-/**
- * This microservice was created by Kevin Mantilla
- */
 @RestController
-@RequestMapping (value = "api/reviews")
-public class ReviewController {
-
+@RequestMapping (value = "api/images")
+public class ImageController {
+    
     @Autowired
-    IReviewService reviewService;
+    IImageService imageService;
 
-
-    @Tag(name = "Get all Reviews information")
+    @Tag(name = "Get all images information")
     @GetMapping
-    public ResponseEntity<List<Review>> listReviews(){
-        List<Review> reviews = new ArrayList<>();
-        reviews = reviewService.listAllReviews();
-        if(reviews.isEmpty()){
+    public ResponseEntity<List<Image>> listImages(){
+        List<Image> images = new ArrayList<>();
+        images = imageService.listAllImages();
+        if(images.isEmpty()){
             return ResponseEntity.noContent().build();
         }
 
-        return ResponseEntity.ok(reviews);
+        return ResponseEntity.ok(images);
     }
 
-    @Tag(name = "Get Review by ID")
+    @Tag(name = "Get image by ID")
     @GetMapping(value="/{id}")
-    public ResponseEntity<Review> getReview(@PathVariable(name="id") Long id){
-        Review review = reviewService.getReview(id);
+    public ResponseEntity<Image> getImage(@PathVariable(name="id") Long id){
+        Image image = imageService.getImage(id);
 
-        if(review==null){
+        if(image==null){
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(review);
+        return ResponseEntity.ok(image);
     }
     
-    @Tag(name = "Create a new review")
+    @Tag(name = "Create a new image")
     @PostMapping
-    public ResponseEntity<Review> createReview(@Valid @RequestBody Review review, BindingResult result){
+    public ResponseEntity<Image> createImage(@Valid @RequestBody Image image, BindingResult result){
         
         if(result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,  this.formatMessage(result));
         }
         
-        Review createdReview = reviewService.createReview(review);
+        Image createdImage = imageService.createImage(image);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdReview);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdImage);
     }
 
     @Tag(name = "Edit a review by ID")
     @PutMapping(value="/{id}")
-    public ResponseEntity<Review> updateReview(@PathVariable(name="id") Long id, @RequestBody Review review){
-        review.setId(id);
-        Review reviewDB = reviewService.updateReview(review);
-        if(reviewDB == null){
+    public ResponseEntity<Image> updateImage(@PathVariable(name="id") Long id, @RequestBody Image image){
+        image.setId(id);
+        Image imageDB = imageService.updateImage(image);
+        if(imageDB == null){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(reviewDB);
+        return ResponseEntity.ok(imageDB);
     }
 
     @Tag(name = "Delete specific review info")
     @DeleteMapping(value="/{id}")
-    public ResponseEntity<?> deleteReview(@PathVariable(name="id") Long id){
-        reviewService.deleteReview(id);
+    public ResponseEntity<?> deleteImage(@PathVariable(name="id") Long id){
+        imageService.deleteImage(id);
 
       return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Successfully operation. ");
     }

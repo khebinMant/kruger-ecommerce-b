@@ -67,9 +67,7 @@ public class ProductController {
             }
         }
         else{
-            products = iproductService.findByCategory(Category.builder().id(categoryId).build()).stream()
-                .filter(product->product.getStatus() != "DELETED")
-                .collect(Collectors.toList());
+            products = iproductService.findByCategory(Category.builder().id(categoryId).build());
 
             if(products.isEmpty()){
                 return ResponseEntity.notFound().build();
