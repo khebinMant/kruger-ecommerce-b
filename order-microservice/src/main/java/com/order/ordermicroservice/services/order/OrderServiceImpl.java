@@ -52,6 +52,12 @@ public class OrderServiceImpl implements IOrderService{
         //Al crear la orden se crea el cart con el customerId y el orderId
         customerClient.addCart(new OrderRequest(userId,createdOrder.getId()));
 
+        //TODO
+        //Al crear la orden si tiene adjuntado
+        //un cupon de descuentos entonces se debe 
+        //cambiar el estado del cupon a USED, CREATED, ACTIVE
+            
+
         //Actualizar el stock del producto
         createdOrder.getItems().forEach( orderItem ->{
             productClient.updateStockProduct(orderItem.getProductId(), orderItem.getQuantity() * -1);
@@ -92,7 +98,6 @@ public class OrderServiceImpl implements IOrderService{
 
         existingOrder.setStatus(order.getStatus());
         existingOrder.setCreated(order.getCreated());
-        existingOrder.setShipmentAddress(order.getShipmentAddress());
         existingOrder.setShipmentDate(order.getShipmentDate());
         existingOrder.setTotalPrice(order.getTotalPrice());
         return orderRepository.save(existingOrder);

@@ -100,13 +100,6 @@ public class UserController {
         return  ResponseEntity.ok(currentUser);
     }
 
-    @GetMapping("/hello")
-    public String saludar(){
-        User currentUser = userServiceImpl.findById(1L);
-        System.out.println(currentUser);
-        return "hooola";
-    }
-
     // para obtener una lista de todos los users
 	@Tag(name = "Retrieve All Users")
 	@ApiResponse(responseCode = "200", description = "Successful retrieval of users", content = @Content(array = @ArraySchema(schema = @Schema(implementation = User.class))))

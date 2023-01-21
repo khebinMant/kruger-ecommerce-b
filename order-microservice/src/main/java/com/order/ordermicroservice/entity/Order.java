@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This microservice was created by Kevin and David
+ * This microservice was created by Kevin
  */
 @Data
 @Entity
@@ -32,11 +32,12 @@ public class Order {
 
     private String status;
 
-    @Column(name="shipment_address")
-    private String shipmentAddress; //cambiar por dirección mediante address_id
+    @Column(name="address_id")
+    private Long addressId;
 
-    //Column(name="cupon_id") //nullable true
-    //private Long cuponId
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "coupon_id")
+    private Coupon coupon;
 
     @Temporal(TemporalType.DATE)
     @Column(name="shipment_date")
