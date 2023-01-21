@@ -47,6 +47,7 @@ public class ProductServiceImpl implements IProductService{
             return null;
         }
         productDB.setImages(product.getImages());
+        productDB.setReviews(product.getReviews());
         productDB.setName(product.getName());
         productDB.setType(product.getType());
         productDB.setBrand(product.getBrand());

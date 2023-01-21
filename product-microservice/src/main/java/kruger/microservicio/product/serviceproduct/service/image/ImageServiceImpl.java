@@ -28,7 +28,8 @@ public class ImageServiceImpl implements IImageService{
     @Override
     public Image createImage(Image image) {
         image.setCreated(new Date());
-
+        image.setUri(image.getUri());
+        image.setProductId(image.getProductId());
         return imageRepository.save(image);
     }
 
