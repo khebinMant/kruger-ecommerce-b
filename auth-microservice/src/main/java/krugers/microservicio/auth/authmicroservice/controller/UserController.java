@@ -71,6 +71,7 @@ public class UserController {
         else{
             User userDB = userServiceImpl.findByEmail(user.getEmail());
             if(userDB != null){
+            	System.out.println(userDB);
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El email ya esta en uso");
             }
             User authUserCreated = userServiceImpl.save(user);
