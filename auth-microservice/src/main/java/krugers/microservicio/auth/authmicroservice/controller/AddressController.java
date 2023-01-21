@@ -48,13 +48,11 @@ public class AddressController {
 	// })
     // @Operation(summary = "Return a list with all branchs", description = "Returns a JSON response with the branchs information")
     // @Tag(name = "GET all branchs ", description = "Retrieve information of all branchs")
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<Address>> listAddress(){
             List<Address> addresses = new ArrayList<>();
 
-            addresses = iAddressService.findAddresses().stream()
-                .filter(address->address.getStatus()!="DELETED")
-                .collect(Collectors.toList());
+            addresses = iAddressService.findAddresses();
             if(addresses.isEmpty()){
                 return ResponseEntity.noContent().build();
             }
@@ -86,7 +84,7 @@ public class AddressController {
 	// })
     // @Operation(summary = "Create a new branch to a customer", description = "Returns a JSON response with the branch information")
     // @Tag(name = "POST branch", description = "Retrieve information of a created branch")
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<Address> createAddress(@Valid @RequestBody Address address, BindingResult result){
         
         if(result.hasErrors()){

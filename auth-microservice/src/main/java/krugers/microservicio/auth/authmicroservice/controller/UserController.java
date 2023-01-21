@@ -28,7 +28,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import krugers.microservicio.auth.authmicroservice.dto.LoginRequest;
 import krugers.microservicio.auth.authmicroservice.dto.LoginResponse;
 import krugers.microservicio.auth.authmicroservice.entity.User;
+import krugers.microservicio.auth.authmicroservice.service.address.AddressServiceImpl;
 import krugers.microservicio.auth.authmicroservice.service.user.UserServiceImpl;
+import krugers.microservicio.auth.authmicroservice.entity.Address;
 import krugers.microservicio.auth.authmicroservice.entity.TokenDto;
 import lombok.extern.slf4j.Slf4j;
 
@@ -45,6 +47,9 @@ public class UserController {
 
     @Autowired
     UserServiceImpl userServiceImpl;
+
+    @Autowired
+    AddressServiceImpl addressServiceImpl;
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest dto){
@@ -169,8 +174,64 @@ public class UserController {
 			return ResponseEntity.ok(user);
 		else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please make sure the email is correct!!");
-		
 	}
+
+    //Obtener todas las sucursales de un cliente dado su ID
+    @ApiResponses(value = { 
+        @ApiResponse(responseCode = "200", description = "Successfully operation"),
+        @ApiResponse(responseCode = "404", description = "We cant find the customer")
+    })
+    @Operation(summary = "Return all customer branches  with the provided customer Id", description = "Returns a JSON response with the customer branchs information with the provided customer Id")
+    @Tag(name = "GET  customer branches by customer Id", description = "Retrieve a customer branches with the provided customer Id")
+    @GetMapping(value="/{id}/addresses")
+    public ResponseEntity<List<Address>> getAddressesByUserId(@PathVariable(name="id") Long id){
+        List <Address> branchs = addressServiceImpl.findByUserId(id);
+
+        if(branchs==null){
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(branchs);
+    }
+
+       //Establecer sucursal matriz de un cliente
+       @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "Customer information")
+	})
+    @Operation(summary = "Update a customer matriz branch by Id", description = "Returns a JSON response with the customer updated information ")
+    @Tag(name = "PUT update a customer matriz branch ", description = "Retrieve information of a updated customer")
+    @PutMapping(value = "/{userId}/address/{addressId}")
+    public ResponseEntity<User> updateCustomerMatriz(@PathVariable("userId") Long userId, @PathVariable("addressId") Long addressId) {
+        log.info("Updating Customer matriz branch with id {}", userId);
+
+        //Obtengo todas las sucursales que son del cliente
+        List <Address> addresses = addressServiceImpl.findByUserId(userId);
+        
+        //Obtengo la sucursal que deseo establecer como matriz
+        Address address = addressServiceImpl.getAddress(addressId);
+        
+        //Si no encontro entonce retorno vacio
+        if ( addresses.isEmpty() ) {
+            log.error("Unable to update. Customer with id {} not found.", userId);
+            return  ResponseEntity.notFound().build();
+        }
+        //Si encontro actualizo una por una si es matriz o no
+
+        for (Address address2 : addresses) {
+            if(address2.getId()==address.getId()){
+                addressServiceImpl.updateMatrizAddress(address2, true);
+            }
+            else{
+                addressServiceImpl.updateMatrizAddress(address2, false);
+            }
+        }
+
+        User currentUser = userServiceImpl.findById(userId);
+        
+
+        return  ResponseEntity.ok(currentUser);
+    }
+
 
 
     private String formatMessage( BindingResult result){

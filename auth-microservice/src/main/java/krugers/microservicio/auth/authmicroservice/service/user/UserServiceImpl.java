@@ -115,6 +115,7 @@ public class UserServiceImpl implements UserService {
             userDB.setImageUrl(user.getImageUrl());
             userDB.setBirthDate(user.getBirthDate());
             userDB.setCellPhone(user.getCellPhone());
+            userDB.setAddresses(user.getAddresses());
             userDB.setEmail(user.getEmail());
             userDB.setPassword(password);
             User userUpdated = userRepository.save(userDB);

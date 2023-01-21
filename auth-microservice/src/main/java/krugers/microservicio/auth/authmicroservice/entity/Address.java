@@ -46,7 +46,7 @@ public class Address implements Serializable{
     @Column(name="is_matriz")
     private Boolean isMatriz;
 
-    @Column(name = "userId")
+    @Column(name = "user_id")
     private Long userId;
 
     private String status;

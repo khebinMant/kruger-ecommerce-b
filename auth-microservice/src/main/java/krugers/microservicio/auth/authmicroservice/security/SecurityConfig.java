@@ -14,7 +14,13 @@ public class SecurityConfig{
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        String[] pathArray = new String[]{"/api/users/*","/api/carts/*","/api/users/update/*"};
+        String[] pathArray = new String[]
+        {
+                "/api/users/**",
+                "/api/carts/**",
+                "/api/users/update/**",
+                "/api/address/**"
+        };
 
         http
                 .csrf().disable()
