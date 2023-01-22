@@ -14,10 +14,10 @@ public interface CartService {
      */
     Cart addCart (OrderRequest request);
 
-    // /**
-    //  * este metodo busca todas las cartas que tienen el customerId equal al parametro id
-    //  * @param id es el id del customer que estamos buscando
-    //  * @return list de todas las cartas que estan el base de datos
-    //  */
-    // List<Cart> findAllByUserId(Long userId);
+    /**
+     * este metodo busca todas las cartas que tienen el customerId equal al parametro id
+     * @param id es el id del customer que estamos buscando
+     * @return list de todas las cartas que estan el base de datos
+     */
+    List<Cart> findAllCartsByUserId(Long userId);
 }

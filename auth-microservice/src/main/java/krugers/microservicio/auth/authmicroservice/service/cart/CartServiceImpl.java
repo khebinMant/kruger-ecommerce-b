@@ -35,4 +35,10 @@ public class CartServiceImpl implements CartService {
         return null;
     }
 
+    @Override
+    public List<Cart> findAllCartsByUserId(Long userId) {
+        return cartRepository.findByUserId(userId);
+    }
+    
+
 }
