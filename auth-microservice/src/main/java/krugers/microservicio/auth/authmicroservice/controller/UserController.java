@@ -162,7 +162,6 @@ public class UserController {
     }
 
 
-
     //obtener un cliente dado su email
 	@ApiResponse(responseCode = "200", description = "Successful retrieval of user", content = @Content(array = @ArraySchema(schema = @Schema(implementation = User.class))))
 	@Operation(description = "get specific user", summary = "calling this endpoint will allow you to fetch a user by passing its email in the url as a path variable")
