@@ -35,7 +35,7 @@ public class Order {
     @Column(name="address_id")
     private Long addressId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "coupon_id")
     private Coupon coupon;
 
