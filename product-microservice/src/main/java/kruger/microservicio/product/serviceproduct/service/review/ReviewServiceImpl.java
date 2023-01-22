@@ -30,6 +30,7 @@ public class ReviewServiceImpl implements IReviewService {
     public Review createReview(Review review) {
         review.setCreated(new Date());
         review.setRaiting(review.getRaiting());
+        review.setUserId(review.getUserId());
         review.setText(review.getText());
         review.setProductId(review.getProductId());
 

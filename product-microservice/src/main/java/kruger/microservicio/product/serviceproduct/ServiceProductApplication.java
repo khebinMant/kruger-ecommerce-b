@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import kruger.microservicio.product.serviceproduct.client.product.ProductClient;
 @SpringBootApplication
 @EnableDiscoveryClient
 @RestController
+@EnableFeignClients
 public class ServiceProductApplication implements CommandLineRunner{
 
 	@Autowired

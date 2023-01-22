@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import kruger.microservicio.product.serviceproduct.client.user.UserClientF;
 import kruger.microservicio.product.serviceproduct.entity.Review;
+import kruger.microservicio.product.serviceproduct.model.User;
 import kruger.microservicio.product.serviceproduct.service.review.IReviewService;
 
 /**
@@ -38,6 +41,8 @@ public class ReviewController {
     @Autowired
     IReviewService reviewService;
 
+    @Autowired
+    UserClientF userClientF;
 
     @Tag(name = "Get all Reviews information")
     @GetMapping
@@ -47,6 +52,12 @@ public class ReviewController {
         if(reviews.isEmpty()){
             return ResponseEntity.noContent().build();
         }
+
+        reviews.stream().map(review->{
+            User user = userClientF.getUser(review.getId()).getBody();
+            review.setUser(user);
+            return review;
+        }).collect(Collectors.toList());
 
         return ResponseEntity.ok(reviews);
     }
@@ -59,6 +70,7 @@ public class ReviewController {
         if(review==null){
             return ResponseEntity.noContent().build();
         }
+        review.setUser(userClientF.getUser(review.getUserId()).getBody());
         return ResponseEntity.ok(review);
     }
     

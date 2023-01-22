@@ -38,7 +38,7 @@ public class ProductClient {
         List<Review> emptyReviews =  new ArrayList<>();
 
         List<Review> reviews =  new ArrayList<>();
-        reviews.add(new Review(1L,5L,"Excelente calzado muy cómodo",1L,new Date()));
+        reviews.add(new Review(1L,5L,"Excelente calzado muy cómodo",1L,1L,new Date()));
 
         //5 productos para la categoria de CALZADO
         productServiceImpl.createProduct(new Product(1L,"TENIS FORUM MID","Calzado deportivo masculino marca Adidas",154.0,100.0, Status.NOT_POPULAR, Type.PRODUCT, "Apple", 15.0, "SUPER", 0.0,new Date(),categoryServiceImpl.getCategory(1L),reviews,emptyImages));

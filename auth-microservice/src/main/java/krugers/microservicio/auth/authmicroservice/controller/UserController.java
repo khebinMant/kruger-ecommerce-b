@@ -130,12 +130,12 @@ public class UserController {
     @Operation(summary = "Return a user with the provided Id", description = "Returns a JSON response with the user information with the provided Id")
     @Tag(name = "GET  user by  Id", description = "Retrieve a user with the provided Id")
     @GetMapping(value = "/{id}")
-    public ResponseEntity<?> getUser(@PathVariable("id") long id) {
+    public ResponseEntity<User> getUser(@PathVariable("id") long id) {
         log.info("Fetching User with id {}", id);
         User user = userServiceImpl.findById(id);
         if (  null == user) {
             log.error("User with id {} not found.", id);
-            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("We cant find a user with that id not found. ");
+            return ResponseEntity.notFound().build();
         }
         return  ResponseEntity.ok(user);
     }

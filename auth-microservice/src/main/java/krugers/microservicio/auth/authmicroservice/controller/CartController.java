@@ -42,26 +42,5 @@ public class CartController {
         return new ResponseEntity<>("Could not find a user with the id provided"
         ,HttpStatus.NOT_FOUND);
     }
-    
-    // @ApiResponse(responseCode = "200", description = "Successful retrieval of userCar", content = @Content(array = @ArraySchema(schema = @Schema(implementation = User.class))))
-    // @Operation(description = "get specific userCar", summary = "calling this endpoint will allow you to fetch a userCar by passing its id in the url as a path variable")
-    // @Tag(name = "Retrieve Single user car")
-    // @GetMapping("/all/{userId}")
-    // public ResponseEntity<?> getAllUserCartsById (@PathVariable Long userId) {
-    // 	List<Cart> carts = cartServiceImpl.findAllByUserId(userId);
-    	
-    // 	return carts == null ? new ResponseEntity<>("Could not find a cards with the id provided"
-    // 	        ,HttpStatus.NOT_FOUND):  new ResponseEntity<>(carts,HttpStatus.OK);
-    // }
 
-  /*  @DeleteMapping("/{userId}")
-    public ResponseEntity deleteOrder(@PathVariable Long userId){
-        
-        user user= cartServiceImpl.deleteOrder(userId);
-        if(user!=null){
-            return new ResponseEntity<>(user,HttpStatus.OK);
-        }
-        return new ResponseEntity<>("Could not find a user with the id provided"
-        ,HttpStatus.NOT_FOUND);
-    }*/    
 }

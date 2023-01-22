@@ -35,19 +35,4 @@ public class CartServiceImpl implements CartService {
         return null;
     }
 
-	// @Override
-	// public List<Cart> findAllByUserId(Long userId) {
-		
-	// 	if(userRepository.findById(userId).isPresent()) {
-	// 		return userRepository.findById(userId).get().getCarts();
-	// 	}
-	// 	return null;
-	// }
-
-   
-    
-
-    
-
-    
 }

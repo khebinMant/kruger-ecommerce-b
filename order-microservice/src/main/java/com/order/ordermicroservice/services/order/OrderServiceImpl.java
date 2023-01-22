@@ -1,7 +1,7 @@
 package com.order.ordermicroservice.services.order;
 
 import com.netflix.discovery.converters.Auto;
-import com.order.ordermicroservice.client.UserClient;
+import com.order.ordermicroservice.client.CartClient;
 import com.order.ordermicroservice.client.ProductClient;
 import com.order.ordermicroservice.entity.Order;
 import com.order.ordermicroservice.entity.OrderItem;
@@ -36,7 +36,7 @@ public class OrderServiceImpl implements IOrderService{
     ProductClient productClient;
 
     @Autowired
-    UserClient customerClient;
+    CartClient cartClient;
 
     // -------------------create order service--------------------------------------------
     public Order createOrder(Order order, Long userId){
@@ -50,7 +50,7 @@ public class OrderServiceImpl implements IOrderService{
         paymentServiceImpl.createPayment(new Payment("CREATED", UUID.randomUUID(), new Date(),createdOrder));
 
         //Al crear la orden se crea el cart con el customerId y el orderId
-        customerClient.addCart(new OrderRequest(userId,createdOrder.getId()));
+        cartClient.addCart(new OrderRequest(userId,createdOrder.getId()));
 
         //TODO
         //Al crear la orden si tiene adjuntado
