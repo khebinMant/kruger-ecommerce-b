@@ -22,6 +22,7 @@ import krugers.microservicio.auth.authmicroservice.dto.OrderRequest;
 import krugers.microservicio.auth.authmicroservice.entity.Cart;
 import krugers.microservicio.auth.authmicroservice.entity.User;
 import krugers.microservicio.auth.authmicroservice.service.cart.CartServiceImpl;
+import krugers.microservicio.auth.authmicroservice.service.user.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.*;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -33,6 +34,9 @@ public class CartController {
 
     @Autowired
     CartServiceImpl cartServiceImpl;
+
+    @Autowired
+    UserServiceImpl userServiceImpl;
 
     @Autowired
     OrderClientF orderClientF;
@@ -61,6 +65,7 @@ public class CartController {
 
         carts.stream().map(cart ->{
             cart.setOrder(orderClientF.getOrder(cart.getOrderId()).getBody());
+            cart.setUser(userServiceImpl.findById(cart.getUserId()));
             return cart;
         }).collect(Collectors.toList());
 

@@ -38,6 +38,9 @@ public class Cart {
 
     private Status status;
 
+    public Cart() {
+    }
+
     public Cart(Long orderId, Long userId){
         this.orderId = orderId;
         this.userId = userId;
