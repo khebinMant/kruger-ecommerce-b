@@ -31,6 +31,7 @@ public class Review {
 
     private Long raiting;
 
+    @Column(columnDefinition="TEXT")
     private String text;
 
     @Column(name="user_id")

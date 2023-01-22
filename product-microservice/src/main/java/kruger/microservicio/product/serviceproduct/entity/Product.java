@@ -46,7 +46,11 @@ public class Product {
     @NotEmpty(message="El nombre del campo no debe de ser vacio")
     private String name;
 
+    @Column(columnDefinition="TEXT")
     private String description;
+
+    @Column(columnDefinition="TEXT",name = "youtube_link")
+    private String youtubeLink;
     
     private Double price;
 

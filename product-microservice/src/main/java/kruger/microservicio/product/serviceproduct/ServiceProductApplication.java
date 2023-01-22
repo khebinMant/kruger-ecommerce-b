@@ -10,8 +10,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.bind.annotation.RestController;
 
-import kruger.microservicio.product.serviceproduct.client.category.CategoryClient;
-import kruger.microservicio.product.serviceproduct.client.product.ProductClient;
+import kruger.microservicio.product.serviceproduct.seeders.category.CategoryClient;
+import kruger.microservicio.product.serviceproduct.seeders.product.ProductClient;
 /**
  * This microservice was created by Kevin Mantilla
  */

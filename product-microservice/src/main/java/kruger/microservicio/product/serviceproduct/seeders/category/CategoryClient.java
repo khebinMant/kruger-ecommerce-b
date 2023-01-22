@@ -1,4 +1,4 @@
-package kruger.microservicio.product.serviceproduct.client.category;
+package kruger.microservicio.product.serviceproduct.seeders.category;
 
 import java.util.Date;
 
@@ -22,9 +22,10 @@ public class CategoryClient {
     //Me sirve para llenar de categorias la base de datos cuando recién empieza
     public void fillCategoriesDataBase(){
 
-        Category category1 = categoryServiceImpl.createCategory( new Category(1L,"calzado","Categoría donde pertecen los productos de tipo calzado",new Date()));
-        Category category2 = categoryServiceImpl.createCategory(new Category(2L,"electrónico","Categoría donde pertecen los productos de tipo electrónicos",new Date()));
-        Category category4 = categoryServiceImpl.createCategory(new Category(4L,"hogar","Categoría donde pertecen instrumentos o contenido musical",new Date()));
+        categoryServiceImpl.createCategory( new Category(1L,"Gama Baja","Dipositivo catalogado como gama baja",new Date()));
+        categoryServiceImpl.createCategory(new Category(2L,"Gama Media","Dipositivo catalogado como gama media",new Date()));
+        categoryServiceImpl.createCategory(new Category(4L,"Gama Alta","Dipositivo catalogado como gama alta",new Date()));
+        categoryServiceImpl.createCategory(new Category(5L,"Servicio","Este es un servicio ",new Date()));
     }
 
 }
