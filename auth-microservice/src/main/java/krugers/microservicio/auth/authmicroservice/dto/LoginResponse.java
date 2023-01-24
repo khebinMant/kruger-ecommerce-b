@@ -3,6 +3,7 @@ package krugers.microservicio.auth.authmicroservice.dto;
 import java.util.Date;
 import java.util.List;
 
+import krugers.microservicio.auth.authmicroservice.entity.Address;
 import krugers.microservicio.auth.authmicroservice.entity.Cart;
 import krugers.microservicio.auth.authmicroservice.entity.Role;
 
@@ -45,7 +46,7 @@ public class LoginResponse {
     
     private Role role;
 
-    private List<Cart> carts;
+    private List<Address> addresses;
 
     private String token;
 

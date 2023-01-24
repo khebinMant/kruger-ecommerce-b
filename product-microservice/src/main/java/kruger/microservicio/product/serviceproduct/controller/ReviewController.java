@@ -54,7 +54,7 @@ public class ReviewController {
         }
 
         reviews.stream().map(review->{
-            User user = userClientF.getUser(review.getId()).getBody();
+            User user = userClientF.getUser(review.getUserId()).getBody();
             review.setUser(user);
             return review;
         }).collect(Collectors.toList());
