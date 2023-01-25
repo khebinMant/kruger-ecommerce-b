@@ -42,8 +42,7 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "user_name")
-    private String userName;
+   
 
     @Column(name = "first_name")
     private String firstName;
@@ -62,7 +61,7 @@ public class User {
     @Column(name = "sign_date")
     private Date signDate;
 
-    @Column(name = "image_url")
+    @Column(name = "image_url", columnDefinition = "TEXT")
     private String imageUrl;
 
     //Compañia a la que representa el cliente
@@ -79,5 +78,13 @@ public class User {
     
     @Column(name = "role", nullable = false)
     private Role role;
+    
+    public void addAddress(Address address) {
+    	if(this.addresses==null) {
+    		this.addresses=new ArrayList<>();
+    	}
+    	this.addresses.add(address);
+    	address.setUserId(this.id);
+    }
 
 }
