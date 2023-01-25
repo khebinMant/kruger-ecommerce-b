@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
+import kruger.microservicio.product.serviceproduct.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,7 +19,6 @@ import lombok.NoArgsConstructor;
 /**
  * This microservice was created by Kevin Mantilla
  */
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
@@ -30,7 +31,14 @@ public class Review {
 
     private Long raiting;
 
+    @Column(columnDefinition="TEXT")
     private String text;
+
+    @Column(name="user_id")
+    private Long userId;
+
+    @Transient
+    private User user;
 
     @Column(name = "product_id")
     private Long productId;
@@ -39,4 +47,12 @@ public class Review {
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
 
+    public Review(Long id, Long raiting, String text, Long userId, Long productId, Date created) {
+        this.id = id;
+        this.raiting = raiting;
+        this.text = text;
+        this.userId = userId;
+        this.productId = productId;
+        this.created = created;
+    }
 }

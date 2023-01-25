@@ -46,7 +46,11 @@ public class Product {
     @NotEmpty(message="El nombre del campo no debe de ser vacio")
     private String name;
 
+    @Column(columnDefinition="TEXT")
     private String description;
+
+    @Column(columnDefinition="TEXT",name = "youtube_link")
+    private String youtubeLink;
     
     private Double price;
 
@@ -54,13 +58,18 @@ public class Product {
     @Positive(message = "El stock debe ser mayor que cero")
     private Double stock;
 
-    private String status;
+    private Status status;
+
+    private Type type;
+
+    private String brand;
+
+    private Double weight;
+
+    private String processor;
 
     @Column(name = "sales_counter")
     private Double salesCounter;
-
-    @Column(name = "photo_url")
-    private String photoUrl;
 
     @Column(name = "created")
     @Temporal(TemporalType.TIMESTAMP)
@@ -74,7 +83,13 @@ public class Product {
     
     @Valid
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "product_id")
     private List<Review> reviews;
+
+    @Valid
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "product_id")
+    private List<Image> images;
 }

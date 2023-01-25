@@ -26,5 +26,5 @@ public class User {
     
     private Role role;
 
-   private List<Cart> carts;
+    private List<Address> addresses;
 }

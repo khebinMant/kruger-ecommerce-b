@@ -6,8 +6,8 @@ spring:
         config:
             server:
                 git:
-                    default-label: master
-                    uri: https://github.com/khebinSd/Ks-Final-Project-B
+                    default-label: development
+                    uri: https://github.com/khebinSd/kruger-ecommerce-b
                     searchPaths: config-data
     security:
         user:

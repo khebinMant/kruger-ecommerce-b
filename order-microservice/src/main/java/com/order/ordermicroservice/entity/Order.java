@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This microservice was created by Kevin and David
+ * This microservice was created by Kevin
  */
 @Data
 @Entity
@@ -32,19 +32,21 @@ public class Order {
 
     private String status;
 
-    @Column(name="shipment_address")
-    private String shipmentAddress;
+    @Column(name="address_id")
+    private Long addressId;
+
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "coupon_id")
+    private Coupon coupon;
 
     @Temporal(TemporalType.DATE)
     @Column(name="shipment_date")
     private Date shipmentDate;
-
 
     @Valid
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "order_id")
     private List<OrderItem> items;
-
 
 }

@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
+import krugers.microservicio.auth.authmicroservice.model.Order;
 import lombok.Data;
 /**
  * This microservice was created by Kenan Aljaber
@@ -28,9 +30,16 @@ public class Cart {
     @Column(name="user_id")
     private Long userId;
 
-    // @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    // @ManyToOne(targetEntity = User.class, fetch = FetchType.EAGER)
-    // private User user;   
+    @Transient
+    private Order order;
+
+    @Transient
+    private User user;
+
+    private Status status;
+
+    public Cart() {
+    }
 
     public Cart(Long orderId, Long userId){
         this.orderId = orderId;

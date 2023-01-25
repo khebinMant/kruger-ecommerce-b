@@ -33,8 +33,11 @@ dependencies {
 	implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.0.0'
 	// Sleuth y Zipkin
-	implementation group: 'org.springframework.cloud', name: 'spring-cloud-sleuth-zipkin', version: '3.1.5'
-	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth', version: '3.1.5'
+	// implementation group: 'org.springframework.cloud', name: 'spring-cloud-sleuth-zipkin', version: '3.1.5'
+	// implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-sleuth', version: '3.1.5'
+	//Para circuit breaker y conectar microservicios
+	implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+	implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
 	compileOnly 'org.projectlombok:lombok'
 	runtimeOnly 'org.postgresql:postgresql'
 	annotationProcessor 'org.projectlombok:lombok'

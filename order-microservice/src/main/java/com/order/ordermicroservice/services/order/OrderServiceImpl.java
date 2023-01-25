@@ -1,14 +1,17 @@
 package com.order.ordermicroservice.services.order;
 
 import com.netflix.discovery.converters.Auto;
-import com.order.ordermicroservice.client.UserClient;
+import com.order.ordermicroservice.client.CartClient;
 import com.order.ordermicroservice.client.ProductClient;
+import com.order.ordermicroservice.entity.Coupon;
 import com.order.ordermicroservice.entity.Order;
 import com.order.ordermicroservice.entity.OrderItem;
 import com.order.ordermicroservice.entity.Payment;
+import com.order.ordermicroservice.entity.Status;
 import com.order.ordermicroservice.model.OrderRequest;
 import com.order.ordermicroservice.model.Product;
 import com.order.ordermicroservice.repository.OrderRepository;
+import com.order.ordermicroservice.services.coupon.CouponServiceImpl;
 import com.order.ordermicroservice.services.payment.PaymentServiceImpl;
 
 import java.util.Date;
@@ -33,10 +36,14 @@ public class OrderServiceImpl implements IOrderService{
     PaymentServiceImpl paymentServiceImpl;
 
     @Autowired
+    CouponServiceImpl couponServiceImpl;
+    
+    @Autowired
     ProductClient productClient;
 
     @Autowired
-    UserClient customerClient;
+    CartClient cartClient;
+
 
     // -------------------create order service--------------------------------------------
     public Order createOrder(Order order, Long userId){
@@ -50,8 +57,18 @@ public class OrderServiceImpl implements IOrderService{
         paymentServiceImpl.createPayment(new Payment("CREATED", UUID.randomUUID(), new Date(),createdOrder));
 
         //Al crear la orden se crea el cart con el customerId y el orderId
-        customerClient.addCart(new OrderRequest(userId,createdOrder.getId()));
+        cartClient.addCart(new OrderRequest(userId,createdOrder.getId()));
 
+        //Al crear la orden si tiene adjuntado
+        //un cupon de descuentos entonces se debe 
+        //cambiar el estado del cupon a USED, CREATED, ACTIVE
+        if(order.getCoupon()!=null){
+
+            Coupon couponDB = couponServiceImpl.getCoupon(order.getCoupon().getId());
+            couponDB.setStatus(Status.USED);
+            couponServiceImpl.updateCoupon(couponDB);
+        }
+            
         //Actualizar el stock del producto
         createdOrder.getItems().forEach( orderItem ->{
             productClient.updateStockProduct(orderItem.getProductId(), orderItem.getQuantity() * -1);
@@ -63,7 +80,6 @@ public class OrderServiceImpl implements IOrderService{
         });
 
         return createdOrder;
-
     }
 
     // -------------------getOrder by ID service--------------------------------------------
@@ -92,7 +108,6 @@ public class OrderServiceImpl implements IOrderService{
 
         existingOrder.setStatus(order.getStatus());
         existingOrder.setCreated(order.getCreated());
-        existingOrder.setShipmentAddress(order.getShipmentAddress());
         existingOrder.setShipmentDate(order.getShipmentDate());
         existingOrder.setTotalPrice(order.getTotalPrice());
         return orderRepository.save(existingOrder);
