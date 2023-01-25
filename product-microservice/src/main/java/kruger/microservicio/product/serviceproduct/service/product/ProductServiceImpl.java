@@ -34,7 +34,6 @@ public class ProductServiceImpl implements IProductService{
 
     @Override
     public Product createProduct(Product product) {
-        product.setStatus(Status.NOT_POPULAR);
         product.setSalesCounter(0.0);
         product.setCreated(new Date());
         return productRepository.save(product);
