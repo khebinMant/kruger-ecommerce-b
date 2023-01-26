@@ -60,7 +60,7 @@ public class Product {
     @Positive(message = "El stock debe ser mayor que cero")
     private Double stock;
 
-    private Status status;
+    private Boolean status;
 
     private Type type;
 

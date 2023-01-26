@@ -13,6 +13,7 @@ import krugers.microservicio.auth.authmicroservice.dto.ChangeCredentialsResponse
 import krugers.microservicio.auth.authmicroservice.dto.LoginRequest;
 import krugers.microservicio.auth.authmicroservice.dto.LoginResponse;
 import krugers.microservicio.auth.authmicroservice.entity.Address;
+import krugers.microservicio.auth.authmicroservice.entity.Role;
 import krugers.microservicio.auth.authmicroservice.entity.TokenDto;
 import krugers.microservicio.auth.authmicroservice.entity.User;
 import krugers.microservicio.auth.authmicroservice.repository.UserRepository;
@@ -42,6 +43,10 @@ public class UserServiceImpl implements UserService {
 		String password = passwordEncoder.encode(authUser.getPassword());
 		authUser.setPassword(password);
 		authUser.setVerified(false);
+		authUser.setCompanyId(1L);
+		if(authUser.getRole().equals(Role.ADMIN)){
+			authUser.setVerified(true);
+		}
 
 		Long customerId;
 		User userDB = new User();

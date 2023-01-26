@@ -103,7 +103,7 @@ public class ReviewController {
     public ResponseEntity<?> deleteReview(@PathVariable(name="id") Long id){
         reviewService.deleteReview(id);
 
-      return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Successfully operation. ");
+      return  ResponseEntity.status(HttpStatus.ACCEPTED).body("Successfully operation. ");
     }
 
 
