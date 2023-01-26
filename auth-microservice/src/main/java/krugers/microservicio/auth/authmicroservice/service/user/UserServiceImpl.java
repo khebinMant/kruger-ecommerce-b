@@ -1,5 +1,6 @@
 package krugers.microservicio.auth.authmicroservice.service.user;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,36 +57,11 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(userDB);
 	}
 
-<<<<<<< HEAD
+
 	public LoginResponse login(LoginRequest dto) {
 		Optional<User> user = userRepository.findByEmail(dto.getEmail());
 		if (!user.isPresent())
 			return null;
-=======
-        if (passwordEncoder.matches(dto.getPassword(), user.get().getPassword())) {
-            LoginResponse response = LoginResponse.builder()
-                    .id(user.get().getId())
-                    .email(user.get().getEmail())
-                    .password(user.get().getPassword())
-                    .userName(user.get().getUserName())
-                    .birthDate(user.get().getBirthDate())
-                        .imageUrl(user.get().getImageUrl())
-                    .firstName(user.get().getFirstName())
-                    .lastName(user.get().getLastName())
-                    .cellPhone(user.get().getCellPhone())
-                    .companyId(user.get().getCompanyId())
-                    .addresses(user.get().getAddresses())
-                    .signDate(user.get().getSignDate())
-                    .verified(user.get().getVerified())
-                    .role(user.get().getRole())
-                    .token(jwtProvider.createToken(user.get()))
-                    .build();
-            return response;
-        }
-        return null;
-    }
->>>>>>> 5256cbba2c5873feebb91f08f10528e19c481195
-
 		if (passwordEncoder.matches(dto.getPassword(), user.get().getPassword())) {
 			LoginResponse response = LoginResponse.builder().id(user.get().getId()).email(user.get().getEmail())
 					.password(user.get().getPassword())
@@ -93,6 +69,8 @@ public class UserServiceImpl implements UserService {
 					.lastName(user.get().getLastName()).cellPhone(user.get().getCellPhone())
 					.companyId(user.get().getCompanyId()).signDate(user.get().getSignDate())
 					.verified(user.get().getVerified()).role(user.get().getRole())
+					.imageUrl(user.get().getImageUrl())
+					.addresses(user.get().getAddresses())
 					.token(jwtProvider.createToken(user.get())).build();
 			return response;
 		}
@@ -135,6 +113,7 @@ public class UserServiceImpl implements UserService {
 			userDB.setBirthDate(user.getBirthDate());
 			userDB.setCellPhone(user.getCellPhone());
 			User userUpdated = userRepository.save(userDB);
+			System.out.println("---------------------------------------------------");
 			return userUpdated;
 		} else
 			return null;
@@ -144,9 +123,12 @@ public class UserServiceImpl implements UserService {
 	public User updateUserUbication(Long userId, User user) {
 		User userDB = findById(userId);
 		if (user != null && userDB != null && user.getAddresses() != null && !user.getAddresses().isEmpty()) {
+			List<Address> newAddresses=new ArrayList<>();
 			for(Address address:user.getAddresses()) {
-				userDB.addAddress(address);
+				newAddresses.add(address);
+				address.setUserId(userDB.getId());
 			}
+			userDB.setAddresses(newAddresses);
 			User userUpdated = userRepository.save(userDB);
 			return userUpdated;
 		} else

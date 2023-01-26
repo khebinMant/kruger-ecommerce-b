@@ -49,5 +49,7 @@ public class LoginResponse {
     private List<Address> addresses;
 
     private String token;
+    
+    
 
 }
