@@ -34,7 +34,6 @@ public class ProductServiceImpl implements IProductService{
 
     @Override
     public Product createProduct(Product product) {
-        product.setStatus(Status.NOT_POPULAR);
         product.setSalesCounter(0.0);
         product.setCreated(new Date());
         return productRepository.save(product);
@@ -49,6 +48,7 @@ public class ProductServiceImpl implements IProductService{
         productDB.setImages(product.getImages());
         productDB.setReviews(product.getReviews());
         productDB.setName(product.getName());
+        productDB.setStock(product.getStock());
         productDB.setType(product.getType());
         productDB.setBrand(product.getBrand());
         productDB.setWeight(product.getWeight());

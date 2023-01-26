@@ -33,114 +33,113 @@ public class ProductClient {
     // front end manualmente
     public List<Image> fillImagesToP1 (){
         List<Image> images = new ArrayList<>();
-        images.add(new Image(1L, "https://catalogo.claro.com.ec/uploads/imgs/productos/combo-apple-iphone-14-128gb-apple-20w-power-adapter/negro/zoom/01-combo-apple-iphone-14-128gb-apple-20w-power-adapter-negro-front.png", 1L,new Date()));
-        images.add(new Image(2L, "https://catalogo.claro.com.ec/uploads/imgs/productos/combo-apple-iphone-14-128gb-apple-20w-power-adapter/negro/zoom/03-combo-apple-iphone-14-128gb-apple-20w-power-adapter-negro-back.png", 1L,new Date()));
-        images.add(new Image(3L, "https://catalogo.claro.com.ec/uploads/imgs/productos/combo-apple-iphone-14-128gb-apple-20w-power-adapter/negro/zoom/04-combo-apple-iphone-14-128gb-apple-20w-power-adapter-negro-other.png", 1L,new Date()));
-        images.add(new Image(4L, "https://catalogo.claro.com.ec/uploads/imgs/productos/combo-apple-iphone-14-128gb-apple-20w-power-adapter/negro/zoom/02-combo-apple-iphone-14-128gb-apple-20w-power-adapter-negro-side.png", 1L,new Date()));
+        images.add(new Image(1L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/combo-apple-iphone-14-128gb-apple-20w-power-adapter/negro/zoom/01-combo-apple-iphone-14-128gb-apple-20w-power-adapter-negro-front.png", 1L,new Date()));
+        images.add(new Image(2L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/combo-apple-iphone-14-128gb-apple-20w-power-adapter/negro/zoom/03-combo-apple-iphone-14-128gb-apple-20w-power-adapter-negro-back.png", 1L,new Date()));
+        images.add(new Image(3L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/combo-apple-iphone-14-128gb-apple-20w-power-adapter/negro/zoom/04-combo-apple-iphone-14-128gb-apple-20w-power-adapter-negro-other.png", 1L,new Date()));
+        images.add(new Image(4L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/combo-apple-iphone-14-128gb-apple-20w-power-adapter/negro/zoom/02-combo-apple-iphone-14-128gb-apple-20w-power-adapter-negro-side.png", 1L,new Date()));
         
         return images;
     }
 
     public List<Image> fillImagesToP2(){
         List<Image> images = new ArrayList<>();
-        images.add(new Image(5L, "https://catalogo.claro.com.ec/uploads/imgs/productos/combo-apple-iphone-13-128gb-apple-20w-power-adapter/negro/zoom/02-combo-apple-iphone-13-128gb-apple-20w-power-adapter-negro-side.png", 2L,new Date()));
-        images.add(new Image(6L, "https://catalogo.claro.com.ec/uploads/imgs/productos/combo-apple-iphone-13-128gb-apple-20w-power-adapter/negro/zoom/04-combo-apple-iphone-13-128gb-apple-20w-power-adapter-negro-other.png", 2L,new Date()));
-        images.add(new Image(7L, "https://catalogo.claro.com.ec/uploads/imgs/productos/combo-apple-iphone-13-128gb-apple-20w-power-adapter/negro/zoom/03-combo-apple-iphone-13-128gb-apple-20w-power-adapter-negro-back.png", 2L,new Date()));
-        images.add(new Image(8L, "https://catalogo.claro.com.ec/uploads/imgs/productos/combo-apple-iphone-13-128gb-apple-20w-power-adapter/negro/zoom/01-combo-apple-iphone-13-128gb-apple-20w-power-adapter-negro-front.png", 2L,new Date()));
+        images.add(new Image(5L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/combo-apple-iphone-13-128gb-apple-20w-power-adapter/negro/zoom/02-combo-apple-iphone-13-128gb-apple-20w-power-adapter-negro-side.png", 2L,new Date()));
+        images.add(new Image(6L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/combo-apple-iphone-13-128gb-apple-20w-power-adapter/negro/zoom/04-combo-apple-iphone-13-128gb-apple-20w-power-adapter-negro-other.png", 2L,new Date()));
+        images.add(new Image(7L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/combo-apple-iphone-13-128gb-apple-20w-power-adapter/negro/zoom/03-combo-apple-iphone-13-128gb-apple-20w-power-adapter-negro-back.png", 2L,new Date()));
+        images.add(new Image(8L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/combo-apple-iphone-13-128gb-apple-20w-power-adapter/negro/zoom/01-combo-apple-iphone-13-128gb-apple-20w-power-adapter-negro-front.png", 2L,new Date()));
 
         return images;
     }
 
     public List<Image> fillImagesToP3(){
         List<Image> images = new ArrayList<>();
-        images.add(new Image(9L, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-galaxy-s22-ultra-buds-2-pro-white-samsung-chr-25w/verde/zoom/04-samsung-galaxy-s22-ultra-buds-2-pro-white-samsung-chr-25w-verde-other.png", 3L,new Date()));
-        images.add(new Image(10L, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-galaxy-s22-ultra-buds-2-pro-white-samsung-chr-25w/verde/zoom/03-samsung-galaxy-s22-ultra-buds-2-pro-white-samsung-chr-25w-verde-back.png", 3L,new Date()));
-        images.add(new Image(11L, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-galaxy-s22-ultra-buds-2-pro-white-samsung-chr-25w/verde/zoom/02-samsung-galaxy-s22-ultra-buds-2-pro-white-samsung-chr-25w-verde-side.png", 3L,new Date()));
-        images.add(new Image(12L, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-galaxy-s22-ultra-buds-2-pro-white-samsung-chr-25w/verde/zoom/01-samsung-galaxy-s22-ultra-buds-2-pro-white-samsung-chr-25w-verde-front.png", 3L,new Date()));
+        images.add(new Image(9L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-galaxy-s22-ultra-buds-2-pro-white-samsung-chr-25w/verde/zoom/04-samsung-galaxy-s22-ultra-buds-2-pro-white-samsung-chr-25w-verde-other.png", 3L,new Date()));
+        images.add(new Image(10L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-galaxy-s22-ultra-buds-2-pro-white-samsung-chr-25w/verde/zoom/03-samsung-galaxy-s22-ultra-buds-2-pro-white-samsung-chr-25w-verde-back.png", 3L,new Date()));
+        images.add(new Image(11L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-galaxy-s22-ultra-buds-2-pro-white-samsung-chr-25w/verde/zoom/02-samsung-galaxy-s22-ultra-buds-2-pro-white-samsung-chr-25w-verde-side.png", 3L,new Date()));
+        images.add(new Image(12L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-galaxy-s22-ultra-buds-2-pro-white-samsung-chr-25w/verde/zoom/01-samsung-galaxy-s22-ultra-buds-2-pro-white-samsung-chr-25w-verde-front.png", 3L,new Date()));
         
         return images;
     }
 
     public List<Image> fillImagesToP4(){
         List<Image> images = new ArrayList<>();
-        images.add(new Image(13L, "https://catalogo.claro.com.ec/uploads/imgs/productos/iphone-14-pro-max-1tb/negro/zoom/01-iphone-14-pro-max-1tb-negro-front.png", 4L,new Date()));
-        images.add(new Image(14L, "https://catalogo.claro.com.ec/uploads/imgs/productos/iphone-14-pro-max-1tb/negro/zoom/03-iphone-14-pro-max-1tb-negro-back.png", 4L,new Date()));
-        images.add(new Image(15L, "https://catalogo.claro.com.ec/uploads/imgs/productos/iphone-14-pro-max-1tb/negro/zoom/04-iphone-14-pro-max-1tb-negro-other.png", 4L,new Date()));
-        images.add(new Image(16L, "https://catalogo.claro.com.ec/uploads/imgs/productos/iphone-14-pro-max-1tb/negro/zoom/02-iphone-14-pro-max-1tb-negro-side.png", 4L,new Date()));
+        images.add(new Image(13L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/iphone-14-pro-max-1tb/negro/zoom/01-iphone-14-pro-max-1tb-negro-front.png", 4L,new Date()));
+        images.add(new Image(14L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/iphone-14-pro-max-1tb/negro/zoom/03-iphone-14-pro-max-1tb-negro-back.png", 4L,new Date()));
+        images.add(new Image(15L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/iphone-14-pro-max-1tb/negro/zoom/04-iphone-14-pro-max-1tb-negro-other.png", 4L,new Date()));
+        images.add(new Image(16L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/iphone-14-pro-max-1tb/negro/zoom/02-iphone-14-pro-max-1tb-negro-side.png", 4L,new Date()));
 
         return images;
     }
 
     public List<Image> fillImagesToP5(){
         List<Image> images = new ArrayList<>();
-        images.add(new Image(17L, "https://catalogo.claro.com.ec/uploads/imgs/productos/honor-70-256gb/verde/zoom/04-honor-70-256gb-verde-other.png", 5L,new Date()));
-        images.add(new Image(18L, "https://catalogo.claro.com.ec/uploads/imgs/productos/honor-70-256gb/verde/zoom/03-honor-70-256gb-verde-back.png", 5L,new Date()));
-        images.add(new Image(19L, "https://catalogo.claro.com.ec/uploads/imgs/productos/honor-70-256gb/verde/zoom/05-honor-70-256gb-verde-down.png", 5L,new Date()));
-        images.add(new Image(20L, "https://catalogo.claro.com.ec/uploads/imgs/productos/honor-70-256gb/verde/zoom/02-honor-70-256gb-verde-side.png", 5L,new Date()));
+        images.add(new Image(17L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/honor-70-256gb/verde/zoom/04-honor-70-256gb-verde-other.png", 5L,new Date()));
+        images.add(new Image(18L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/honor-70-256gb/verde/zoom/03-honor-70-256gb-verde-back.png", 5L,new Date()));
+        images.add(new Image(19L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/honor-70-256gb/verde/zoom/05-honor-70-256gb-verde-down.png", 5L,new Date()));
+        images.add(new Image(20L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/honor-70-256gb/verde/zoom/02-honor-70-256gb-verde-side.png", 5L,new Date()));
 
         return images;
     }
 
     public List<Image> fillImagesToP6(){
         List<Image> images = new ArrayList<>();
-        images.add(new Image(21L, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-redmi-note-11-pro-128gb/gris/zoom/01-xiaomi-redmi-note-11-pro-128gb-gris-front.png", 6L,new Date()));
-        images.add(new Image(22L, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-redmi-note-11-pro-128gb/gris/zoom/03-xiaomi-redmi-note-11-pro-128gb-gris-back.png", 6L,new Date()));
-        images.add(new Image(23L, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-redmi-note-11-pro-128gb/gris/zoom/03-xiaomi-redmi-note-11-pro-128gb-gris-back.png", 6L,new Date()));
-        images.add(new Image(24L, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-redmi-note-11-pro-128gb/gris/zoom/02-xiaomi-redmi-note-11-pro-128gb-gris-side.png", 6L,new Date()));
+        images.add(new Image(21L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-redmi-note-11-pro-128gb/gris/zoom/01-xiaomi-redmi-note-11-pro-128gb-gris-front.png", 6L,new Date()));
+        images.add(new Image(22L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-redmi-note-11-pro-128gb/gris/zoom/03-xiaomi-redmi-note-11-pro-128gb-gris-back.png", 6L,new Date()));
+        images.add(new Image(23L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-redmi-note-11-pro-128gb/gris/zoom/03-xiaomi-redmi-note-11-pro-128gb-gris-back.png", 6L,new Date()));
+        images.add(new Image(24L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-redmi-note-11-pro-128gb/gris/zoom/02-xiaomi-redmi-note-11-pro-128gb-gris-side.png", 6L,new Date()));
 
         return images;
     }
 
     public List<Image> fillImagesToP7(){
         List<Image> images = new ArrayList<>();
-        images.add(new Image(25L, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-galaxy-s21-fe/gris/zoom/01-samsung-sin-texto-galaxy-s21-fe-gris-front.png", 7L,new Date()));
-        images.add(new Image(26L, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-galaxy-s21-fe/gris/zoom/03-samsung-galaxy-s21-fe-gris-back.png", 7L,new Date()));
-        images.add(new Image(27L, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-galaxy-s21-fe/gris/zoom/02-samsung-galaxy-s21-fe-gris-side.png", 7L,new Date()));
+        images.add(new Image(25L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-galaxy-s21-fe/gris/zoom/01-samsung-sin-texto-galaxy-s21-fe-gris-front.png", 7L,new Date()));
+        images.add(new Image(26L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-galaxy-s21-fe/gris/zoom/03-samsung-galaxy-s21-fe-gris-back.png", 7L,new Date()));
+        images.add(new Image(27L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-galaxy-s21-fe/gris/zoom/02-samsung-galaxy-s21-fe-gris-side.png", 7L,new Date()));
 
         return images;
     }
 
     public List<Image> fillImagesToP8(){
         List<Image> images = new ArrayList<>();
-        images.add(new Image(28L, "https://catalogo.claro.com.ec/uploads/imgs/productos/iphone-11-64gb/negro/zoom/01-iphone-11-64gb-negro-front.png", 8L,new Date()));
-        images.add(new Image(29L, "https://catalogo.claro.com.ec/uploads/imgs/productos/iphone-11-64gb/negro/zoom/03-iphone-11-64gb-negro-back.png", 8L,new Date()));
-        images.add(new Image(30L, "https://catalogo.claro.com.ec/uploads/imgs/productos/iphone-11-64gb/negro/zoom/02-iphone-11-64gb-negro-side.png", 8L,new Date()));
+        images.add(new Image(28L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/iphone-11-64gb/negro/zoom/01-iphone-11-64gb-negro-front.png", 8L,new Date()));
+        images.add(new Image(29L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/iphone-11-64gb/negro/zoom/03-iphone-11-64gb-negro-back.png", 8L,new Date()));
+        images.add(new Image(30L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/iphone-11-64gb/negro/zoom/02-iphone-11-64gb-negro-side.png", 8L,new Date()));
 
         return images;
     }
     
     public List<Image> fillImagesToP9(){
         List<Image> images = new ArrayList<>();
-        images.add(new Image(31L, "https://catalogo.claro.com.ec/uploads/imgs/productos/tcl-6125f1/azul/zoom/01-tcl-6125f1-azul-front.png", 9L,new Date()));
-        images.add(new Image(32L, "https://catalogo.claro.com.ec/uploads/imgs/productos/tcl-6125f1/azul/zoom/02-tcl-6125f1-azul-side.png", 9L,new Date()));
-        images.add(new Image(33L, "https://catalogo.claro.com.ec/uploads/imgs/productos/tcl-6125f1/azul/zoom/03-tcl-6125f1-azul-back.png", 9L,new Date()));
-        images.add(new Image(34L, "", 9L,new Date()));
+        images.add(new Image(31L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/tcl-6125f1/azul/zoom/01-tcl-6125f1-azul-front.png", 9L,new Date()));
+        images.add(new Image(32L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/tcl-6125f1/azul/zoom/02-tcl-6125f1-azul-side.png", 9L,new Date()));
+        images.add(new Image(33L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/tcl-6125f1/azul/zoom/03-tcl-6125f1-azul-back.png", 9L,new Date()));
 
         return images;
     }
 
     public List<Image> fillImagesToP10(){
         List<Image> images = new ArrayList<>();
-        images.add(new Image(35L, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-11-lite-ne/rosa/zoom/01-xiaomi-11-lite-ne-rosa-front.png", 10L,new Date()));
-        images.add(new Image(36L, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-11-lite-ne/rosa/zoom/03-xiaomi-11-lite-ne-rosa-back.png", 10L,new Date()));
-        images.add(new Image(37L, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-11-lite-ne/rosa/zoom/02-xiaomi-11-lite-ne-rosa-side.png", 10L,new Date()));
+        images.add(new Image(35L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-11-lite-ne/rosa/zoom/01-xiaomi-11-lite-ne-rosa-front.png", 10L,new Date()));
+        images.add(new Image(36L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-11-lite-ne/rosa/zoom/03-xiaomi-11-lite-ne-rosa-back.png", 10L,new Date()));
+        images.add(new Image(37L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-11-lite-ne/rosa/zoom/02-xiaomi-11-lite-ne-rosa-side.png", 10L,new Date()));
 
         return images;
     }
     public List<Image> fillImagesToP11(){
         List<Image> images = new ArrayList<>();
-        images.add(new Image(38L, "https://catalogo.claro.com.ec/uploads/imgs/productos/nokia-g10-64-gb/morado/zoom/01-nokia-g10-64-gb-morado-front.png", 11L,new Date()));
-        images.add(new Image(39L, "https://catalogo.claro.com.ec/uploads/imgs/productos/nokia-g10-64-gb/morado/zoom/03-nokia-g10-64-gb-morado-back.png", 11L,new Date()));
-        images.add(new Image(40L, "https://catalogo.claro.com.ec/uploads/imgs/productos/nokia-g10-64-gb/morado/zoom/02-nokia-g10-64-gb-morado-side.png", 11L,new Date()));
+        images.add(new Image(38L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/nokia-g10-64-gb/morado/zoom/01-nokia-g10-64-gb-morado-front.png", 11L,new Date()));
+        images.add(new Image(39L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/nokia-g10-64-gb/morado/zoom/03-nokia-g10-64-gb-morado-back.png", 11L,new Date()));
+        images.add(new Image(40L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/nokia-g10-64-gb/morado/zoom/02-nokia-g10-64-gb-morado-side.png", 11L,new Date()));
 
         return images;
     }
 
     public List<Image> fillImagesToP12(){
         List<Image> images = new ArrayList<>();
-        images.add(new Image(41L, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-a03-core/azul/zoom/01-samsung-a03-core-azul-front.png", 11L,new Date()));
-        images.add(new Image(42L, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-a03-core/azul/zoom/01-samsung-a03-core-azul-front.png", 11L,new Date()));
-        images.add(new Image(43L, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-a03-core/azul/zoom/02-samsung-a03-core-azul-side.png", 11L,new Date()));
+        images.add(new Image(41L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-a03-core/azul/zoom/01-samsung-a03-core-azul-front.png", 11L,new Date()));
+        images.add(new Image(42L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-a03-core/azul/zoom/01-samsung-a03-core-azul-front.png", 11L,new Date()));
+        images.add(new Image(43L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/samsung-a03-core/azul/zoom/02-samsung-a03-core-azul-side.png", 11L,new Date()));
 
         return images;
     }

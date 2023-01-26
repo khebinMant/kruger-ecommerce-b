@@ -57,7 +57,6 @@ public class UserServiceImpl implements UserService {
 		return userRepository.save(userDB);
 	}
 
-
 	public LoginResponse login(LoginRequest dto) {
 		Optional<User> user = userRepository.findByEmail(dto.getEmail());
 		if (!user.isPresent())
