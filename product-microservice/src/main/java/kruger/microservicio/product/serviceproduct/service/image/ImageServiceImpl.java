@@ -28,7 +28,7 @@ public class ImageServiceImpl implements IImageService{
     @Override
     public Image createImage(Image image) {
         image.setCreated(new Date());
-        image.setUri(image.getUri());
+        image.setUrl(image.getUrl());
         image.setProductId(image.getProductId());
         return imageRepository.save(image);
     }
@@ -39,7 +39,7 @@ public class ImageServiceImpl implements IImageService{
         if(imageDB == null){
             return null;
         }
-        imageDB.setUri(image.getUri());
+        imageDB.setUrl(image.getUrl());
         
         return imageRepository.save(imageDB);
     }

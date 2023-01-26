@@ -31,6 +31,9 @@ public class Image {
     @Column(columnDefinition="TEXT")
     private String uri;
 
+    @Column(columnDefinition="TEXT")
+    private String url;
+
     @Column(name = "product_id")
     private Long productId;
 

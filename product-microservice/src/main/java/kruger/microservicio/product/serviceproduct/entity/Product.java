@@ -85,13 +85,13 @@ public class Product {
     
     @Valid
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private List<Review> reviews;
 
     @Valid
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private List<Image> images;
 }
