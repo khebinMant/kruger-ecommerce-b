@@ -34,9 +34,9 @@ public class CustomerSeeder {
         addressesJos.add(new Address(6L,"Tungurahua","Ambato","Es dirección del trabajo","Calle 14",true,3L,"CREATED",new Date(), new Date()));
 
 
-        userServiceImpl.save(new User(1L,"kevin@customer.com","12345678","khebinSd","Kevin","Mantilla","0986261197",new Date(),new Date(), "https://avatars.githubusercontent.com/u/33032880?v=4",1L,addressesKev, true, Role.CUSTOMER));
-        userServiceImpl.save(new User(2L,"kenan@customer.com","12345678","KenanAljaber","Kenan","Al-jaber","0954157784",new Date(),new Date(), "https://avatars.githubusercontent.com/u/52118245?v=4",1L,addressesKen, true, Role.CUSTOMER));
-        userServiceImpl.save(new User(3L,"jose@customer.com","12345678","joseandresgavilanes","Jose Andres","Gavilanes","0987412236",new Date(),new Date(), "https://avatars.githubusercontent.com/u/76002851?v=4",1L,addressesJos, true, Role.CUSTOMER));
+        userServiceImpl.save(new User(1L,"kevin@customer.com","12345678","Kevin","Mantilla","0986261197",new Date(),new Date(), "https://avatars.githubusercontent.com/u/33032880?v=4",1L,addressesKev, true, Role.CUSTOMER));
+        userServiceImpl.save(new User(2L,"kenan@customer.com","12345678","Kenan","Al-jaber","0954157784",new Date(),new Date(), "https://avatars.githubusercontent.com/u/52118245?v=4",1L,addressesKen, true, Role.CUSTOMER));
+        userServiceImpl.save(new User(3L,"jose@customer.com","12345678","Jose Andres","Gavilanes","0987412236",new Date(),new Date(), "https://avatars.githubusercontent.com/u/76002851?v=4",1L,addressesJos, true, Role.CUSTOMER));
     
     } 
 }
