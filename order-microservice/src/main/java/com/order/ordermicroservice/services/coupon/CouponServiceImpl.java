@@ -50,5 +50,12 @@ public class CouponServiceImpl implements ICouponService{
     public Coupon getCoupon(Long id) {
         return couponRepository.findById(id).orElse(null);
     }
+
+	@Override
+	public Coupon getCouponByCode(String code) {
+		Coupon c=couponRepository.findCouponByCode(code.toLowerCase());
+		System.out.println(c);
+		return c;
+	}
     
 }

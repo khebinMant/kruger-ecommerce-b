@@ -75,6 +75,20 @@ public class CouponController {
         return ResponseEntity.ok(coupon);
     }
     
+    @GetMapping(value="/by-code/{code}")
+    public ResponseEntity<?> getCouponByCode(@PathVariable(name="code") String code){
+        	System.out.println("getting coupon with code "+code);
+    	Coupon c=couponService.getCouponByCode(code);
+    	
+        if(c==null){
+        	
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("We cant find a coupon with that id not found. ");
+        }
+        return ResponseEntity.ok(c);
+    }
+    
+    
+    
     //Crear coupon y adjuntar a cliente
     // @ApiResponses(value = { 
 	// 	@ApiResponse(responseCode = "200", description = "Successfully operation"),

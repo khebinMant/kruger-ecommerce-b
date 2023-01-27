@@ -68,7 +68,7 @@ public class OrderControllerTest {
     public void test_createOrder() throws Exception {
         OrderItem newList = new OrderItem(200L, 5.30, 5.30, 300L, 5.30, null, new Date());
         List<OrderItem> extraList = new ArrayList<>(Arrays.asList(newList));
-        Order customOrder = (new Order(100L, 8.50, new Date(), "SUCCES", 1L,  null, new Date(), extraList));
+        Order customOrder = new Order(100L, 8.50,5.2, new Date(), "SUCCES", 1L,  null, new Date(), extraList);
 
         HttpEntity<Order> entity = new HttpEntity<>(customOrder, headers);
         ResponseEntity<String> response = restTemplate.exchange(
