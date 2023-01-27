@@ -62,6 +62,8 @@ public class OrderServiceImpl implements IOrderService{
         //Al crear la orden si tiene adjuntado
         //un cupon de descuentos entonces se debe 
         //cambiar el estado del cupon a USED, CREATED, ACTIVE
+        
+        
         if(order.getCoupon()!=null){
 
             Coupon couponDB = couponServiceImpl.getCoupon(order.getCoupon().getId());

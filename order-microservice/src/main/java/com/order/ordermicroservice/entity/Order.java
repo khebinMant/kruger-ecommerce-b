@@ -26,6 +26,9 @@ public class Order {
 
     @Column(name = "total_price")
     private Double totalPrice;
+    
+    @Column(name="subtotal")
+    private Double subTotal;
 
     @Temporal(TemporalType.DATE)
     private Date created;

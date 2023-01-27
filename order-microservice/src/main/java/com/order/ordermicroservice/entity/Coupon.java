@@ -33,6 +33,7 @@ public class Coupon {
 
     private Integer quantity;
 
+    @Column(name="code",nullable = false,unique = true)
     private String code;
 
     private Status status;

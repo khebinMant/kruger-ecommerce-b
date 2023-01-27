@@ -39,8 +39,8 @@ public class OrderServiceImplTest {
 
         List<Order> customOrders = new ArrayList<Order>();
 
-        customOrders.add(new Order(200L, 2.10, new Date(), "SUCCES", 1L , null, new Date(), null));
-        customOrders.add(new Order(300L, 3.30, new Date(), "SUCCES", 1L, null, new Date(), null));
+        customOrders.add(new Order(200L, 2.10,1.0, new Date(), "SUCCES", 1L , null, new Date(), null));
+        customOrders.add(new Order(300L, 3.30,1.0, new Date(), "SUCCES", 1L, null, new Date(), null));
 
         when(orderRepository.findAll()).thenReturn(customOrders);
         assertEquals(2, StreamSupport.stream(orderServiceImpl.findAllOrders().spliterator(), false).count());
@@ -51,7 +51,7 @@ public class OrderServiceImplTest {
     @org.junit.jupiter.api.Order(2)
     public void test_getOrder() {
 
-        Order customOrder = new Order(200L, 2.10, new Date(), "SUCCES", 1L, null,  new Date(), null);
+        Order customOrder = new Order(200L, 2.10,1.0, new Date(), "SUCCES", 1L, null,  new Date(), null);
 
         when(orderRepository.findById(300L)).thenReturn(Optional.of(customOrder));
         Assertions.assertThat(customOrder.getId()).isEqualTo(300L);
@@ -62,7 +62,7 @@ public class OrderServiceImplTest {
     @org.junit.jupiter.api.Order(3)
     public void test_createOrder() {
 
-        Order customOrder =new Order(200L, 2.10, new Date(), "SUCCES", 1L, null, new Date(), null);
+        Order customOrder =new Order(200L, 2.10,1.0, new Date(), "SUCCES", 1L, null, new Date(), null);
 
         when(orderRepository.save(customOrder)).thenReturn(customOrder);
         assertEquals(customOrder, orderRepository.save(customOrder));

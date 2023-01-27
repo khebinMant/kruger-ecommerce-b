@@ -13,4 +13,6 @@ public interface ICouponService {
     public void deleteCoupon(Long id);
 
     public Coupon getCoupon(Long id);
+    
+    public Coupon getCouponByCode (String code);
 }
