@@ -30,6 +30,7 @@ import jakarta.validation.Valid;
 import kruger.microservicio.product.serviceproduct.entity.Category;
 import kruger.microservicio.product.serviceproduct.entity.Product;
 import kruger.microservicio.product.serviceproduct.entity.Review;
+import kruger.microservicio.product.serviceproduct.service.product.IProductPagingService;
 import kruger.microservicio.product.serviceproduct.service.product.IProductService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -43,13 +44,41 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 /**
  * This microservice was created by Kevin Mantilla
  */
-// @CrossOrigin(origins = "*")
 @RestController
 @RequestMapping (value = "api/products")
 public class ProductController {
 
     @Autowired
     private IProductService iproductService;
+    
+    @Autowired
+    private IProductPagingService iProductPagingService;
+
+    @GetMapping(value = "/paginate")
+    public ResponseEntity<List<Product>> listProductsPaginate(
+                    @RequestParam(defaultValue = "0") Integer pageNo,
+                    @RequestParam(defaultValue = "6") Integer pageSize,
+                    @RequestParam(defaultValue = "name") String sortBy,
+                    @RequestParam(name = "categoryId",required = false) Long categoryId)
+    {
+            List<Product> listProducts = new ArrayList<>();
+
+            if(categoryId == null){
+                listProducts =  iProductPagingService.getAllProductPaginated(pageNo, pageSize, sortBy);
+                if(listProducts.isEmpty()){
+                    return ResponseEntity.noContent().build();
+                }
+            }else{
+                Category category = Category.builder().id(categoryId).build();
+                listProducts = iProductPagingService.getAllProductsByCategory(pageNo, pageSize, sortBy, category);
+                
+                if(listProducts.isEmpty()){
+                    return ResponseEntity.notFound().build();
+                }
+            }
+
+            return ResponseEntity.ok(listProducts);
+    }
 
     @ApiResponses(value = { 
 		@ApiResponse(responseCode = "200", description = "Successfully operation"),
