@@ -19,7 +19,8 @@ public class SecurityConfig{
                 "/api/users/**",
                 "/api/carts/**",
                 "/api/users/update/**",
-                "/api/address/**"
+                "/api/address/**",
+                "/api/mails/**"
         };
 
         http
