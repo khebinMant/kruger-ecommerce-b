@@ -13,6 +13,7 @@ import krugers.microservicio.auth.authmicroservice.entity.Status;
 import krugers.microservicio.auth.authmicroservice.entity.User;
 import krugers.microservicio.auth.authmicroservice.repository.CartRepository;
 import krugers.microservicio.auth.authmicroservice.repository.UserRepository;
+import krugers.microservicio.auth.authmicroservice.service.mail.MailService;
 
 
 
@@ -24,6 +25,9 @@ public class CartServiceImpl implements CartService {
     
     @Autowired
     CartRepository cartRepository;
+
+    @Autowired
+    MailService mailService;
     
     @Override
     public Cart addCart(OrderRequest request) {
@@ -32,6 +36,7 @@ public class CartServiceImpl implements CartService {
         Cart cart = new Cart(request.getOrderId(),request.getUserId());
         cart.setStatus(Status.PAID);
         cartRepository.save(cart);
+        mailService.SendMailOrderCreated(cart);
         return cart;
     }
         return null;
