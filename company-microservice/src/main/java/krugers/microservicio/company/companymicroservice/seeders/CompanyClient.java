@@ -15,6 +15,6 @@ public class CompanyClient {
     CompanyServiceImpl companyServiceImpl;
 
     public void fillCompanyToDB(){
-        companyServiceImpl.createCompany(new Company(1L,"Kruger Cell", "Tienda virtual de teléfonos", "https://krugercorp.com/wp-content/uploads/revslider/xtra_slider_business/Logo-Kruger_banner1.gif","CREATED", new Date(), new Date()));
+        companyServiceImpl.createCompany(new Company(1L,"Kruger Cell", "Tienda virtual de teléfonos","Objetivo","Historia","0986261197", "https://krugercorp.com/wp-content/uploads/revslider/xtra_slider_business/Logo-Kruger_banner1.gif","CREATED", new Date(), new Date()));
     }
 }

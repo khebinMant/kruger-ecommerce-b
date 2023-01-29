@@ -34,6 +34,12 @@ public class Company implements Serializable{
     private String companyName;
 
     private String description;
+
+    private String objective;
+
+    private String history;
+    
+    private String contact;
     
     @Column(name="image_url")
     private String imageUrl;
