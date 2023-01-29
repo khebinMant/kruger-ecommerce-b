@@ -42,8 +42,8 @@ public class CompanyServiceImplTest {
         
         List<Company> customCompanies =  new ArrayList<Company>();
 
-        customCompanies.add(new Company(1L,"PizzaHut", "de pizzas", "logo", "CREATED", new Date(), new Date()));
-        customCompanies.add(new Company(2L,"El Brasero", "de pollos", "de pollos", "CREATED", new Date(), new Date()));
+        customCompanies.add(new Company(1L,"PizzaHut", "de pizzas", "objetivo","historia","contacto","logo", "CREATED", new Date(), new Date()));
+        customCompanies.add(new Company(2L,"El Brasero", "de pollos", "obejtivo","hisotura","contacto", "de pollos", "CREATED", new Date(), new Date()));
         
         when(companyRepository.findAll()).thenReturn(customCompanies);
         assertEquals(2, StreamSupport.stream(companyServiceImpl.listAllCompanies().spliterator(), false).count());
@@ -54,7 +54,7 @@ public class CompanyServiceImplTest {
     @Order(2)
     public void test_getCompany(){
 
-        Company customCompany = new Company(1L,"PizzaHut", "de pizzas", "logo", "CREATED", new Date(), new Date());
+        Company customCompany = new Company(1L,"PizzaHut", "de pizzas", "objetivo","historia","contacto","logo", "CREATED", new Date(), new Date());
 
         when(companyRepository.findById(1L)).thenReturn(Optional.of(customCompany));
         Assertions.assertThat(customCompany.getId()).isEqualTo(1L);
@@ -65,7 +65,7 @@ public class CompanyServiceImplTest {
     @Order(3)
     public void test_createCompany(){
 
-        Company customCompany = new Company(1L,"PizzaHut", "de pizzas", "logo", "CREATED", new Date(), new Date());
+        Company customCompany = new Company(1L,"PizzaHut", "de pizzas", "objetivo","historia","contacto","logo", "CREATED", new Date(), new Date());
 
         when(companyRepository.save(customCompany)).thenReturn(customCompany);
         assertEquals(customCompany,companyRepository.save(customCompany));
@@ -76,7 +76,7 @@ public class CompanyServiceImplTest {
     @Order(4)
     public void test_updateCompany(){
 
-        Company customCompany = new Company(1L,"PizzaHut", "de pizzas", "logo", "CREATED", new Date(), new Date());
+        Company customCompany = new Company(1L,"PizzaHut", "de pizzas", "objetivo","historia","contacto","logo", "CREATED", new Date(), new Date());
 
         when(companyRepository.save(customCompany)).thenReturn(customCompany);
         assertEquals(customCompany,companyRepository.save(customCompany));
@@ -87,7 +87,7 @@ public class CompanyServiceImplTest {
     @Order(7)
     public void test_deleteCompany(){
 
-        Company customCompany = new Company(1L,"PizzaHut", "de pizzas", "logo", "CREATED", new Date(), new Date());
+        Company customCompany = new Company(1L,"PizzaHut", "de pizzas", "objetivo","historia","contacto","logo", "CREATED", new Date(), new Date());
 
         companyRepository.deleteById(customCompany.getId());
 
