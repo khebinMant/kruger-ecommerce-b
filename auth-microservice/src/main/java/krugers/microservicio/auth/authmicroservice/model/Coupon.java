@@ -11,6 +11,8 @@ public class Coupon {
 
     private Type type;
 
+    private Integer quantity;
+
     private String code;
 
     private Status status;

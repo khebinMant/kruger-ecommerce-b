@@ -11,6 +11,8 @@ public class Order {
 
     private Double totalPrice;
 
+    private Double subTotal;
+
     private Date created;
 
     private String status;
