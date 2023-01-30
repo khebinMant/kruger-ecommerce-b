@@ -67,6 +67,7 @@ public class CartServiceImpl implements CartService {
         if(cartDB == null){
             return null;
         }
+        //CUANDO SE CAMBIA DE ESTADO A CANCELED
         if(cart.getStatus() == Status.CANCELED){
             Order cartOrder = orderClientF.getOrder(cart.getId()).getBody();
             //Actualizar el stock del producto
@@ -80,18 +81,14 @@ public class CartServiceImpl implements CartService {
             //Envío un correo al cliente confirmando que su orden ha sido cancelada
             mailService.SendMailOrderCanceled(cart);
         }
-        //SI ES CANCELED debo de regresar al stock los productos
-        // y restar el contador de ventas en el producto
-        // ENVIAR CORREO AL CLIENTE DICIENDO QUE SU ORDEN FUE CANCELADA
-        // Y QUE SE HARA UN REMBOLSO DE SU DINERO EN LAS 24 HORAS
-
-        //SI ES EN IN_TRAVEL 
-        // SE ENVIA UN MENSAJE AL CLIENTE AVISANDO QUE EL PEDIDO ESTA EN VIAJE
-
-        //SI ES RECIBIDO
-        //SE ENVÍA UN MENSAJE POR CORREO DE QUE NOS ALEGRAMOS QUE SU 
-        // PEDIDO HAYA LLEGADO A SALVO
-        
+        //CUANDO SE CAMBIA DE ESTADO A IN_TRAVEL
+        if(cart.getStatus() == Status.IN_TRAVEL){
+            mailService.SendMailOrderInTravel(cart);
+        }
+        //CUANDO SE CAMBIA DE ESTADO A RECIBIDO
+        if(cart.getStatus() == Status.RECEIVED){
+            mailService.SendMailOrderInReceived(cart);
+        }
         cartDB.setStatus(cart.getStatus());
        
         return cartRepository.save(cartDB);

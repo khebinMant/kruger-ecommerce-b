@@ -49,5 +49,35 @@ public class MailServiceImpl implements MailService{
 
         return "Email Sended";
     }
+
+    @Override
+    public String SendMailOrderInTravel(Cart cart) {
+        SimpleMailMessage email = new SimpleMailMessage();
+        User user = userService.findById(cart.getUserId());
+        email.setTo(user.getEmail());
+        email.setFrom("krugercellmag@gmail.com");
+
+        email.setSubject("Tu pedido esta en viaje");
+        email.setText
+        ("Buen dia " + user.getFirstName() + " " +  user.getLastName() + "este correo es para informarle que su pedido ya esta en camino, si tiene alguna preguntas no dudes en responder");
+        javaMailSender.send(email);
+
+        return "Email Sended";
+    }
+
+    @Override
+    public String SendMailOrderInReceived(Cart cart) {
+        SimpleMailMessage email = new SimpleMailMessage();
+        User user = userService.findById(cart.getUserId());
+        email.setTo(user.getEmail());
+        email.setFrom("krugercellmag@gmail.com");
+
+        email.setSubject("Sano y ssalvo");
+        email.setText
+        ("Buen dia " + user.getFirstName() + user.getLastName() + "este correo es para copnfirmar que su pedido ha llegado a al dirección de envío, si tiene alguna preguntas no dudes en responder");
+        javaMailSender.send(email);
+
+        return "Email Sended";
+    }
     
 }

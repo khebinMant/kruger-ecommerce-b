@@ -7,11 +7,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.netflix.infix.lang.infix.antlr.EventFilterParser.null_predicate_return;
 
 import kruger.microservicio.product.serviceproduct.entity.Image;
 import kruger.microservicio.product.serviceproduct.entity.Product;
-import kruger.microservicio.product.serviceproduct.entity.Status;
 import kruger.microservicio.product.serviceproduct.entity.Type;
 import kruger.microservicio.product.serviceproduct.entity.Review;
 import kruger.microservicio.product.serviceproduct.service.category.CategoryServiceImpl;
