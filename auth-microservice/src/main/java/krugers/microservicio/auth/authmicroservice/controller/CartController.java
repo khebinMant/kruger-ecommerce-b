@@ -23,6 +23,7 @@ import krugers.microservicio.auth.authmicroservice.client.order.OrderClientF;
 import krugers.microservicio.auth.authmicroservice.dto.OrderRequest;
 import krugers.microservicio.auth.authmicroservice.entity.Cart;
 import krugers.microservicio.auth.authmicroservice.entity.User;
+import krugers.microservicio.auth.authmicroservice.model.Order;
 import krugers.microservicio.auth.authmicroservice.service.cart.CartServiceImpl;
 import krugers.microservicio.auth.authmicroservice.service.user.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;

@@ -28,7 +28,23 @@ public class MailServiceImpl implements MailService{
 
         email.setSubject("Orden de compra");
         email.setText
-        ("Tu orden se ha procesado con éxito gracias por confiar en nosotros si tienes, alguna pregunta no dudes en responder");
+        ("Tu orden se ha procesado con éxito gracias por confiar en nosotros, si tienes alguna pregunta no dudes en responder");
+        javaMailSender.send(email);
+
+        return "Email Sended";
+    }
+
+    @Override
+    public String SendMailOrderCanceled(Cart cart) {
+                
+        SimpleMailMessage email = new SimpleMailMessage();
+        User user = userService.findById(cart.getUserId());
+        email.setTo(user.getEmail());
+        email.setFrom("krugercellmag@gmail.com");
+
+        email.setSubject("Cancelación de la orden");
+        email.setText
+        ("Tu orden ha sido cancelada, esperamos haya tenido una buena experiencia usando nuestra plataforma, la devolución del pago se realizara dentro de las próximas 24 horas");
         javaMailSender.send(email);
 
         return "Email Sended";
