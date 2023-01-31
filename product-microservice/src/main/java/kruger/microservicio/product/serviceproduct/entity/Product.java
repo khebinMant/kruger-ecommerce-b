@@ -36,9 +36,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor @NoArgsConstructor
 @Builder
 
-/**
- * This microservice was created by Kevin Mantilla
- */
+
 public class Product {
 
     @Id

@@ -15,9 +15,7 @@ import kruger.microservicio.product.serviceproduct.entity.Review;
 import kruger.microservicio.product.serviceproduct.service.category.CategoryServiceImpl;
 import kruger.microservicio.product.serviceproduct.service.product.ProductServiceImpl;
 
-/**
- * This microservice was created by Kevin Mantilla
- */
+
 @Component
 public class ProductClient {
 

@@ -4,9 +4,7 @@ import java.util.List;
 
 import kruger.microservicio.product.serviceproduct.entity.Category;
 
-/**
- * This microservice was created by Kevin Mantilla
- */
+
 public interface ICategoryService {
 
     public List<Category> listAllCategories();

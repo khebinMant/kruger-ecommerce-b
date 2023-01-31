@@ -23,9 +23,7 @@ import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * This microservice was created by Kevin and David
- */
+
 @Service
 public class OrderServiceImpl implements IOrderService{
 

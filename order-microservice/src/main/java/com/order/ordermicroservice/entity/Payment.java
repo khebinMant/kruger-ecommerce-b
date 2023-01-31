@@ -6,9 +6,7 @@ import lombok.Setter;
 
 import java.util.Date;
 import java.util.UUID;
-/**
- * This microservice was created by Kevin and David
- */
+
 @Entity
 @Table(name="payments")
 @Getter

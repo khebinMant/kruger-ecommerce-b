@@ -36,10 +36,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-/**
- * This microservice was created by Kevin Mantilla
- */
-// @CrossOrigin(origins = "http://localhost:3000")
+
 @RestController
 @RequestMapping (value = "api/categories")
 public class CategoryController {

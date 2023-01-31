@@ -31,9 +31,6 @@ import kruger.microservicio.product.serviceproduct.entity.Review;
 import kruger.microservicio.product.serviceproduct.model.User;
 import kruger.microservicio.product.serviceproduct.service.review.IReviewService;
 
-/**
- * This microservice was created by Kevin Mantilla
- */
 @RestController
 @RequestMapping (value = "api/reviews")
 public class ReviewController {

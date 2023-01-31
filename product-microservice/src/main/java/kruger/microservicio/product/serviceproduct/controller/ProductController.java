@@ -41,9 +41,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-/**
- * This microservice was created by Kevin Mantilla
- */
+
 @RestController
 @RequestMapping (value = "api/products")
 public class ProductController {

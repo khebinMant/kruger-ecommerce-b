@@ -9,9 +9,7 @@ import java.util.Date;
 
 import com.order.ordermicroservice.model.Product;
 
-/**
- * This microservice was created by Kevin and David
- */
+
 @Data
 @Entity
 @Table(name="orderItems")

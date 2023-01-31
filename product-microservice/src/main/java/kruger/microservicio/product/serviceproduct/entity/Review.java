@@ -16,9 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * This microservice was created by Kevin Mantilla
- */
+
 @NoArgsConstructor
 @Data
 @Entity

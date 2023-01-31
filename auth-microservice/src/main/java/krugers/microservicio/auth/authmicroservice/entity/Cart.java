@@ -13,9 +13,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import krugers.microservicio.auth.authmicroservice.model.Order;
 import lombok.Data;
-/**
- * This microservice was created by Kenan Aljaber
- */
+
 @Entity
 @Data
 @Table(name = "carts")

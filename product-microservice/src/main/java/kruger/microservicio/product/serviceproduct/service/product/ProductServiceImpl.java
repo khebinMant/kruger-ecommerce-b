@@ -12,9 +12,7 @@ import kruger.microservicio.product.serviceproduct.entity.Product;
 import kruger.microservicio.product.serviceproduct.entity.Status;
 import kruger.microservicio.product.serviceproduct.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
-/**
- * This microservice was created by Kevin Mantilla
- */
+
 @Service
 @RequiredArgsConstructor
 
