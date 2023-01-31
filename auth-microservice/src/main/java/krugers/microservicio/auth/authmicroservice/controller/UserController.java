@@ -53,6 +53,12 @@ public class UserController {
 	@Autowired
 	AddressServiceImpl addressServiceImpl;
 
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
+			@ApiResponse(responseCode = "400", description = "Failed to log in") })
+	@Operation(summary = "This endpoint will login the user, the credentials of the user should be passed as a LoginRequest object",
+	description = "You should call this endpoint when you want to log a user in")
+	@Tag(name = "Login a user with credentials", description = "calling this endpoint will login the user"
+			+ "who has the credentials stored in the LoginRequest object")
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest dto) {
 		LoginResponse response = userServiceImpl.login(dto);
@@ -69,15 +75,23 @@ public class UserController {
 		return ResponseEntity.ok(tokenDto);
 	}
 
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
+			@ApiResponse(responseCode = "400", description = "There is no customers found") })
+	@Operation(summary = "This endpoint will return a list of all customers in the Db through a GET request", description = "You should call this endpoint whenever you want to get all customers")
+	@Tag(name = "Get all users with role Customers in the database", description = "calling this endpoint will return a list of all customers")
 	@GetMapping("/customers")
 	public ResponseEntity getAllCusotmers() {
 		List<User> customers = userServiceImpl.findAllCustomers();
-		if(customers!=null) {
-			return  ResponseEntity.ok(customers);
+		if (customers != null) {
+			return ResponseEntity.ok(customers);
 		}
-		return new ResponseEntity("There is no customers found",HttpStatus.NO_CONTENT);
+		return new ResponseEntity("There is no customers found", HttpStatus.NO_CONTENT);
 	}
-	
+
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
+			@ApiResponse(responseCode = "400", description = "El email ya esta en uso") })
+	@Operation(summary = "This endpoint will create a new user by passing a user object through post request", description = "You should pass user object as a post rquest body so this endpoint will create a new user")
+	@Tag(name = "Create a new user", description = "calling this endpoint will create a new user")
 	@PostMapping("/create")
 	public ResponseEntity<?> create(@RequestBody User user, BindingResult result) {
 
@@ -135,7 +149,7 @@ public class UserController {
 		ChangeCredentialsResponse resp = userServiceImpl.updateUserCredentials(id, req);
 		if (resp != ChangeCredentialsResponse.CHANGED) {
 			log.error("Unable to update. user credentials.");
-			return new ResponseEntity(resp,HttpStatus.BAD_REQUEST);
+			return new ResponseEntity(resp, HttpStatus.BAD_REQUEST);
 		}
 		return ResponseEntity.ok(resp);
 	}
