@@ -68,11 +68,13 @@ public class OrderController {
     @Operation(description = "add  orders", summary = "calling this endpoint will allow you to add orders by passing the order data as json in the request body")
     @Tag(name = "Create a Order")
     @PostMapping(value= "/user/{id}")
-    public ResponseEntity<Order> createOrder(@Valid @RequestBody Order Order, BindingResult result, @PathVariable("id") Long userId) {
+    public ResponseEntity<Order> createOrder(@Valid @RequestBody Order order, BindingResult result, @PathVariable("id") Long userId) {
+    	System.out.println("called");
         if (result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
         }
-        Order OrderDB = orderService.createOrder(Order, userId);
+        System.out.println(order);
+        Order OrderDB = orderService.createOrder(order, userId);
 
         return  ResponseEntity.status( HttpStatus.CREATED).body(OrderDB);
     }

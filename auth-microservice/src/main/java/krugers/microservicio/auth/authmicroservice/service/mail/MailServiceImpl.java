@@ -76,7 +76,6 @@ public class MailServiceImpl implements MailService{
         email.setText
         ("Buen dia " + user.getFirstName() + user.getLastName() + "este correo es para copnfirmar que su pedido ha llegado a al dirección de envío, si tiene alguna preguntas no dudes en responder");
         javaMailSender.send(email);
-
         return "Email Sended";
     }
     

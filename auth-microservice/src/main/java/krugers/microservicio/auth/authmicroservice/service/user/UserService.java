@@ -21,4 +21,6 @@ public interface UserService {
     User updateUserUbication(Long userId,User user);
     ChangeCredentialsResponse updateUserCredentials(Long userId,ChangeCredentialsRequest req);
     User findByEmail(String email);
+    List<User> findAllCustomers();
+    
 }
