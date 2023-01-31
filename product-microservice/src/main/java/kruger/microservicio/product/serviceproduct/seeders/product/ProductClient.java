@@ -166,7 +166,7 @@ public class ProductClient {
             173.0, 
             "Chip A15 Bionic", 
             0.0, new Date(),
-            categoryServiceImpl.getCategory(1L),
+            categoryServiceImpl.getCategory(3L),
             reviews, fillImagesToP1()
         ));
         productServiceImpl.createProduct(new Product(
@@ -182,7 +182,7 @@ public class ProductClient {
             173.0, 
             "Chip A15 Bionic", 
             0.0, new Date(),
-            categoryServiceImpl.getCategory(1L),
+            categoryServiceImpl.getCategory(3L),
             emptyReviews, fillImagesToP2()
         ));
         productServiceImpl.createProduct(new Product(
@@ -198,7 +198,7 @@ public class ProductClient {
             227.0, 
             "Exynos 2200 a 2,8GHz GPU AMD", 
             0.0, new Date(),
-            categoryServiceImpl.getCategory(1L),
+            categoryServiceImpl.getCategory(3L),
             emptyReviews, fillImagesToP3()
         ));
 
@@ -215,7 +215,7 @@ public class ProductClient {
             206.0, 
             "Chip A16 Bionic", 
             0.0, new Date(),
-            categoryServiceImpl.getCategory(1L),
+            categoryServiceImpl.getCategory(3L),
             emptyReviews, fillImagesToP4()
         ));
 
@@ -302,7 +302,7 @@ public class ProductClient {
             150.0, 
             "Octa-Core Mediatek", 
             0.0, new Date(),
-            categoryServiceImpl.getCategory(3L),
+            categoryServiceImpl.getCategory(1L),
             emptyReviews, fillImagesToP9()
         ));
 
@@ -319,7 +319,7 @@ public class ProductClient {
             158.0, 
             "Qualcomm Snapdragon 778G", 
             0.0, new Date(),
-            categoryServiceImpl.getCategory(3L),
+            categoryServiceImpl.getCategory(1L),
             emptyReviews, fillImagesToP10()
         ));
 
@@ -336,7 +336,7 @@ public class ProductClient {
             194.0, 
             "MediaTek Helio G25 Octa-Core de 2GHz", 
             0.0, new Date(),
-            categoryServiceImpl.getCategory(3L),
+            categoryServiceImpl.getCategory(1L),
             emptyReviews, fillImagesToP11()
         ));
 
@@ -353,7 +353,7 @@ public class ProductClient {
             160.0, 
             "Ocho núcleos a 1,6GHz", 
             0.0, new Date(),
-            categoryServiceImpl.getCategory(3L),
+            categoryServiceImpl.getCategory(1L),
             emptyReviews, fillImagesToP12()
         ));
 
