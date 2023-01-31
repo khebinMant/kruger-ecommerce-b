@@ -30,7 +30,6 @@ public class MailServiceImpl implements MailService{
         email.setText
         ("Tu orden se ha procesado con éxito gracias por confiar en nosotros si tienes, alguna pregunta no dudes en responder");
         javaMailSender.send(email);
-
         return "Email Sended";
     }
     

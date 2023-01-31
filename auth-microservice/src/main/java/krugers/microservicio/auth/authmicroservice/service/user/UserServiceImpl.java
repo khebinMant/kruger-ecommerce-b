@@ -160,6 +160,12 @@ public class UserServiceImpl implements UserService {
 			return ChangeCredentialsResponse.USER_ID_NOT_FOUND;
 	}
 
+	@Override
+	public List<User> findAllCustomers() {
+		
+		return userRepository.findAllCustomers();
+	}
+
 	/*
 	 * public User updateUser(Long userId, User user) { User userDB =
 	 * findById(userId); String password =

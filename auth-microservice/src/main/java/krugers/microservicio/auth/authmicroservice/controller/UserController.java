@@ -69,6 +69,15 @@ public class UserController {
 		return ResponseEntity.ok(tokenDto);
 	}
 
+	@GetMapping("/customers")
+	public ResponseEntity getAllCusotmers() {
+		List<User> customers = userServiceImpl.findAllCustomers();
+		if(customers!=null) {
+			return  ResponseEntity.ok(customers);
+		}
+		return new ResponseEntity("There is no customers found",HttpStatus.NO_CONTENT);
+	}
+	
 	@PostMapping("/create")
 	public ResponseEntity<?> create(@RequestBody User user, BindingResult result) {
 
