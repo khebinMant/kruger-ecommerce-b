@@ -1,22 +1,36 @@
 package krugers.microservicio.auth.authmicroservice.service.cart;
 
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
 
 import com.netflix.discovery.converters.Auto;
 
 import krugers.microservicio.auth.authmicroservice.client.order.OrderClientF;
 import krugers.microservicio.auth.authmicroservice.client.product.ProductClient;
 import krugers.microservicio.auth.authmicroservice.dto.OrderRequest;
+import krugers.microservicio.auth.authmicroservice.entity.Address;
 import krugers.microservicio.auth.authmicroservice.entity.Cart;
 import krugers.microservicio.auth.authmicroservice.entity.Status;
 import krugers.microservicio.auth.authmicroservice.entity.User;
 import krugers.microservicio.auth.authmicroservice.model.Order;
+import krugers.microservicio.auth.authmicroservice.model.OrderItem;
 import krugers.microservicio.auth.authmicroservice.repository.CartRepository;
 import krugers.microservicio.auth.authmicroservice.repository.UserRepository;
+import krugers.microservicio.auth.authmicroservice.service.address.AddressServiceImpl;
 import krugers.microservicio.auth.authmicroservice.service.mail.MailService;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 
 
@@ -37,6 +51,9 @@ public class CartServiceImpl implements CartService {
 
     @Autowired
     ProductClient productClient;
+
+    @Autowired
+    AddressServiceImpl addressServiceImpl;
     
     @Override
     public Cart addCart(OrderRequest request) {
@@ -102,6 +119,60 @@ public class CartServiceImpl implements CartService {
     @Override
     public Cart getCart(Long id) {
         return cartRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public JasperPrint getCartReport(Long id) {
+
+        Map<String, Object> reportParameters = new HashMap<String, Object>();
+        Address shipmentAddress = new Address();
+        Cart cart = getCart(id);
+        if (cart == null){
+            return null;
+        }
+        
+        cart.setOrder(orderClientF.getOrder(cart.getId()).getBody());
+        cart.setUser(userRepository.findById(cart.getUserId()).orElse(null));
+        if(cart.getOrder().getAddressId()!=null){
+            shipmentAddress = addressServiceImpl.getAddress(cart.getOrder().getAddressId());
+        }
+
+        // reportParameters.put("cartId", cart.getId());
+        reportParameters.put("firstName", cart.getUser().getFirstName());
+        reportParameters.put("lastName", cart.getUser().getLastName());
+        reportParameters.put("cellPhone", cart.getUser().getCellPhone());
+        reportParameters.put("province", shipmentAddress.getProvince());
+        reportParameters.put("city", shipmentAddress.getCity());
+        reportParameters.put("street", shipmentAddress.getStreet());
+        reportParameters.put("address", shipmentAddress.getAddress());
+        reportParameters.put("subTotalG", cart.getOrder().getSubTotal());
+        reportParameters.put("totalG", cart.getOrder().getTotalPrice());
+        //Order Items
+        List<Map<String, Object>> dataList = new ArrayList<>();
+        
+        for(OrderItem item : cart.getOrder().getItems()){
+            Map<String, Object> data = new HashMap<>();
+            data.put("name", item.getProduct().getName());
+            data.put("price", item.getProduct().getPrice());
+            data.put("quantity", item.getQuantity());
+            data.put("subTotal", item.getSubTotal());
+            dataList.add(data);
+        }
+        reportParameters.put("orderItems", new JRBeanCollectionDataSource(dataList));
+
+        JasperPrint reportJasperPrint = null;
+        try{
+            reportJasperPrint = JasperFillManager.fillReport(
+                JasperCompileManager.compileReport(
+                    ResourceUtils.getFile("classpath:jrxml/ReciboCompra.jrxml")
+                    .getAbsolutePath())
+            , reportParameters
+            , new JREmptyDataSource());
+        }catch(FileNotFoundException | JRException e){
+            e.printStackTrace();
+        }
+
+        return reportJasperPrint;
     }
     
 

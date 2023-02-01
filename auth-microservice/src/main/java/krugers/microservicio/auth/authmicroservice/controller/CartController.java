@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,6 +28,9 @@ import krugers.microservicio.auth.authmicroservice.entity.User;
 import krugers.microservicio.auth.authmicroservice.model.Order;
 import krugers.microservicio.auth.authmicroservice.service.cart.CartServiceImpl;
 import krugers.microservicio.auth.authmicroservice.service.user.UserServiceImpl;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.*;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -114,6 +119,30 @@ public class CartController {
         cart.setOrder(orderClientF.getOrder(cart.getId()).getBody());
         cart.setUser(userServiceImpl.findById(cart.getUserId()));
         return ResponseEntity.ok(cart);
+    }
+
+    
+    //Obtener reporte de cart dado su id
+    @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "No content")
+	})
+    @Operation(summary = "Return a cart report by Id", description = "Returns a PDF report response cart information")
+    @Tag(name = "GET cart report by Id ", description = "Retrieve information PDF of cart by Id")
+    @GetMapping(value="/{id}/report")
+    public ResponseEntity<byte[]> getCartReport(@PathVariable(name="id") Long id) throws JRException{
+        JasperPrint report = cartServiceImpl.getCartReport(id);
+
+        if(report == null){
+            return new ResponseEntity<byte []>(null, null, HttpStatus.NOT_FOUND);
+        }
+        HttpHeaders headers =  new HttpHeaders();
+        //set PDF format
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("filename", "recibo.pdf");
+
+        //create the report in PDF format
+        return new ResponseEntity<byte []>(JasperExportManager.exportReportToPdf(report), headers, HttpStatus.OK);
     }
 
     @ApiResponses(value = { 
