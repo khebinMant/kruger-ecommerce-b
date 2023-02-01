@@ -41,13 +41,13 @@ public class AddressController {
     @Autowired
     IAddressService iAddressService;
 
-    //Obtener todas las direcciones
-    // @ApiResponses(value = { 
-	// 	@ApiResponse(responseCode = "200", description = "Successfully operation"),
-	// 	@ApiResponse(responseCode = "404", description = "No content")
-	// })
-    // @Operation(summary = "Return a list with all branchs", description = "Returns a JSON response with the branchs information")
-    // @Tag(name = "GET all branchs ", description = "Retrieve information of all branchs")
+    // Obtener todas las direcciones
+    @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "No content")
+	})
+    @Operation(summary = "Return a list with all branchs", description = "Returns a JSON response with the branchs information")
+    @Tag(name = "GET all branchs ", description = "Retrieve information of all branchs")
     @GetMapping("/")
     public ResponseEntity<List<Address>> listAddress(){
             List<Address> addresses = new ArrayList<>();
@@ -77,13 +77,13 @@ public class AddressController {
         return ResponseEntity.ok(address);
     }
     
-    // //Crear sucursal y adjuntar a cliente
-    // @ApiResponses(value = { 
-	// 	@ApiResponse(responseCode = "200", description = "Successfully operation"),
-	// 	@ApiResponse(responseCode = "404", description = "No content")
-	// })
-    // @Operation(summary = "Create a new branch to a customer", description = "Returns a JSON response with the branch information")
-    // @Tag(name = "POST branch", description = "Retrieve information of a created branch")
+    //Crear sucursal y adjuntar a cliente
+    @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "No content")
+	})
+    @Operation(summary = "Create a new branch to a customer", description = "Returns a JSON response with the branch information")
+    @Tag(name = "POST branch", description = "Retrieve information of a created branch")
     @PostMapping("/")
     public ResponseEntity<Address> createAddress(@Valid @RequestBody Address address, BindingResult result){
         
@@ -137,7 +137,6 @@ public class AddressController {
                 return error;
             }).collect(Collectors.toList());
         
-        //Aqui guardo utilizando la clase que creamos para gestionar el error
         ErrorMessage errorMessage = ErrorMessage.builder()
             .code("01")
             .messages(errors).build();

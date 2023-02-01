@@ -12,6 +12,7 @@ import org.springframework.util.ResourceUtils;
 
 import com.netflix.discovery.converters.Auto;
 
+import jakarta.mail.MessagingException;
 import krugers.microservicio.auth.authmicroservice.client.order.OrderClientF;
 import krugers.microservicio.auth.authmicroservice.client.product.ProductClient;
 import krugers.microservicio.auth.authmicroservice.dto.OrderRequest;
@@ -56,7 +57,7 @@ public class CartServiceImpl implements CartService {
     AddressServiceImpl addressServiceImpl;
     
     @Override
-    public Cart addCart(OrderRequest request) {
+    public Cart addCart(OrderRequest request) throws MessagingException{
        // en caso que no hay customer con el id ingresado retorna null
        if(userRepository.findById(request.getUserId()).isPresent()){
         Cart cart = new Cart(request.getOrderId(),request.getUserId());
