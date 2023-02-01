@@ -432,22 +432,7 @@ public class ProductClient {
             null
         ));
         
-        productServiceImpl.createProduct(new Product(
-                17L,
-                "IPHONE 1444 (128 GB)",
-                "Frente de Ceramic Shield Diseño de aluminio con parte posterior de vidrio", 
-                "https://www.youtube.com/embed/TBTgQbjRsqg",
-                1162.62, 
-                100.0,
-                true, 
-                Type.PRODUCT, 
-                "Apple", 
-                173.0, 
-                "Chip A15 Bionic", 
-                0.0, new Date(),
-                categoryServiceImpl.getCategory(3L),
-                reviews, null
-            ));
+    
 
     }
 }

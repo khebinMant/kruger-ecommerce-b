@@ -91,28 +91,5 @@ public class Product {
     @JoinColumn(name = "product_id")
     private List<Image> images;
 
-	public Product(@NotEmpty(message = "El nombre del campo no debe de ser vacio") String name, String description,
-			String youtubeLink, Double price, @Positive(message = "El stock debe ser mayor que cero") Double stock,
-			Boolean status, Type type, String brand, Double weight, String processor, Double salesCounter, Date created,
-			@NotNull(message = "La categoria no puede ser vacia") Category category, @Valid List<Review> reviews,
-			@Valid List<Image> images) {
-		super();
-		this.name = name;
-		this.description = description;
-		this.youtubeLink = youtubeLink;
-		this.price = price;
-		this.stock = stock;
-		this.status = status;
-		this.type = type;
-		this.brand = brand;
-		this.weight = weight;
-		this.processor = processor;
-		this.salesCounter = salesCounter;
-		this.created = created;
-		this.category = category;
-		this.reviews = reviews;
-		this.images = images;
-	}
-    
-    
+	    
 }
