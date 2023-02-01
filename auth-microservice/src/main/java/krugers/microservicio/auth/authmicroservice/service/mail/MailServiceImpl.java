@@ -1,15 +1,24 @@
 package krugers.microservicio.auth.authmicroservice.service.mail;
 
+import java.nio.charset.StandardCharsets;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.context.Context;
 
+import jakarta.mail.MessagingException;
+import jakarta.mail.internet.MimeMessage;
 import krugers.microservicio.auth.authmicroservice.entity.Cart;
 import krugers.microservicio.auth.authmicroservice.entity.User;
 import krugers.microservicio.auth.authmicroservice.service.user.UserService;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class MailServiceImpl implements MailService{
 
     @Autowired
@@ -18,18 +27,30 @@ public class MailServiceImpl implements MailService{
     @Autowired
     UserService userService;
 
-    @Override
-    public String SendMailOrderCreated(Cart cart) {
-        
-        SimpleMailMessage email = new SimpleMailMessage();
-        User user = userService.findById(cart.getUserId());
-        email.setTo(user.getEmail());
-        email.setFrom("krugercellmag@gmail.com");
+    @Autowired
+    TemplateEngine templateEngine;
 
-        email.setSubject("Orden de compra");
-        email.setText
-        ("Tu orden se ha procesado con éxito gracias por confiar en nosotros, si tienes alguna pregunta no dudes en responder");
-        javaMailSender.send(email);
+    @Override
+    public String SendMailOrderCreated(Cart cart) throws MessagingException {
+        
+        MimeMessage message  = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+
+        User user = userService.findById(cart.getUserId());
+
+        Context context = new Context();
+        context.setVariable("user", user);
+
+        String html = templateEngine.process("purchase", context);
+
+        helper.setFrom("krugercellmag@gmail.com");
+        helper.setTo(user.getEmail());
+        helper.setSubject("Orden de compra");
+        helper.setText(html, true);
+        
+        log.info("Sending email: {} with html body: {}", cart, html);
+        
+        javaMailSender.send(message);
 
         return "Email Sended";
     }

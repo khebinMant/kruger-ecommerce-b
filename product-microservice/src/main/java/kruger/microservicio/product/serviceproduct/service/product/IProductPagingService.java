@@ -2,7 +2,6 @@ package kruger.microservicio.product.serviceproduct.service.product;
 
 import java.util.List;
 
-import org.springframework.data.domain.Page;
 
 import kruger.microservicio.product.serviceproduct.entity.Category;
 import kruger.microservicio.product.serviceproduct.entity.Product;

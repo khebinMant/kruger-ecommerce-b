@@ -2,6 +2,7 @@ package krugers.microservicio.auth.authmicroservice.service.cart;
 
 import java.util.List;
 
+import jakarta.mail.MessagingException;
 import krugers.microservicio.auth.authmicroservice.dto.OrderRequest;
 import krugers.microservicio.auth.authmicroservice.entity.Cart;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -12,7 +13,7 @@ public interface CartService {
      * @param request es el objeto que carga los orderId y customerId
      * @return el customer que le fue agregado la carta
      */
-    public Cart addCart (OrderRequest request);
+    public Cart addCart (OrderRequest request) throws MessagingException;
 
     /**
      * este metodo busca todas las cartas que tienen el customerId equal al parametro id

@@ -1,6 +1,5 @@
 package com.order.ordermicroservice.services.order;
 
-import com.netflix.discovery.converters.Auto;
 import com.order.ordermicroservice.client.CartClient;
 import com.order.ordermicroservice.client.ProductClient;
 import com.order.ordermicroservice.entity.Coupon;
@@ -19,7 +18,6 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import org.aspectj.weaver.ast.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

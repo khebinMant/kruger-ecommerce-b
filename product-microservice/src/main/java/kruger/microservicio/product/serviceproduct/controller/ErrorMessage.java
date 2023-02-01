@@ -3,7 +3,6 @@ package kruger.microservicio.product.serviceproduct.controller;
 import java.util.Map;
 
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 

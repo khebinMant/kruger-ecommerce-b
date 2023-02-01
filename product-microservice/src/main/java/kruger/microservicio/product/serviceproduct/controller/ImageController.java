@@ -23,7 +23,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+
 import jakarta.validation.Valid;
 import kruger.microservicio.product.serviceproduct.entity.Image;
 import kruger.microservicio.product.serviceproduct.service.image.IImageService;
@@ -35,7 +39,13 @@ public class ImageController {
     @Autowired
     IImageService imageService;
 
-    @Tag(name = "Get all images information")
+    //Obtener todas las imágenes
+    @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "No content")
+	})
+    @Operation(summary = "Return a list with all images", description = "Returns a JSON response with the images information")
+    @Tag(name = "GET all images ", description = "Retrieve all images")
     @GetMapping
     public ResponseEntity<List<Image>> listImages(){
         List<Image> images = new ArrayList<>();
@@ -47,7 +57,14 @@ public class ImageController {
         return ResponseEntity.ok(images);
     }
 
-    @Tag(name = "Get image by ID")
+
+    //Obtener imagen dado su id
+    @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "No content")
+	})
+    @Operation(summary = "Return a image by Id", description = "Returns a JSON response with the image information")
+    @Tag(name = "GET image by Id ", description = "Retrieve information of image by Id")
     @GetMapping(value="/{id}")
     public ResponseEntity<Image> getImage(@PathVariable(name="id") Long id){
         Image image = imageService.getImage(id);
@@ -58,7 +75,13 @@ public class ImageController {
         return ResponseEntity.ok(image);
     }
     
-    @Tag(name = "Create a new image")
+    //Crear imagen
+    @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "No content")
+	})
+    @Operation(summary = "Create a new image", description = "Returns a JSON response with the image information")
+    @Tag(name = "POST image", description = "Retrieve information of a created image")
     @PostMapping
     public ResponseEntity<Image> createImage(@Valid @RequestBody Image image, BindingResult result){
         
@@ -71,7 +94,13 @@ public class ImageController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdImage);
     }
 
-    @Tag(name = "Edit a review by ID")
+    //Actualizar la información de la imagen
+    @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "We cant find a image with that id not found.")
+	})
+    @Operation(summary = "Update image", description = "Returns a JSON response with the image information")
+    @Tag(name = "PUT update image information", description = "Retrieve information of a created image")
     @PutMapping(value="/{id}")
     public ResponseEntity<Image> updateImage(@PathVariable(name="id") Long id, @RequestBody Image image){
         image.setId(id);
@@ -82,7 +111,12 @@ public class ImageController {
         return ResponseEntity.ok(imageDB);
     }
 
-    @Tag(name = "Delete specific review info")
+    //Eliminar una imagen
+    @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "We cant find a image with that id not found.")
+	})
+    @Operation(summary = "Delete image", description = "Return OK status")
     @DeleteMapping(value="/{id}")
     public ResponseEntity<?> deleteImage(@PathVariable(name="id") Long id){
         imageService.deleteImage(id);

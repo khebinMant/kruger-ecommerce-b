@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.mail.MessagingException;
 import krugers.microservicio.auth.authmicroservice.client.order.OrderClientF;
 import krugers.microservicio.auth.authmicroservice.dto.OrderRequest;
 import krugers.microservicio.auth.authmicroservice.entity.Cart;
@@ -52,7 +53,7 @@ public class CartController {
     @Tag(name = "Create Order in ShoppingCar")
     @Operation(description = "add  order in car", summary = "calling this endpoint will allow you to add an order to the shopping Car by passing the order data as json in the request body")
     @PostMapping("/")
-    public ResponseEntity<?> addCart(@RequestBody(required = true) OrderRequest request){
+    public ResponseEntity<?> addCart(@RequestBody(required = true) OrderRequest request) throws MessagingException{
         Cart user= cartServiceImpl.addCart(request);
         if(user!=null){
             return new ResponseEntity<>(user,HttpStatus.OK);

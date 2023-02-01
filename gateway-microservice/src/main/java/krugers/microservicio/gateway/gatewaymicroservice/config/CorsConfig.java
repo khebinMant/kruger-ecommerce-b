@@ -1,17 +1,12 @@
 package krugers.microservicio.gateway.gatewaymicroservice.config;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.reactive.CorsConfigurationSource;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
-import org.springframework.web.reactive.config.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
 
 @Configuration
 public class CorsConfig  extends org.springframework.web.cors.CorsConfiguration{
@@ -19,7 +14,9 @@ public class CorsConfig  extends org.springframework.web.cors.CorsConfiguration{
     public CorsWebFilter corsFilter() {
       org.springframework.web.cors.CorsConfiguration corsConfiguration = new org.springframework.web.cors.CorsConfiguration();
       corsConfiguration.setAllowCredentials(true);
-      corsConfiguration.addAllowedOrigin("http://localhost:5173");
+      //Cuando se tenga desplegado el front podemos cambiar o por defecto permitie cualquier request
+      // corsConfiguration.addAllowedOrigin("http://localhost:5173");
+      corsConfiguration.addAllowedOriginPattern("*");
       corsConfiguration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"));
       corsConfiguration.addAllowedHeader("origin");
       corsConfiguration.addAllowedHeader("content-type");

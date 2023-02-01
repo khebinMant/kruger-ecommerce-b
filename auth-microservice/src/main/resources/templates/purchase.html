@@ -1,0 +1,12 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:remove="all">Template for HTML email</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    </head>
+    <body>
+        <div>Welcome <b th:text="${user.firstName}"></b></div>
+
+        <div> Your Name is <b th:text="${user.lastName}"></b></div>
+    </body>
+</html>
