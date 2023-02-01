@@ -137,7 +137,6 @@ public class CartServiceImpl implements CartService {
             shipmentAddress = addressServiceImpl.getAddress(cart.getOrder().getAddressId());
         }
 
-        // reportParameters.put("cartId", cart.getId());
         reportParameters.put("firstName", cart.getUser().getFirstName());
         reportParameters.put("lastName", cart.getUser().getLastName());
         reportParameters.put("cellPhone", cart.getUser().getCellPhone());

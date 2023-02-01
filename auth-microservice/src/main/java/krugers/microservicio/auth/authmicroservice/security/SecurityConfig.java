@@ -20,7 +20,8 @@ public class SecurityConfig{
                 "/api/carts/**",
                 "/api/users/update/**",
                 "/api/address/**",
-                "/api/mails/**"
+                "/api/mails/**",
+                "/swagger-ui/index.html#/**"
         };
 
         http
