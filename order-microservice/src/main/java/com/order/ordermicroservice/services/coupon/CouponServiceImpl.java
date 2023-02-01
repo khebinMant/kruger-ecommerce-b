@@ -38,6 +38,8 @@ public class CouponServiceImpl implements ICouponService{
             return null;
         }
         couponDB.setStatus(coupon.getStatus());
+        couponDB.setQuantity(coupon.getQuantity());
+        couponDB.setType(coupon.getType());
         return couponRepository.save(couponDB);
     }
 
