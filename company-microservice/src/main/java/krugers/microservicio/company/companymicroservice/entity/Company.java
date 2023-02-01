@@ -33,15 +33,16 @@ public class Company implements Serializable{
     @Column(name="company_name", nullable=false)
     private String companyName;
 
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
-
+    @Column(name = "objective", columnDefinition = "TEXT")
     private String objective;
-
+    @Column(name = "history", columnDefinition = "TEXT")
     private String history;
     
     private String contact;
     
-    @Column(name="image_url")
+    @Column(name="image_url",columnDefinition = "TEXT")
     private String imageUrl;
 
     private String status;

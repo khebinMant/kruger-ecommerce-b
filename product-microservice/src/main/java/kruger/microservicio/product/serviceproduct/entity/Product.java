@@ -90,4 +90,6 @@ public class Product {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private List<Image> images;
+
+	    
 }

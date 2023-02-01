@@ -116,6 +116,7 @@ public class ProductClient {
 
     public List<Image> fillImagesToP10(){
         List<Image> images = new ArrayList<>();
+        
         images.add(new Image(35L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-11-lite-ne/rosa/zoom/01-xiaomi-11-lite-ne-rosa-front.png", 10L,new Date()));
         images.add(new Image(36L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-11-lite-ne/rosa/zoom/03-xiaomi-11-lite-ne-rosa-back.png", 10L,new Date()));
         images.add(new Image(37L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-11-lite-ne/rosa/zoom/02-xiaomi-11-lite-ne-rosa-side.png", 10L,new Date()));
@@ -169,6 +170,7 @@ public class ProductClient {
             categoryServiceImpl.getCategory(3L),
             reviews, fillImagesToP1()
         ));
+    
         productServiceImpl.createProduct(new Product(
             2L, 
             "IPHONE 13 (128 GB)",
@@ -429,6 +431,8 @@ public class ProductClient {
             emptyReviews, 
             null
         ));
+        
+    
 
     }
 }
