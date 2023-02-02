@@ -712,7 +712,8 @@
                                           font-size: 26px;
                                         "
                                         href=""
-                                        >#65000500</a
+                                        th:text="${cart.id}"
+                                        ></a
                                       >
                                     </h2>
                                   </td>
@@ -771,96 +772,17 @@
                                         font-size: 14px;
                                       "
                                     >
-                                      This email is to confirm&nbsp;your order.
-                                      We will send you another email as soon as
-                                      it ships.
+                                      Este correo es para notificarte&nbsp;que tu orden.
+                                      Ha llegado estamos atentos ante cualquier cambio.
+                                      No dudes en escribirnos si consideras que ha fallado algo
                                     </p>
+                                    <h3>
+                                      Te hemos hecho un regalo un cupón de descuento de 15% para tu próxima compra,
+                                      para mayor seguridad revisa el código de tu cupon en la sección de cupones.
+                                    </h3>
                                   </td>
                                 </tr>
-                                <tr>
-                                  <td
-                                    align="center"
-                                    style="padding: 0; margin: 0"
-                                  >
-                                    <!--[if mso
-                                      ]><a href="" target="_blank" hidden>
-                                        <v:roundrect
-                                          xmlns:v="urn:schemas-microsoft-com:vml"
-                                          xmlns:w="urn:schemas-microsoft-com:office:word"
-                                          esdevVmlButton
-                                          href=""
-                                          style="
-                                            height: 44px;
-                                            v-text-anchor: middle;
-                                            width: 292px;
-                                          "
-                                          arcsize="14%"
-                                          strokecolor="#5c68e2"
-                                          strokeweight="2px"
-                                          fillcolor="#29495d"
-                                        >
-                                          <w:anchorlock></w:anchorlock>
-                                          <center
-                                            style="
-                                              color: #ffffff;
-                                              font-family: arial,
-                                                'helvetica neue', helvetica,
-                                                sans-serif;
-                                              font-size: 18px;
-                                              font-weight: 400;
-                                              line-height: 18px;
-                                              mso-text-raise: 1px;
-                                            "
-                                          >
-                                            TRACK ORDER STATUS
-                                          </center>
-                                        </v:roundrect></a
-                                      > <!
-                                    [endif]--><!--[if !mso]><!-- --><span
-                                      class="msohide es-button-border"
-                                      style="
-                                        border-style: solid;
-                                        border-color: #5c68e2;
-                                        background: #29495d;
-                                        border-width: 2px;
-                                        display: inline-block;
-                                        border-radius: 6px;
-                                        width: auto;
-                                        mso-hide: all;
-                                      "
-                                      ><a
-                                        href=""
-                                        class="es-button"
-                                        target="_blank"
-                                        style="
-                                          mso-style-priority: 100 !important;
-                                          text-decoration: none;
-                                          -webkit-text-size-adjust: none;
-                                          -ms-text-size-adjust: none;
-                                          mso-line-height-rule: exactly;
-                                          color: #ffffff;
-                                          font-size: 20px;
-                                          border-style: solid;
-                                          border-color: #29495d;
-                                          border-width: 10px 30px 10px 30px;
-                                          display: inline-block;
-                                          background: #29495d;
-                                          border-radius: 6px;
-                                          font-family: arial, 'helvetica neue',
-                                            helvetica, sans-serif;
-                                          font-weight: normal;
-                                          font-style: normal;
-                                          line-height: 24px;
-                                          width: auto;
-                                          text-align: center;
-                                          border-left-width: 30px;
-                                          border-right-width: 30px;
-                                        "
-                                        >DESCARGAR FACTURA</a
-                                      ></span
-                                    ><!--<![endif]-->
-                                  </td>
-                                </tr>
+
                               </table>
                             </td>
                           </tr>
@@ -930,7 +852,13 @@
                                       "
                                     >
                                       Customer:
-                                      <strong>sarah_powell@domain.com</strong>
+                                      &nbsp;
+                                      <strong th:text="${user.email}">
+                                      </strong>
+                                      <strong th:text="${user.firstName}">
+                                      </strong>
+                                      <strong th:text="${user.lastName}">
+                                      </strong>
                                     </p>
                                     <p
                                       style="
@@ -945,10 +873,12 @@
                                         font-size: 14px;
                                       "
                                     >
-                                      Order number:&nbsp;<strong
-                                        >#65000500</strong
+                                      Order number: #&nbsp;<strong
+                                        th:text="${cart.id}"
+                                        ></strong
                                       >
                                     </p>
+
                                     <p
                                       style="
                                         margin: 0;
@@ -962,8 +892,9 @@
                                         font-size: 14px;
                                       "
                                     >
-                                      Invoice date:&nbsp;<strong
-                                        >Apr 17, 2021</strong
+                                      Fecha de entrega:&nbsp;<strong
+                                      th:text="${today}"
+                                        ></strong
                                       >
                                     </p>
                                     <p
@@ -1018,84 +949,7 @@
                             float: right;
                           "
                         >
-                          <tr>
-                            <td
-                              class="es-m-p0r"
-                              align="center"
-                              style="padding: 0; margin: 0; width: 280px"
-                            >
-                              <table
-                                cellpadding="0"
-                                cellspacing="0"
-                                width="100%"
-                                role="presentation"
-                                style="
-                                  mso-table-lspace: 0pt;
-                                  mso-table-rspace: 0pt;
-                                  border-collapse: collapse;
-                                  border-spacing: 0px;
-                                "
-                              >
-                                <tr>
-                                  <td
-                                    align="left"
-                                    class="es-m-txt-l"
-                                    style="padding: 0; margin: 0"
-                                  >
-                                    <p
-                                      style="
-                                        margin: 0;
-                                        -webkit-text-size-adjust: none;
-                                        -ms-text-size-adjust: none;
-                                        mso-line-height-rule: exactly;
-                                        font-family: arial, 'helvetica neue',
-                                          helvetica, sans-serif;
-                                        line-height: 21px;
-                                        color: #333333;
-                                        font-size: 14px;
-                                      "
-                                    >
-                                      Shipping Method:
-                                      <strong>UPS - Ground</strong>
-                                    </p>
-                                    <p
-                                      style="
-                                        margin: 0;
-                                        -webkit-text-size-adjust: none;
-                                        -ms-text-size-adjust: none;
-                                        mso-line-height-rule: exactly;
-                                        font-family: arial, 'helvetica neue',
-                                          helvetica, sans-serif;
-                                        line-height: 21px;
-                                        color: #333333;
-                                        font-size: 14px;
-                                      "
-                                    >
-                                      Shipping address:
-                                    </p>
-                                    <p
-                                      style="
-                                        margin: 0;
-                                        -webkit-text-size-adjust: none;
-                                        -ms-text-size-adjust: none;
-                                        mso-line-height-rule: exactly;
-                                        font-family: arial, 'helvetica neue',
-                                          helvetica, sans-serif;
-                                        line-height: 21px;
-                                        color: #333333;
-                                        font-size: 14px;
-                                      "
-                                    >
-                                      <strong
-                                        >Sarah Powell,<br />600 Montgomery
-                                        St,<br />San Francisco, CA 94111</strong
-                                      >
-                                    </p>
-                                  </td>
-                                </tr>
-                              </table>
-                            </td>
-                          </tr>
+                        
                         </table>
                         <!--[if mso]></td></tr></table><![endif]-->
                       </td>
@@ -1162,7 +1016,7 @@
                                         font-size: 14px;
                                       "
                                     >
-                                      Got a question?&nbsp;Email us at&nbsp;<a
+                                      Alguna duda?&nbsp;Escríbenos a&nbsp;<a
                                         target="_blank"
                                         href=""
                                         style="
@@ -1173,7 +1027,7 @@
                                           color: #29495d;
                                           font-size: 14px;
                                         "
-                                        >support@</a
+                                        >krugercellmag@</a
                                       ><a
                                         target="_blank"
                                         href=""
@@ -1185,7 +1039,7 @@
                                           color: #29495d;
                                           font-size: 14px;
                                         "
-                                        >stylecasual</a
+                                        >gmail</a
                                       ><a
                                         target="_blank"
                                         href=""
@@ -1198,7 +1052,7 @@
                                           font-size: 14px;
                                         "
                                         >.com</a
-                                      >&nbsp;or give us a call at&nbsp;<a
+                                      >&nbsp;o llámanos a&nbsp;<a
                                         target="_blank"
                                         href=""
                                         style="
@@ -1209,7 +1063,7 @@
                                           color: #29495d;
                                           font-size: 14px;
                                         "
-                                        >+000 123 456</a
+                                        >+593 995426348</a
                                       >.
                                     </p>
                                   </td>
@@ -1434,24 +1288,27 @@
                                         font-size: 12px;
                                       "
                                     >
-                                      Style Casual&nbsp;© 2021 Style Casual,
-                                      Inc. All Rights Reserved.
-                                    </p>
-                                    <p
-                                      style="
-                                        margin: 0;
-                                        -webkit-text-size-adjust: none;
-                                        -ms-text-size-adjust: none;
-                                        mso-line-height-rule: exactly;
-                                        font-family: arial, 'helvetica neue',
-                                          helvetica, sans-serif;
-                                        line-height: 18px;
-                                        color: #333333;
-                                        font-size: 12px;
-                                      "
-                                    >
-                                      4562 Hazy Panda Limits, Chair Crossing,
-                                      Kentucky, US, 607898
+                                    <strong
+                                    >Nuestra misión es traerte lo
+                                    mejor</strong
+                                  >&nbsp; Este mensaje electrónico y
+                                  cualquier archivo adjunto son
+                                  confidenciales y están destinados
+                                  únicamente para el uso exclusivo del
+                                  destinatario. Si ha recibido este mensaje
+                                  por error, por favor notifique al
+                                  remitente inmediatamente y destruya el
+                                  mensaje original y cualquier copia.
+                                  Cualquier revisión, retransmisión,
+                                  difusión o cualquier otro uso de este
+                                  mensaje o su contenido por cualquier
+                                  persona o entidad distinta del
+                                  destinatario previsto está estrictamente
+                                  prohibida. La empresa no acepta ninguna
+                                  responsabilidad por la seguridad o
+                                  integridad de cualquier información
+                                  transmitida electrónicamente.
+
                                     </p>
                                   </td>
                                 </tr>

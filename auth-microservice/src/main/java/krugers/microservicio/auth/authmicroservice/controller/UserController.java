@@ -54,7 +54,7 @@ public class UserController {
 	AddressServiceImpl addressServiceImpl;
 
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
-			@ApiResponse(responseCode = "400", description = "Failed to log in") })
+	@ApiResponse(responseCode = "400", description = "Failed to log in") })
 	@Operation(summary = "This endpoint will login the user, the credentials of the user should be passed as a LoginRequest object",
 	description = "You should call this endpoint when you want to log a user in")
 	@Tag(name = "Login a user with credentials", description = "calling this endpoint will login the user"
@@ -76,7 +76,7 @@ public class UserController {
 	}
 
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
-			@ApiResponse(responseCode = "400", description = "There is no customers found") })
+	@ApiResponse(responseCode = "400", description = "There is no customers found") })
 	@Operation(summary = "This endpoint will return a list of all customers in the Db through a GET request", description = "You should call this endpoint whenever you want to get all customers")
 	@Tag(name = "Get all users with role Customers in the database", description = "calling this endpoint will return a list of all customers")
 	@GetMapping("/customers")
@@ -89,7 +89,7 @@ public class UserController {
 	}
 
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
-			@ApiResponse(responseCode = "400", description = "El email ya esta en uso") })
+	@ApiResponse(responseCode = "400", description = "El email ya esta en uso") })
 	@Operation(summary = "This endpoint will create a new user by passing a user object through post request", description = "You should pass user object as a post rquest body so this endpoint will create a new user")
 	@Tag(name = "Create a new user", description = "calling this endpoint will create a new user")
 	@PostMapping("/create")
@@ -111,7 +111,7 @@ public class UserController {
 
 	// Actualizar user
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
-			@ApiResponse(responseCode = "404", description = "Multiple validations responses") })
+	@ApiResponse(responseCode = "404", description = "Multiple validations responses") })
 	@Operation(summary = "Update a user personal information by Id", description = "Returns a JSON response with the user personal information updated")
 	@Tag(name = "PUT update a user ", description = "Retrieve information of a updated user")
 	@PutMapping(value = "/update/personal/{id}")
@@ -125,9 +125,10 @@ public class UserController {
 		}
 		return ResponseEntity.ok(updatedUser);
 	}
+	
 
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
-			@ApiResponse(responseCode = "404", description = "Multiple validations responses") })
+	@ApiResponse(responseCode = "404", description = "Multiple validations responses") })
 	@Operation(summary = "Update a user ubication by Id", description = "Returns a JSON response with the user updated information ")
 	@Tag(name = "PUT update a user ", description = "Retrieve information of a updated user")
 	@PutMapping(value = "/update/ubication/{id}")
@@ -141,7 +142,7 @@ public class UserController {
 	}
 
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
-			@ApiResponse(responseCode = "404", description = "Multiple validations responses") })
+	@ApiResponse(responseCode = "404", description = "Multiple validations responses") })
 	@Operation(summary = "Update a user credentials by Id", description = "Returns a JSON response with the user updated information ")
 	@Tag(name = "PUT update a user ", description = "Retrieve information of a updated user")
 	@PutMapping(value = "/update/credentials/{id}")
@@ -187,7 +188,7 @@ public class UserController {
 
 	// Eliminar user
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
-			@ApiResponse(responseCode = "404", description = "We cant find a user with that id not found.") })
+	@ApiResponse(responseCode = "404", description = "We cant find a user with that id not found.") })
 	@Operation(summary = "Delete a user by Id", description = "Returns a message if everything is ok")
 	@Tag(name = "DELETE delete a user ", description = "Retrieve a message if everything its ok")
 	@DeleteMapping(value = "/{id}")
@@ -229,6 +230,22 @@ public class UserController {
 			return ResponseEntity.noContent().build();
 		}
 		return ResponseEntity.ok(branchs);
+	}
+
+	// Actualizar user verified
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
+	@ApiResponse(responseCode = "404", description = "Multiple validations responses") })
+	@Operation(summary = "Update a user personal information by Id", description = "Returns a JSON response with the user personal information updated")
+	@Tag(name = "PUT update a user ", description = "Retrieve information of a updated user")
+	@PutMapping(value = "/update/verified/{id}")
+	public ResponseEntity<?> updateUserVerified(@RequestBody User user, @PathVariable("id") long id) {
+		log.info("Updating user personal info with id {}", user.getId());
+		User updatedUser = userServiceImpl.updateUserVerified(id, user);
+		if (updatedUser == null) {
+			log.error("Unable to update. user with id {} not found.", user.getId());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("We cant find a user with that id not found. ");
+		}
+		return ResponseEntity.ok(updatedUser);
 	}
 
 	// Establecer sucursal matriz de un cliente
