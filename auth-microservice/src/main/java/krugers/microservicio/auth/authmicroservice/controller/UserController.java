@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -80,7 +79,7 @@ public class UserController {
 	@Operation(summary = "This endpoint will return a list of all customers in the Db through a GET request", description = "You should call this endpoint whenever you want to get all customers")
 	@Tag(name = "Get all users with role Customers in the database", description = "calling this endpoint will return a list of all customers")
 	@GetMapping("/customers")
-	public ResponseEntity getAllCusotmers() {
+	public ResponseEntity<?> getAllCusotmers() {
 		List<User> customers = userServiceImpl.findAllCustomers();
 		if (customers != null) {
 			return ResponseEntity.ok(customers);
@@ -132,7 +131,7 @@ public class UserController {
 	@Operation(summary = "Update a user ubication by Id", description = "Returns a JSON response with the user updated information ")
 	@Tag(name = "PUT update a user ", description = "Retrieve information of a updated user")
 	@PutMapping(value = "/update/ubication/{id}")
-	public ResponseEntity updateUserUbication(@RequestBody User user, @PathVariable Long id) {
+	public ResponseEntity<?> updateUserUbication(@RequestBody User user, @PathVariable Long id) {
 		User updatedUser = userServiceImpl.updateUserUbication(id, user);
 		if (updatedUser == null) {
 			log.error("Unable to update. user with id {} not found.", user.getId());
@@ -146,7 +145,7 @@ public class UserController {
 	@Operation(summary = "Update a user credentials by Id", description = "Returns a JSON response with the user updated information ")
 	@Tag(name = "PUT update a user ", description = "Retrieve information of a updated user")
 	@PutMapping(value = "/update/credentials/{id}")
-	public ResponseEntity updateUserCredentials(@RequestBody ChangeCredentialsRequest req, @PathVariable Long id) {
+	public ResponseEntity<?> updateUserCredentials(@RequestBody ChangeCredentialsRequest req, @PathVariable Long id) {
 		ChangeCredentialsResponse resp = userServiceImpl.updateUserCredentials(id, req);
 		if (resp != ChangeCredentialsResponse.CHANGED) {
 			log.error("Unable to update. user credentials.");

@@ -66,9 +66,6 @@ public class OrderServiceImpl implements IOrderService{
             couponDB.setUserId(userId);
             couponServiceImpl.updateCoupon(couponDB);
         }
-        //TODO
-        //Al realizarse una compra se regala un cupón nuevo de descuento
-        // de tipo porcentaje del 25% de descuento
             
         //Actualizar el stock del producto
         createdOrder.getItems().forEach( orderItem ->{

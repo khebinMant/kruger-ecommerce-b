@@ -9,7 +9,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,18 +24,14 @@ import jakarta.mail.MessagingException;
 import krugers.microservicio.auth.authmicroservice.client.order.OrderClientF;
 import krugers.microservicio.auth.authmicroservice.dto.OrderRequest;
 import krugers.microservicio.auth.authmicroservice.entity.Cart;
-import krugers.microservicio.auth.authmicroservice.entity.User;
-import krugers.microservicio.auth.authmicroservice.model.Order;
 import krugers.microservicio.auth.authmicroservice.service.cart.CartServiceImpl;
 import krugers.microservicio.auth.authmicroservice.service.user.UserServiceImpl;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.*;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import jakarta.mail.MessagingException;
 
 @RestController
 @RequestMapping("/api/carts")

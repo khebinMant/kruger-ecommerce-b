@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.order.ordermicroservice.entity.Coupon;
-import com.order.ordermicroservice.entity.Status;
 import com.order.ordermicroservice.repository.CouponRepository;
 
 @Service

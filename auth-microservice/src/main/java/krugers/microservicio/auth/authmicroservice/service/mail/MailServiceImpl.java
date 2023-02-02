@@ -3,7 +3,6 @@ package krugers.microservicio.auth.authmicroservice.service.mail;
 import java.nio.charset.StandardCharsets;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -114,7 +113,7 @@ public class MailServiceImpl implements MailService{
         context.setVariable("user", user);
         context.setVariable("cart", cart);
         context.setVariable("today", new Date());
-        
+
         String html = templateEngine.process("arrived", context);
 
         helper.setFrom("krugercellmag@gmail.com");

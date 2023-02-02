@@ -6,7 +6,6 @@ import jakarta.mail.MessagingException;
 import krugers.microservicio.auth.authmicroservice.dto.OrderRequest;
 import krugers.microservicio.auth.authmicroservice.entity.Cart;
 import net.sf.jasperreports.engine.JasperPrint;
-import jakarta.mail.MessagingException;
 
 public interface CartService {
 	/**
