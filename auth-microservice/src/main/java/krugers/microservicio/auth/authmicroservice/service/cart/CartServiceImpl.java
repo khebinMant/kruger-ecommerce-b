@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 
-import com.netflix.discovery.converters.Auto;
 
 import jakarta.mail.MessagingException;
 import krugers.microservicio.auth.authmicroservice.client.order.OrderClientF;
@@ -19,7 +18,6 @@ import krugers.microservicio.auth.authmicroservice.dto.OrderRequest;
 import krugers.microservicio.auth.authmicroservice.entity.Address;
 import krugers.microservicio.auth.authmicroservice.entity.Cart;
 import krugers.microservicio.auth.authmicroservice.entity.Status;
-import krugers.microservicio.auth.authmicroservice.entity.User;
 import krugers.microservicio.auth.authmicroservice.model.Order;
 import krugers.microservicio.auth.authmicroservice.model.OrderItem;
 import krugers.microservicio.auth.authmicroservice.repository.CartRepository;
@@ -32,7 +30,6 @@ import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import jakarta.mail.MessagingException;
 
 
 

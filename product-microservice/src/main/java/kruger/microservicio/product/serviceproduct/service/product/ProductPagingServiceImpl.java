@@ -35,7 +35,6 @@ public class ProductPagingServiceImpl implements IProductPagingService{
 
     @Override
     public List<Product> getAllProductsByName(Integer pageNo, Integer pageSize, String sortBy) {
-        // TODO Auto-generated method stub
         return null;
     }
 

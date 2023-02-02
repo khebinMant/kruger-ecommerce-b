@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.order.ordermicroservice.entity.Coupon;
-import com.order.ordermicroservice.entity.Status;
 import com.order.ordermicroservice.repository.CouponRepository;
 
 @Service
@@ -39,6 +38,7 @@ public class CouponServiceImpl implements ICouponService{
         couponDB.setStatus(coupon.getStatus());
         couponDB.setQuantity(coupon.getQuantity());
         couponDB.setType(coupon.getType());
+        couponDB.setUserId(coupon.getUserId());
         return couponRepository.save(couponDB);
     }
 
@@ -58,5 +58,11 @@ public class CouponServiceImpl implements ICouponService{
 		System.out.println(c);
 		return c;
 	}
+
+    @Override
+    public List<Coupon> findByUserId(Long id){
+        return couponRepository.findByUserId(id);
+    }
+
     
 }

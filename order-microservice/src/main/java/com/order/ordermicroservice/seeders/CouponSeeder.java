@@ -26,7 +26,7 @@ public class CouponSeeder {
             else{
                 type = Type.PERCENTAGE;
             } 
-            couponServiceImpl.createCoupon(new Coupon(i, type, (int)(Math.random()*(35-5) +5) , RandomStringUtils.random(8, "0123456789abcdef"),Status.NOT_USED, new Date()));
+            couponServiceImpl.createCoupon(new Coupon(i, type, (int)(Math.random()*(35-5) +5) , RandomStringUtils.random(8, "0123456789abcdef"),Status.NOT_USED,null, new Date()));
         }
     }
 

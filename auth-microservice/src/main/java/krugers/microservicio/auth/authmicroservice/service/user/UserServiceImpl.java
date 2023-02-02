@@ -151,6 +151,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+	public User updateUserVerified(Long userId, User user){
+		User userDB = findById(userId);
+		if (user != null && userDB != null && user.getVerified()!= null){
+			userDB.setVerified(user.getVerified());
+			User userUpdated = userRepository.save(userDB);
+			return userUpdated;
+		}else{
+			return null;
+		}
+	}
+
+	@Override
 	public ChangeCredentialsResponse updateUserCredentials(Long userId, ChangeCredentialsRequest req) {
 		User userDB = findById(userId);
 		if (userDB != null) {

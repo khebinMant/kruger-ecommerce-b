@@ -74,6 +74,24 @@ public class CouponController {
         }
         return ResponseEntity.ok(coupon);
     }
+
+    //Obtener coupon dado el id del cliente
+    @ApiResponses(value = { 
+        @ApiResponse(responseCode = "200", description = "Successfully operation"),
+        @ApiResponse(responseCode = "404", description = "No content")
+    })
+    @Operation(summary = "Return a coupon by Id", description = "Returns a JSON response coupon information")
+    @Tag(name = "GET coupon by Id ", description = "Retrieve information of coupon by Id")
+    @GetMapping(value="user/{id}")
+    public ResponseEntity<?> getCouponByUserId(@PathVariable(name="id") Long id){
+        List<Coupon> coupons = couponService.findByUserId(id);
+
+        if(coupons.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(coupons);
+    }
     
     @GetMapping(value="/by-code/{code}")
     public ResponseEntity<?> getCouponByCode(@PathVariable(name="code") String code){

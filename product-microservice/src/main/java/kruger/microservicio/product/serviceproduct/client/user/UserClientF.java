@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import kruger.microservicio.product.serviceproduct.client.fallback.UserFallback;
 import kruger.microservicio.product.serviceproduct.model.User;
 
 @FeignClient(name="auth-microservice", path = "/api/users")

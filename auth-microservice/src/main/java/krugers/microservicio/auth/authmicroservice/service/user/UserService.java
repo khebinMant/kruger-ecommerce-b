@@ -20,6 +20,7 @@ public interface UserService {
     void deleteUser(Long userId);
     User updateUserPersonalInfo(Long userId,User user);
     User updateUserUbication(Long userId,User user);
+    User updateUserVerified(Long userId, User user);
     ChangeCredentialsResponse updateUserCredentials(Long userId,ChangeCredentialsRequest req);
     User findByEmail(String email);
     List<User> findAllCustomers();

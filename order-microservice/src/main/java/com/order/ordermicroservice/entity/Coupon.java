@@ -35,6 +35,9 @@ public class Coupon {
     private String code;
 
     private Status status;
+
+    @Column(name = "user_id")
+    private Long userId;
     
     @Temporal(TemporalType.DATE)
     private Date created;

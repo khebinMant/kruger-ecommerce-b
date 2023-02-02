@@ -59,11 +59,11 @@ public class OrderServiceImpl implements IOrderService{
         //un cupon de descuentos entonces se debe 
         //cambiar el estado del cupon a USED, CREATED, ACTIVE
         
-        
         if(order.getCoupon()!=null){
 
             Coupon couponDB = couponServiceImpl.getCoupon(order.getCoupon().getId());
             couponDB.setStatus(Status.USED);
+            couponDB.setUserId(userId);
             couponServiceImpl.updateCoupon(couponDB);
         }
             

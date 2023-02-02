@@ -4,12 +4,12 @@ import java.nio.charset.StandardCharsets;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
+import java.util.Date;
 
 
 import jakarta.mail.MessagingException;
@@ -88,7 +88,10 @@ public class MailServiceImpl implements MailService{
         User user = userService.findById(cart.getUserId());
         Context context = new Context();
         context.setVariable("user", user);
+        context.setVariable("cart", cart);
+        context.setVariable("today", new Date());
 
+        
         String html = templateEngine.process("order", context);
 
         helper.setFrom("krugercellmag@gmail.com");
@@ -110,6 +113,8 @@ public class MailServiceImpl implements MailService{
         User user = userService.findById(cart.getUserId());
         Context context = new Context();
         context.setVariable("user", user);
+        context.setVariable("cart", cart);
+        context.setVariable("today", new Date());
 
         String html = templateEngine.process("arrived", context);
 
