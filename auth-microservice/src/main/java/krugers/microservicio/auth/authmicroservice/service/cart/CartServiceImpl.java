@@ -32,6 +32,7 @@ import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import jakarta.mail.MessagingException;
 
 
 
@@ -80,7 +81,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Cart updateCart(Cart cart) {
+    public Cart updateCart(Cart cart) throws MessagingException{
         Cart cartDB = getCart(cart.getId());
         if(cartDB == null){
             return null;

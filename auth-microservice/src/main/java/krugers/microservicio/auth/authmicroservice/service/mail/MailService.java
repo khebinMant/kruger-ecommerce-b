@@ -5,7 +5,7 @@ import krugers.microservicio.auth.authmicroservice.entity.Cart;
 
 public interface MailService {
     public String SendMailOrderCreated(Cart cart) throws MessagingException;
-    public String SendMailOrderCanceled(Cart cart);
-    public String SendMailOrderInTravel(Cart cart);
-    public String SendMailOrderInReceived(Cart cart);
+    public String SendMailOrderCanceled(Cart cart) throws MessagingException;
+    public String SendMailOrderInTravel(Cart cart) throws MessagingException;
+    public String SendMailOrderInReceived(Cart cart) throws MessagingException;
 }

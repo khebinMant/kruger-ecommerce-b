@@ -36,6 +36,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.*;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.mail.MessagingException;
 
 @RestController
 @RequestMapping("/api/carts")
@@ -153,7 +154,7 @@ public class CartController {
     @Operation(summary = "Update cart of a customer", description = "Returns a JSON response with the cart information")
     @Tag(name = "PUT update cart information", description = "Retrieve information of a created cart")
     @PutMapping(value="/{id}")
-    public ResponseEntity<?> updateCart(@PathVariable(name="id") Long id, @RequestBody Cart cart){
+    public ResponseEntity<?> updateCart(@PathVariable(name="id") Long id, @RequestBody Cart cart) throws MessagingException{
         cart.setId(id);
         Cart cartDB = cartServiceImpl.updateCart(cart);
         if(cartDB == null){

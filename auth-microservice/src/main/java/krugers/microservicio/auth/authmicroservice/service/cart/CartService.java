@@ -6,6 +6,7 @@ import jakarta.mail.MessagingException;
 import krugers.microservicio.auth.authmicroservice.dto.OrderRequest;
 import krugers.microservicio.auth.authmicroservice.entity.Cart;
 import net.sf.jasperreports.engine.JasperPrint;
+import jakarta.mail.MessagingException;
 
 public interface CartService {
 	/**
@@ -23,7 +24,7 @@ public interface CartService {
     public List<Cart> findAllCartsByUserId(Long userId);
 
     public List<Cart> findCarts();
-    public Cart updateCart(Cart cart); // cambiar el STATUS  del carrito
+    public Cart updateCart(Cart cart)throws MessagingException ; // cambiar el STATUS  del carrito
     public void deleteCart(Long id);
     public Cart getCart(Long id);
     public JasperPrint getCartReport(Long id);
