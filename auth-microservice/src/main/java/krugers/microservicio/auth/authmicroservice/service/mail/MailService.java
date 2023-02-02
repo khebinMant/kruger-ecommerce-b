@@ -8,4 +8,7 @@ public interface MailService {
     public String SendMailOrderCanceled(Cart cart) throws MessagingException;
     public String SendMailOrderInTravel(Cart cart) throws MessagingException;
     public String SendMailOrderInReceived(Cart cart) throws MessagingException;
+    
+    //password recovery
+    public String senRecoveryCode(String email) throws MessagingException;
 }

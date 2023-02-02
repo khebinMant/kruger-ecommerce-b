@@ -29,8 +29,10 @@ import krugers.microservicio.auth.authmicroservice.dto.ChangeCredentialsRequest;
 import krugers.microservicio.auth.authmicroservice.dto.ChangeCredentialsResponse;
 import krugers.microservicio.auth.authmicroservice.dto.LoginRequest;
 import krugers.microservicio.auth.authmicroservice.dto.LoginResponse;
+import krugers.microservicio.auth.authmicroservice.dto.PasswordRecoveryRequest;
 import krugers.microservicio.auth.authmicroservice.entity.User;
 import krugers.microservicio.auth.authmicroservice.service.address.AddressServiceImpl;
+import krugers.microservicio.auth.authmicroservice.service.mail.MailService;
 import krugers.microservicio.auth.authmicroservice.service.user.UserServiceImpl;
 import krugers.microservicio.auth.authmicroservice.entity.Address;
 import krugers.microservicio.auth.authmicroservice.entity.TokenDto;
@@ -40,6 +42,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.mail.MessagingException;
 import io.swagger.v3.oas.annotations.media.*;
 
 @Slf4j
@@ -52,6 +55,7 @@ public class UserController {
 
 	@Autowired
 	AddressServiceImpl addressServiceImpl;
+	
 
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
 			@ApiResponse(responseCode = "400", description = "Failed to log in") })
@@ -73,6 +77,42 @@ public class UserController {
 		if (tokenDto == null)
 			return ResponseEntity.badRequest().build();
 		return ResponseEntity.ok(tokenDto);
+	}
+	
+	@GetMapping("/recovery-code/{email}")
+	public ResponseEntity sendRecoveryCode (@PathVariable("email") String email) throws MessagingException {
+		User user=userServiceImpl.findByEmail(email);
+		if(user!=null) {
+			userServiceImpl.sendRecoveryCode(email);
+			return new ResponseEntity("SUCCESS", HttpStatus.OK);
+		}else {
+			return ResponseEntity.badRequest().build();
+		}
+		
+	}
+	
+	@PostMapping("/recovery-code/validate")
+	public ResponseEntity validateRecoverycode (@RequestBody PasswordRecoveryRequest request) throws MessagingException {
+		User user=userServiceImpl.findByEmail(request.getEmail());
+		if(user!=null) {
+			return userServiceImpl.validateRecoverycode(request) ?  new ResponseEntity("SUCCESS", HttpStatus.OK) :
+				new ResponseEntity("INVALID_CODE", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity("WRONG_EMAIL", HttpStatus.NOT_FOUND);
+	}
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "SUCCESS"),
+			@ApiResponse(responseCode = "400", description = "FAIELD"),
+			@ApiResponse(responseCode = "404", description = "WRONG_EMAIL") })
+	@Operation(summary = "This endpoint will take care of reseting a new password when user has lost the old password ", description = "You should call this endpoint whenever you want recover or reset the user password")
+	@Tag(name = "Set a new password when the old password is lost", description = "calling this endpoint will reset a new password when the old one is lost")
+	@PostMapping("/recovery-code/reset-password")
+	public ResponseEntity resetPassword (@RequestBody ChangeCredentialsRequest request)  {
+		User user=userServiceImpl.findByEmail(request.getEmail());
+		if(user!=null) {
+			return userServiceImpl.resetNewPassword(request) ?  new ResponseEntity("SUCCESS", HttpStatus.OK) :
+				new ResponseEntity("FAIELD", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity("WRONG_EMAIL", HttpStatus.NOT_FOUND);
 	}
 
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
