@@ -15,4 +15,6 @@ public interface ICouponService {
     public Coupon getCoupon(Long id);
     
     public Coupon getCouponByCode (String code);
+
+    public List<Coupon> findByUserId(Long id);
 }
