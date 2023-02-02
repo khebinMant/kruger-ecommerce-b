@@ -45,6 +45,7 @@ public class MailServiceImpl implements MailService{
     TemplateEngine templateEngine;
 
 
+
     @Override
     public String SendMailOrderCreated(Cart cart) throws MessagingException {
         
@@ -54,30 +55,22 @@ public class MailServiceImpl implements MailService{
 
         User user = userService.findById(cart.getUserId());
 
-        Coupon couponDto =  new Coupon();
-
-        // ResponseEntity<Coupon[]> response =
-        // restTemplate.getForEntity(
-        // "http://localhost:8082/api/coupons",
-        // Coupon[].class);
-        // Coupon[] coupons = response.getBody();
-        // List<Coupon> couponsRes= Arrays.asList(coupons);
-        ResponseEntity<List<Coupon>> responseEntity = 
-        restTemplate.exchange(
-            "http://localhost:8082/api/coupons",
-          HttpMethod.GET,
-          null,
-          new ParameterizedTypeReference<List<Coupon>>() {}
-        );
+        // ResponseEntity<List<Coupon>> responseEntity = 
+        // restTemplate.exchange(
+        //     "http://localhost:8082/api/coupons",
+        //   HttpMethod.GET,
+        //   null,
+        //   new ParameterizedTypeReference<List<Coupon>>() {}
+        // );
         
         
-        List<Coupon> coupons = responseEntity.getBody();
+        // List<Coupon> coupons = responseEntity.getBody();
         
-        Optional <Coupon> couponGift = coupons.stream().filter(coupon-> coupon.getStatus() == Status.NOT_USED ).findFirst();
+        // Optional <Coupon> couponGift = coupons.stream().filter(coupon-> coupon.getStatus() == Status.NOT_USED ).findFirst();
         
         Context context = new Context();
         context.setVariable("user", user);
-        context.setVariable("coupon", couponGift);
+        // context.setVariable("coupon", couponGift);
 
         String html = templateEngine.process("purchase", context);
 
