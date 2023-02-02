@@ -21,6 +21,7 @@ public class SecurityConfig{
                 "/api/users/update/**",
                 "/api/address/**",
                 "/api/mails/**",
+                "/api/coupons/**",
                 "/swagger-ui/index.html#/**"
         };
 

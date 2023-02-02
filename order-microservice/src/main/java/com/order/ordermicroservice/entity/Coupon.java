@@ -35,7 +35,7 @@ public class Coupon {
     private String code;
 
     private Status status;
-
+    
     @Temporal(TemporalType.DATE)
     private Date created;
 }

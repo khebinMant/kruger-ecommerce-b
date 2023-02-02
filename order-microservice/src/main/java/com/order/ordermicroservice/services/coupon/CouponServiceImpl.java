@@ -27,7 +27,6 @@ public class CouponServiceImpl implements ICouponService{
 
         coupon.setCode(RandomStringUtils.random(8, "0123456789abcdef"));
         coupon.setCreated(new Date());
-        coupon.setStatus(Status.NOT_USED);
         return couponRepository.save(coupon);
     }
 
