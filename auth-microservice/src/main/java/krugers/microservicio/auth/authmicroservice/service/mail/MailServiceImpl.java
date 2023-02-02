@@ -2,6 +2,7 @@ package krugers.microservicio.auth.authmicroservice.service.mail;
 
 import java.nio.charset.StandardCharsets;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -17,6 +18,7 @@ import krugers.microservicio.auth.authmicroservice.entity.Cart;
 import krugers.microservicio.auth.authmicroservice.entity.User;
 
 import krugers.microservicio.auth.authmicroservice.service.user.UserService;
+import krugers.microservicio.auth.authmicroservice.utils.RecoveryCodesStore;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -124,6 +126,35 @@ public class MailServiceImpl implements MailService{
 
         javaMailSender.send(message);
         log.info("Sending email: {} with html body: {}", cart, html);
+        return "Email Sended";
+    }
+    
+    
+    
+
+    @Override
+    public String senRecoveryCode(String email) throws MessagingException {
+        RecoveryCodesStore store=RecoveryCodesStore.getInstance();
+        MimeMessage message  = javaMailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+
+        User user = userService.findByEmail(email);
+        Context context = new Context();
+        String code=RandomStringUtils.random(6, "0123456789");
+        store.addCode(email, code);
+        context.setVariable("recoveryCode", code);
+        context.setVariable("user", user);
+        
+        String html = templateEngine.process("recoveryCode", context);
+
+        helper.setFrom("krugercellmag@gmail.com");
+        helper.setTo(user.getEmail());
+        helper.setSubject("Recuperacion de contrraseña");
+        helper.setText(html, true);  
+
+        javaMailSender.send(message);
+        
+        log.info("Sending email: {} with html body: {}", email, html);
         return "Email Sended";
     }
     

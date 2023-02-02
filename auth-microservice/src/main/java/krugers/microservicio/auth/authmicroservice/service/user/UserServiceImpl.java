@@ -5,13 +5,18 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.netflix.discovery.converters.Auto;
+
+import jakarta.mail.MessagingException;
 import krugers.microservicio.auth.authmicroservice.dto.ChangeCredentialsRequest;
 import krugers.microservicio.auth.authmicroservice.dto.ChangeCredentialsResponse;
 import krugers.microservicio.auth.authmicroservice.dto.LoginRequest;
 import krugers.microservicio.auth.authmicroservice.dto.LoginResponse;
+import krugers.microservicio.auth.authmicroservice.dto.PasswordRecoveryRequest;
 import krugers.microservicio.auth.authmicroservice.entity.Address;
 import krugers.microservicio.auth.authmicroservice.entity.Role;
 import krugers.microservicio.auth.authmicroservice.entity.TokenDto;
@@ -19,6 +24,8 @@ import krugers.microservicio.auth.authmicroservice.entity.User;
 import krugers.microservicio.auth.authmicroservice.repository.UserRepository;
 import krugers.microservicio.auth.authmicroservice.security.JwtProvider;
 import krugers.microservicio.auth.authmicroservice.service.address.AddressServiceImpl;
+import krugers.microservicio.auth.authmicroservice.service.mail.MailService;
+import krugers.microservicio.auth.authmicroservice.utils.RecoveryCodesStore;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -31,6 +38,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	AddressServiceImpl addressServiceImpl;
+	
+	@Autowired
+	@Lazy
+	MailService mailService;
 
 	@Autowired
 	JwtProvider jwtProvider;
@@ -176,6 +187,39 @@ public class UserServiceImpl implements UserService {
 	public List<User> findAllCustomers() {
 		
 		return userRepository.findAllCustomers();
+	}
+
+	@Override
+	public void sendRecoveryCode(String email) {
+		try {
+			mailService.senRecoveryCode(email);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public boolean validateRecoverycode(PasswordRecoveryRequest request) {
+		RecoveryCodesStore store=RecoveryCodesStore.getInstance();
+		return store.validateCode(request.getEmail(), request.getCode());	
+	}
+
+	@Override
+	public boolean resetNewPassword(ChangeCredentialsRequest req) {
+		RecoveryCodesStore store=RecoveryCodesStore.getInstance();
+		User userDB=findByEmail(req.getEmail());
+		if(userDB!=null && store.removeCode(req.getEmail(), req.getCode())) {
+			String newPassword = passwordEncoder.encode(req.getNewPassword());
+			userDB.setPassword(newPassword);
+			User userUpdated = userRepository.save(userDB);
+			return true;
+			
+		}
+		return false;
+		
+		
 	}
 
 	/*
