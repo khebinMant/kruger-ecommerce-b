@@ -5,9 +5,9 @@ FROM openjdk:17-alpine
 WORKDIR /app
 
 # Que archivos voy a copiar al directorio /app
-COPY target/auth-microservice-0.0.1-SNAPSHOT.jar /app/auth-microservice-0.0.1-SNAPSHOT.jar
+COPY build/libs/service-product-0.0.1-SNAPSHOT.jar /app/service-product-0.0.1-SNAPSHOT.jar
 
 # Run the JAR file as the default command
-CMD ["java", "-jar", "auth-microservice-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "service-product-0.0.1-SNAPSHOT.jar"]
 
-EXPOSE 9092
+EXPOSE 9090
