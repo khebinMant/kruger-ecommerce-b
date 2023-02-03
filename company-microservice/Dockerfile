@@ -5,9 +5,9 @@ FROM openjdk:17-alpine
 WORKDIR /app
 
 # Que archivos voy a copiar al directorio /app
-COPY build/libs/registry-microservice-0.0.1-SNAPSHOT.jar /app/registry-microservice-0.0.1-SNAPSHOT.jar
+COPY build/libs/company-microservice-0.0.1-SNAPSHOT.jar /app/company-microservice-0.0.1-SNAPSHOT.jar
 
 # Run the JAR file as the default command
-CMD ["java", "-jar", "registry-microservice-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "company-microservice-0.0.1-SNAPSHOT.jar"]
 
 EXPOSE 8081
