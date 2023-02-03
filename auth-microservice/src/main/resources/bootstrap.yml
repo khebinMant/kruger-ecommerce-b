@@ -3,7 +3,11 @@ spring:
         name: auth-microservice
     cloud:
         config:
-            uri: http://localhost:8080
+            fail-fast: true
+            retry:
+                maxAttempts: 200
+                maxInterval: 10000 
+            uri: http://host.docker.internal:8080
             username: root
             password: s3cr3t
 jwt:
