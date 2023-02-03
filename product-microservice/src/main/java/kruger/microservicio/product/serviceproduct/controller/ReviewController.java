@@ -24,6 +24,9 @@ import org.springframework.web.server.ResponseStatusException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import kruger.microservicio.product.serviceproduct.client.user.UserClientF;
@@ -31,9 +34,6 @@ import kruger.microservicio.product.serviceproduct.entity.Review;
 import kruger.microservicio.product.serviceproduct.model.User;
 import kruger.microservicio.product.serviceproduct.service.review.IReviewService;
 
-/**
- * This microservice was created by Kevin Mantilla
- */
 @RestController
 @RequestMapping (value = "api/reviews")
 public class ReviewController {
@@ -44,7 +44,13 @@ public class ReviewController {
     @Autowired
     UserClientF userClientF;
 
-    @Tag(name = "Get all Reviews information")
+    //Obtener todas las reseñas
+    @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "No content")
+	})
+    @Operation(summary = "Return a list with all reviews", description = "Returns a JSON response with the reviews information")
+    @Tag(name = "GET all reviews ", description = "Retrieve all reviews")
     @GetMapping
     public ResponseEntity<List<Review>> listReviews(){
         List<Review> reviews = new ArrayList<>();
@@ -61,8 +67,13 @@ public class ReviewController {
 
         return ResponseEntity.ok(reviews);
     }
-
-    @Tag(name = "Get Review by ID")
+    //Obtener reseña dado su id
+    @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "No content")
+	})
+    @Operation(summary = "Return a review by Id", description = "Returns a JSON response with the review information")
+    @Tag(name = "GET review by Id ", description = "Retrieve information of review by Id")
     @GetMapping(value="/{id}")
     public ResponseEntity<Review> getReview(@PathVariable(name="id") Long id){
         Review review = reviewService.getReview(id);
@@ -74,7 +85,13 @@ public class ReviewController {
         return ResponseEntity.ok(review);
     }
     
-    @Tag(name = "Create a new review")
+    //Crear reseña
+    @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "No content")
+	})
+    @Operation(summary = "Create a new review", description = "Returns a JSON response with the review information")
+    @Tag(name = "POST review", description = "Retrieve information of a created review")
     @PostMapping
     public ResponseEntity<Review> createReview(@Valid @RequestBody Review review, BindingResult result){
         
@@ -87,7 +104,13 @@ public class ReviewController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdReview);
     }
 
-    @Tag(name = "Edit a review by ID")
+    //Actualizar la información de la reseña
+    @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "We cant find a review with that id not found.")
+	})
+    @Operation(summary = "Update review", description = "Returns a JSON response with the review information")
+    @Tag(name = "PUT update review information", description = "Retrieve information of a created review")
     @PutMapping(value="/{id}")
     public ResponseEntity<Review> updateReview(@PathVariable(name="id") Long id, @RequestBody Review review){
         review.setId(id);
@@ -98,12 +121,18 @@ public class ReviewController {
         return ResponseEntity.ok(reviewDB);
     }
 
+    //Eliminar una reseña
+    @ApiResponses(value = { 
+        @ApiResponse(responseCode = "200", description = "Successfully operation"),
+        @ApiResponse(responseCode = "404", description = "We cant find a review with that id not found.")
+    })
+    @Operation(summary = "Delete review", description = "Return OK status")
     @Tag(name = "Delete specific review info")
     @DeleteMapping(value="/{id}")
     public ResponseEntity<?> deleteReview(@PathVariable(name="id") Long id){
         reviewService.deleteReview(id);
 
-      return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("Successfully operation. ");
+      return  ResponseEntity.status(HttpStatus.ACCEPTED).body("Successfully operation. ");
     }
 
 

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.order.ordermicroservice.entity.Coupon;
-import com.order.ordermicroservice.entity.Status;
 import com.order.ordermicroservice.repository.CouponRepository;
 
 @Service
@@ -27,7 +26,6 @@ public class CouponServiceImpl implements ICouponService{
 
         coupon.setCode(RandomStringUtils.random(8, "0123456789abcdef"));
         coupon.setCreated(new Date());
-        coupon.setStatus(Status.NOT_USED);
         return couponRepository.save(coupon);
     }
 
@@ -38,6 +36,9 @@ public class CouponServiceImpl implements ICouponService{
             return null;
         }
         couponDB.setStatus(coupon.getStatus());
+        couponDB.setQuantity(coupon.getQuantity());
+        couponDB.setType(coupon.getType());
+        couponDB.setUserId(coupon.getUserId());
         return couponRepository.save(couponDB);
     }
 
@@ -50,5 +51,18 @@ public class CouponServiceImpl implements ICouponService{
     public Coupon getCoupon(Long id) {
         return couponRepository.findById(id).orElse(null);
     }
+
+	@Override
+	public Coupon getCouponByCode(String code) {
+		Coupon c=couponRepository.findCouponByCode(code.toLowerCase());
+		System.out.println(c);
+		return c;
+	}
+
+    @Override
+    public List<Coupon> findByUserId(Long id){
+        return couponRepository.findByUserId(id);
+    }
+
     
 }

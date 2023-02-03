@@ -8,9 +8,7 @@ import org.springframework.stereotype.Component;
 import kruger.microservicio.product.serviceproduct.entity.Category;
 import kruger.microservicio.product.serviceproduct.service.category.CategoryServiceImpl;
 
-/**
- * This microservice was created by Kevin Mantilla
- */
+
 @Component
 public class CategoryClient {
     
@@ -24,8 +22,8 @@ public class CategoryClient {
 
         categoryServiceImpl.createCategory( new Category(1L,"Gama Baja","Dipositivo catalogado como gama baja",new Date()));
         categoryServiceImpl.createCategory(new Category(2L,"Gama Media","Dipositivo catalogado como gama media",new Date()));
-        categoryServiceImpl.createCategory(new Category(4L,"Gama Alta","Dipositivo catalogado como gama alta",new Date()));
-        categoryServiceImpl.createCategory(new Category(5L,"Servicio","Este es un servicio ",new Date()));
+        categoryServiceImpl.createCategory(new Category(3L,"Gama Alta","Dipositivo catalogado como gama alta",new Date()));
+        categoryServiceImpl.createCategory(new Category(4L,"Servicio","Este es un servicio ",new Date()));
     }
 
 }

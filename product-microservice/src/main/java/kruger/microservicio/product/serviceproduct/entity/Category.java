@@ -14,9 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-/**
- * This microservice was created by Kevin Mantilla
- */
+
 @Entity
 @Table(name = "categories")
 @Data 

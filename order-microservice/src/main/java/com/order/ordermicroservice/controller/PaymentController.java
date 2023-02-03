@@ -22,9 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * This microservice was created by Kevin and David
- */
+
 @RestController
 @RequestMapping(value = "/api/payments")
 public class PaymentController {

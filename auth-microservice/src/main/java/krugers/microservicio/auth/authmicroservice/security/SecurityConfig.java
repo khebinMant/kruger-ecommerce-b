@@ -19,7 +19,9 @@ public class SecurityConfig{
                 "/api/users/**",
                 "/api/carts/**",
                 "/api/users/update/**",
-                "/api/address/**"
+                "/api/address/**",
+                "/api/mails/**",
+                "/swagger-ui/index.html#/**"
         };
 
         http

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,27 +28,51 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
 import kruger.microservicio.product.serviceproduct.entity.Category;
 import kruger.microservicio.product.serviceproduct.entity.Product;
-import kruger.microservicio.product.serviceproduct.entity.Review;
+import kruger.microservicio.product.serviceproduct.service.product.IProductPagingService;
 import kruger.microservicio.product.serviceproduct.service.product.IProductService;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
+
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-/**
- * This microservice was created by Kevin Mantilla
- */
-// @CrossOrigin(origins = "*")
+
 @RestController
 @RequestMapping (value = "api/products")
 public class ProductController {
 
     @Autowired
     private IProductService iproductService;
+    
+    @Autowired
+    private IProductPagingService iProductPagingService;
+
+    @GetMapping(value = "/paginate")
+    public ResponseEntity<List<Product>> listProductsPaginate(
+                    @RequestParam(defaultValue = "0") Integer pageNo,
+                    @RequestParam(defaultValue = "6") Integer pageSize,
+                    @RequestParam(defaultValue = "name") String sortBy,
+                    @RequestParam(name = "categoryId",required = false) Long categoryId)
+    {
+            List<Product> listProducts = new ArrayList<>();
+
+            if(categoryId == null){
+                listProducts =  iProductPagingService.getAllProductPaginated(pageNo, pageSize, sortBy);
+                if(listProducts.isEmpty()){
+                    return ResponseEntity.noContent().build();
+                }
+            }else{
+                Category category = Category.builder().id(categoryId).build();
+                listProducts = iProductPagingService.getAllProductsByCategory(pageNo, pageSize, sortBy, category);
+                
+                if(listProducts.isEmpty()){
+                    return ResponseEntity.notFound().build();
+                }
+            }
+
+            return ResponseEntity.ok(listProducts);
+    }
 
     @ApiResponses(value = { 
 		@ApiResponse(responseCode = "200", description = "Successfully operation"),

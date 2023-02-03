@@ -1,22 +1,31 @@
 package krugers.microservicio.auth.authmicroservice.service.user;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.netflix.discovery.converters.Auto;
+
+import jakarta.mail.MessagingException;
 import krugers.microservicio.auth.authmicroservice.dto.ChangeCredentialsRequest;
 import krugers.microservicio.auth.authmicroservice.dto.ChangeCredentialsResponse;
 import krugers.microservicio.auth.authmicroservice.dto.LoginRequest;
 import krugers.microservicio.auth.authmicroservice.dto.LoginResponse;
+import krugers.microservicio.auth.authmicroservice.dto.PasswordRecoveryRequest;
 import krugers.microservicio.auth.authmicroservice.entity.Address;
+import krugers.microservicio.auth.authmicroservice.entity.Role;
 import krugers.microservicio.auth.authmicroservice.entity.TokenDto;
 import krugers.microservicio.auth.authmicroservice.entity.User;
 import krugers.microservicio.auth.authmicroservice.repository.UserRepository;
 import krugers.microservicio.auth.authmicroservice.security.JwtProvider;
 import krugers.microservicio.auth.authmicroservice.service.address.AddressServiceImpl;
+import krugers.microservicio.auth.authmicroservice.service.mail.MailService;
+import krugers.microservicio.auth.authmicroservice.utils.RecoveryCodesStore;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -29,6 +38,10 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	AddressServiceImpl addressServiceImpl;
+	
+	@Autowired
+	@Lazy
+	MailService mailService;
 
 	@Autowired
 	JwtProvider jwtProvider;
@@ -41,6 +54,10 @@ public class UserServiceImpl implements UserService {
 		String password = passwordEncoder.encode(authUser.getPassword());
 		authUser.setPassword(password);
 		authUser.setVerified(false);
+		authUser.setCompanyId(1L);
+		if(authUser.getRole().equals(Role.ADMIN)){
+			authUser.setVerified(true);
+		}
 
 		Long customerId;
 		User userDB = new User();
@@ -60,41 +77,20 @@ public class UserServiceImpl implements UserService {
 		Optional<User> user = userRepository.findByEmail(dto.getEmail());
 		if (!user.isPresent())
 			return null;
-        if (passwordEncoder.matches(dto.getPassword(), user.get().getPassword())) {
-            LoginResponse response = LoginResponse.builder()
-                    .id(user.get().getId())
-                    .email(user.get().getEmail())
-                    .password(user.get().getPassword())
-                    // .userName(user.get().getUserName())
-                    .birthDate(user.get().getBirthDate())
+		if (passwordEncoder.matches(dto.getPassword(), user.get().getPassword())) {
+			LoginResponse response = LoginResponse.builder().id(user.get().getId()).email(user.get().getEmail())
+					.password(user.get().getPassword())
+					.birthDate(user.get().getBirthDate()).firstName(user.get().getFirstName())
+					.lastName(user.get().getLastName()).cellPhone(user.get().getCellPhone())
+					.companyId(user.get().getCompanyId()).signDate(user.get().getSignDate())
+					.verified(user.get().getVerified()).role(user.get().getRole())
 					.imageUrl(user.get().getImageUrl())
-                    .firstName(user.get().getFirstName())
-                    .lastName(user.get().getLastName())
-                    .cellPhone(user.get().getCellPhone())
-                    .companyId(user.get().getCompanyId())
-                    .addresses(user.get().getAddresses())
-                    .signDate(user.get().getSignDate())
-                    .verified(user.get().getVerified())
-                    .role(user.get().getRole())
-                    .token(jwtProvider.createToken(user.get()))
-                    .build();
-            return response;
-        }
-        return null;
-    }
-
-		// if (passwordEncoder.matches(dto.getPassword(), user.get().getPassword())) {
-		// 	LoginResponse response = LoginResponse.builder().id(user.get().getId()).email(user.get().getEmail())
-		// 			.password(user.get().getPassword())
-		// 			.birthDate(user.get().getBirthDate()).firstName(user.get().getFirstName())
-		// 			.lastName(user.get().getLastName()).cellPhone(user.get().getCellPhone())
-		// 			.companyId(user.get().getCompanyId()).signDate(user.get().getSignDate())
-		// 			.verified(user.get().getVerified()).role(user.get().getRole())
-		// 			.token(jwtProvider.createToken(user.get())).build();
-		// 	return response;
-		// }
-		// return null;
-	// }
+					.addresses(user.get().getAddresses())
+					.token(jwtProvider.createToken(user.get())).build();
+			return response;
+		}
+		return null;
+	}
 
 	public TokenDto validate(String token) {
 		if (!jwtProvider.validate(token))
@@ -132,6 +128,7 @@ public class UserServiceImpl implements UserService {
 			userDB.setBirthDate(user.getBirthDate());
 			userDB.setCellPhone(user.getCellPhone());
 			User userUpdated = userRepository.save(userDB);
+			System.out.println("---------------------------------------------------");
 			return userUpdated;
 		} else
 			return null;
@@ -141,13 +138,28 @@ public class UserServiceImpl implements UserService {
 	public User updateUserUbication(Long userId, User user) {
 		User userDB = findById(userId);
 		if (user != null && userDB != null && user.getAddresses() != null && !user.getAddresses().isEmpty()) {
+			List<Address> newAddresses=new ArrayList<>();
 			for(Address address:user.getAddresses()) {
-				userDB.addAddress(address);
+				newAddresses.add(address);
+				address.setUserId(userDB.getId());
 			}
+			userDB.setAddresses(newAddresses);
 			User userUpdated = userRepository.save(userDB);
 			return userUpdated;
 		} else
 			return null;
+	}
+
+	@Override
+	public User updateUserVerified(Long userId, User user){
+		User userDB = findById(userId);
+		if (user != null && userDB != null && user.getVerified()!= null){
+			userDB.setVerified(user.getVerified());
+			User userUpdated = userRepository.save(userDB);
+			return userUpdated;
+		}else{
+			return null;
+		}
 	}
 
 	@Override
@@ -169,6 +181,45 @@ public class UserServiceImpl implements UserService {
 
 		} else
 			return ChangeCredentialsResponse.USER_ID_NOT_FOUND;
+	}
+
+	@Override
+	public List<User> findAllCustomers() {
+		
+		return userRepository.findAllCustomers();
+	}
+
+	@Override
+	public void sendRecoveryCode(String email) {
+		try {
+			mailService.senRecoveryCode(email);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public boolean validateRecoverycode(PasswordRecoveryRequest request) {
+		RecoveryCodesStore store=RecoveryCodesStore.getInstance();
+		return store.validateCode(request.getEmail(), request.getCode());	
+	}
+
+	@Override
+	public boolean resetNewPassword(ChangeCredentialsRequest req) {
+		RecoveryCodesStore store=RecoveryCodesStore.getInstance();
+		User userDB=findByEmail(req.getEmail());
+		if(userDB!=null && store.removeCode(req.getEmail(), req.getCode())) {
+			String newPassword = passwordEncoder.encode(req.getNewPassword());
+			userDB.setPassword(newPassword);
+			User userUpdated = userRepository.save(userDB);
+			return true;
+			
+		}
+		return false;
+		
+		
 	}
 
 	/*

@@ -23,10 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-/**
- * This microservice was created by Kevin and David
- */
-// @CrossOrigin(origins = "http://localhost:3000")
+
 @RestController
 @RequestMapping("/api/orders")
 public class OrderController {
@@ -68,11 +65,12 @@ public class OrderController {
     @Operation(description = "add  orders", summary = "calling this endpoint will allow you to add orders by passing the order data as json in the request body")
     @Tag(name = "Create a Order")
     @PostMapping(value= "/user/{id}")
-    public ResponseEntity<Order> createOrder(@Valid @RequestBody Order Order, BindingResult result, @PathVariable("id") Long userId) {
+    public ResponseEntity<Order> createOrder(@Valid @RequestBody Order order, BindingResult result, @PathVariable("id") Long userId) {
         if (result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
         }
-        Order OrderDB = orderService.createOrder(Order, userId);
+        System.out.println(order);
+        Order OrderDB = orderService.createOrder(order, userId);
 
         return  ResponseEntity.status( HttpStatus.CREATED).body(OrderDB);
     }

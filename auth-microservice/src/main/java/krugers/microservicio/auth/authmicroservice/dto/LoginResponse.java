@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 
 import krugers.microservicio.auth.authmicroservice.entity.Address;
-import krugers.microservicio.auth.authmicroservice.entity.Cart;
 import krugers.microservicio.auth.authmicroservice.entity.Role;
 
 
@@ -49,5 +48,7 @@ public class LoginResponse {
     private List<Address> addresses;
 
     private String token;
+    
+    
 
 }

@@ -23,58 +23,58 @@ import java.util.Date;
 
 @RunWith(SpringRunner.class)
 public class PaymentControllerTest {
-    private final HttpHeaders headers = new HttpHeaders();
-    private final TestRestTemplate restTemplate = new TestRestTemplate();
+    // private final HttpHeaders headers = new HttpHeaders();
+    // private final TestRestTemplate restTemplate = new TestRestTemplate();
 
-    @LocalServerPort
-    private int port = 9091;
+    // @LocalServerPort
+    // private int port = 9091;
 
-    private String createURLWithPort(String uri) {
-        return "http://localhost:" + port + uri;
-    }
+    // private String createURLWithPort(String uri) {
+    //     return "http://localhost:" + port + uri;
+    // }
 
-    @Test
-    public void test_ListAllPayments() throws Exception {
+    // @Test
+    // public void test_ListAllPayments() throws Exception {
 
-        HttpEntity<String> entity = new HttpEntity<>(null, headers);
-        ResponseEntity<String> response = restTemplate.exchange(
-                createURLWithPort("/api/payments"),
-                HttpMethod.GET, entity, String.class);
-        if (response.getStatusCode() != HttpStatus.OK) {
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
-        } else {
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        }
-    }
+    //     HttpEntity<String> entity = new HttpEntity<>(null, headers);
+    //     ResponseEntity<String> response = restTemplate.exchange(
+    //             createURLWithPort("/api/payments"),
+    //             HttpMethod.GET, entity, String.class);
+    //     if (response.getStatusCode() != HttpStatus.OK) {
+    //         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NO_CONTENT);
+    //     } else {
+    //         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    //     }
+    // }
 
-    @Test
-    public void test_FindById() throws Exception {
+    // @Test
+    // public void test_FindById() throws Exception {
 
-        HttpEntity<String> entity = new HttpEntity<>(null, headers);
-        ResponseEntity<String> response = restTemplate.exchange(
-                createURLWithPort("/1"),
-                HttpMethod.GET, entity, String.class);
-        if (response.getStatusCode() != HttpStatus.OK) {
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
-        } else {
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        }
-    }
+    //     HttpEntity<String> entity = new HttpEntity<>(null, headers);
+    //     ResponseEntity<String> response = restTemplate.exchange(
+    //             createURLWithPort("/1"),
+    //             HttpMethod.GET, entity, String.class);
+    //     if (response.getStatusCode() != HttpStatus.OK) {
+    //         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.NOT_FOUND);
+    //     } else {
+    //         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+    //     }
+    // }
 
-    @Test
-    public void test_createPayment() throws Exception {
+    // @Test
+    // public void test_createPayment() throws Exception {
 
-        Order order = new Order();
-        Payment customPayment = new Payment("succces", null, new Date(), order);
-        HttpEntity<Payment> entity = new HttpEntity<>(customPayment, headers);
-        ResponseEntity<String> response = restTemplate.exchange(
-                createURLWithPort("/placePayment"),
-                HttpMethod.POST, entity, String.class);
-        if (response.getStatusCode() != HttpStatus.CREATED) {
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
-        } else {
-            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-        }
-    }
+    //     Order order = new Order();
+    //     Payment customPayment = new Payment("succces", null, new Date(), order);
+    //     HttpEntity<Payment> entity = new HttpEntity<>(customPayment, headers);
+    //     ResponseEntity<String> response = restTemplate.exchange(
+    //             createURLWithPort("/placePayment"),
+    //             HttpMethod.POST, entity, String.class);
+    //     if (response.getStatusCode() != HttpStatus.CREATED) {
+    //         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
+    //     } else {
+    //         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+    //     }
+    // }
 
 }

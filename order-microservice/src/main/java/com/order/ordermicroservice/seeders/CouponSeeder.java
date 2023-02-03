@@ -1,7 +1,6 @@
 package com.order.ordermicroservice.seeders;
 
 import java.util.Date;
-import java.util.Random;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,7 @@ public class CouponSeeder {
             else{
                 type = Type.PERCENTAGE;
             } 
-            couponServiceImpl.createCoupon(new Coupon(i, type, (int)(Math.random()*(50-20) +20) , RandomStringUtils.random(8, "0123456789abcdef"),Status.NOT_USED, new Date()));
+            couponServiceImpl.createCoupon(new Coupon(i, type, (int)(Math.random()*(35-5) +5) , RandomStringUtils.random(8, "0123456789abcdef"),Status.NOT_USED,null, new Date()));
         }
     }
 

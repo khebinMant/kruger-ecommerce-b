@@ -36,6 +36,8 @@ public class CompanyServiceImpl implements ICompanyService{
         companyDB.setImageUrl(company.getImageUrl());
         companyDB.setDescription(company.getDescription());
         companyDB.setCompanyName(company.getCompanyName());
+        companyDB.setObjective(company.getObjective());
+        companyDB.setHistory(company.getHistory());
         
 
         return companyRepository.save(companyDB);

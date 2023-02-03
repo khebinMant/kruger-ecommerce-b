@@ -9,8 +9,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,9 +34,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor @NoArgsConstructor
 @Builder
 
-/**
- * This microservice was created by Kevin Mantilla
- */
+
 public class Product {
 
     @Id
@@ -60,7 +56,7 @@ public class Product {
     @Positive(message = "El stock debe ser mayor que cero")
     private Double stock;
 
-    private Status status;
+    private Boolean status;
 
     private Type type;
 
@@ -94,4 +90,6 @@ public class Product {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private List<Image> images;
+
+	    
 }

@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,8 +28,10 @@ import krugers.microservicio.auth.authmicroservice.dto.ChangeCredentialsRequest;
 import krugers.microservicio.auth.authmicroservice.dto.ChangeCredentialsResponse;
 import krugers.microservicio.auth.authmicroservice.dto.LoginRequest;
 import krugers.microservicio.auth.authmicroservice.dto.LoginResponse;
+import krugers.microservicio.auth.authmicroservice.dto.PasswordRecoveryRequest;
 import krugers.microservicio.auth.authmicroservice.entity.User;
 import krugers.microservicio.auth.authmicroservice.service.address.AddressServiceImpl;
+import krugers.microservicio.auth.authmicroservice.service.mail.MailService;
 import krugers.microservicio.auth.authmicroservice.service.user.UserServiceImpl;
 import krugers.microservicio.auth.authmicroservice.entity.Address;
 import krugers.microservicio.auth.authmicroservice.entity.TokenDto;
@@ -40,6 +41,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.mail.MessagingException;
 import io.swagger.v3.oas.annotations.media.*;
 
 @Slf4j
@@ -52,7 +54,14 @@ public class UserController {
 
 	@Autowired
 	AddressServiceImpl addressServiceImpl;
+	
 
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
+	@ApiResponse(responseCode = "400", description = "Failed to log in") })
+	@Operation(summary = "This endpoint will login the user, the credentials of the user should be passed as a LoginRequest object",
+	description = "You should call this endpoint when you want to log a user in")
+	@Tag(name = "Login a user with credentials", description = "calling this endpoint will login the user"
+			+ "who has the credentials stored in the LoginRequest object")
 	@PostMapping("/login")
 	public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest dto) {
 		LoginResponse response = userServiceImpl.login(dto);
@@ -68,7 +77,60 @@ public class UserController {
 			return ResponseEntity.badRequest().build();
 		return ResponseEntity.ok(tokenDto);
 	}
+	
+	@GetMapping("/recovery-code/{email}")
+	public ResponseEntity sendRecoveryCode (@PathVariable("email") String email) throws MessagingException {
+		User user=userServiceImpl.findByEmail(email);
+		if(user!=null) {
+			userServiceImpl.sendRecoveryCode(email);
+			return new ResponseEntity("SUCCESS", HttpStatus.OK);
+		}else {
+			return ResponseEntity.badRequest().build();
+		}
+		
+	}
+	
+	@PostMapping("/recovery-code/validate")
+	public ResponseEntity validateRecoverycode (@RequestBody PasswordRecoveryRequest request) throws MessagingException {
+		User user=userServiceImpl.findByEmail(request.getEmail());
+		if(user!=null) {
+			return userServiceImpl.validateRecoverycode(request) ?  new ResponseEntity("SUCCESS", HttpStatus.OK) :
+				new ResponseEntity("INVALID_CODE", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity("WRONG_EMAIL", HttpStatus.NOT_FOUND);
+	}
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "SUCCESS"),
+			@ApiResponse(responseCode = "400", description = "FAIELD"),
+			@ApiResponse(responseCode = "404", description = "WRONG_EMAIL") })
+	@Operation(summary = "This endpoint will take care of reseting a new password when user has lost the old password ", description = "You should call this endpoint whenever you want recover or reset the user password")
+	@Tag(name = "Set a new password when the old password is lost", description = "calling this endpoint will reset a new password when the old one is lost")
+	@PostMapping("/recovery-code/reset-password")
+	public ResponseEntity resetPassword (@RequestBody ChangeCredentialsRequest request)  {
+		User user=userServiceImpl.findByEmail(request.getEmail());
+		if(user!=null) {
+			return userServiceImpl.resetNewPassword(request) ?  new ResponseEntity("SUCCESS", HttpStatus.OK) :
+				new ResponseEntity("FAIELD", HttpStatus.BAD_REQUEST);
+		}
+		return new ResponseEntity("WRONG_EMAIL", HttpStatus.NOT_FOUND);
+	}
 
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
+	@ApiResponse(responseCode = "400", description = "There is no customers found") })
+	@Operation(summary = "This endpoint will return a list of all customers in the Db through a GET request", description = "You should call this endpoint whenever you want to get all customers")
+	@Tag(name = "Get all users with role Customers in the database", description = "calling this endpoint will return a list of all customers")
+	@GetMapping("/customers")
+	public ResponseEntity<?> getAllCusotmers() {
+		List<User> customers = userServiceImpl.findAllCustomers();
+		if (customers != null) {
+			return ResponseEntity.ok(customers);
+		}
+		return new ResponseEntity("There is no customers found", HttpStatus.NO_CONTENT);
+	}
+
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
+	@ApiResponse(responseCode = "400", description = "El email ya esta en uso") })
+	@Operation(summary = "This endpoint will create a new user by passing a user object through post request", description = "You should pass user object as a post rquest body so this endpoint will create a new user")
+	@Tag(name = "Create a new user", description = "calling this endpoint will create a new user")
 	@PostMapping("/create")
 	public ResponseEntity<?> create(@RequestBody User user, BindingResult result) {
 
@@ -88,7 +150,7 @@ public class UserController {
 
 	// Actualizar user
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
-			@ApiResponse(responseCode = "404", description = "Multiple validations responses") })
+	@ApiResponse(responseCode = "404", description = "Multiple validations responses") })
 	@Operation(summary = "Update a user personal information by Id", description = "Returns a JSON response with the user personal information updated")
 	@Tag(name = "PUT update a user ", description = "Retrieve information of a updated user")
 	@PutMapping(value = "/update/personal/{id}")
@@ -102,13 +164,14 @@ public class UserController {
 		}
 		return ResponseEntity.ok(updatedUser);
 	}
+	
 
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
-			@ApiResponse(responseCode = "404", description = "Multiple validations responses") })
+	@ApiResponse(responseCode = "404", description = "Multiple validations responses") })
 	@Operation(summary = "Update a user ubication by Id", description = "Returns a JSON response with the user updated information ")
 	@Tag(name = "PUT update a user ", description = "Retrieve information of a updated user")
 	@PutMapping(value = "/update/ubication/{id}")
-	public ResponseEntity updateUserUbication(@RequestBody User user, @PathVariable Long id) {
+	public ResponseEntity<?> updateUserUbication(@RequestBody User user, @PathVariable Long id) {
 		User updatedUser = userServiceImpl.updateUserUbication(id, user);
 		if (updatedUser == null) {
 			log.error("Unable to update. user with id {} not found.", user.getId());
@@ -118,15 +181,15 @@ public class UserController {
 	}
 
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
-			@ApiResponse(responseCode = "404", description = "Multiple validations responses") })
+	@ApiResponse(responseCode = "404", description = "Multiple validations responses") })
 	@Operation(summary = "Update a user credentials by Id", description = "Returns a JSON response with the user updated information ")
 	@Tag(name = "PUT update a user ", description = "Retrieve information of a updated user")
 	@PutMapping(value = "/update/credentials/{id}")
-	public ResponseEntity updateUserCredentials(@RequestBody ChangeCredentialsRequest req, @PathVariable Long id) {
+	public ResponseEntity<?> updateUserCredentials(@RequestBody ChangeCredentialsRequest req, @PathVariable Long id) {
 		ChangeCredentialsResponse resp = userServiceImpl.updateUserCredentials(id, req);
 		if (resp != ChangeCredentialsResponse.CHANGED) {
 			log.error("Unable to update. user credentials.");
-			return new ResponseEntity(resp,HttpStatus.BAD_REQUEST);
+			return new ResponseEntity(resp, HttpStatus.BAD_REQUEST);
 		}
 		return ResponseEntity.ok(resp);
 	}
@@ -164,7 +227,7 @@ public class UserController {
 
 	// Eliminar user
 	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
-			@ApiResponse(responseCode = "404", description = "We cant find a user with that id not found.") })
+	@ApiResponse(responseCode = "404", description = "We cant find a user with that id not found.") })
 	@Operation(summary = "Delete a user by Id", description = "Returns a message if everything is ok")
 	@Tag(name = "DELETE delete a user ", description = "Retrieve a message if everything its ok")
 	@DeleteMapping(value = "/{id}")
@@ -206,6 +269,22 @@ public class UserController {
 			return ResponseEntity.noContent().build();
 		}
 		return ResponseEntity.ok(branchs);
+	}
+
+	// Actualizar user verified
+	@ApiResponses(value = { @ApiResponse(responseCode = "200", description = "Successfully operation"),
+	@ApiResponse(responseCode = "404", description = "Multiple validations responses") })
+	@Operation(summary = "Update a user personal information by Id", description = "Returns a JSON response with the user personal information updated")
+	@Tag(name = "PUT update a user ", description = "Retrieve information of a updated user")
+	@PutMapping(value = "/update/verified/{id}")
+	public ResponseEntity<?> updateUserVerified(@RequestBody User user, @PathVariable("id") long id) {
+		log.info("Updating user personal info with id {}", user.getId());
+		User updatedUser = userServiceImpl.updateUserVerified(id, user);
+		if (updatedUser == null) {
+			log.error("Unable to update. user with id {} not found.", user.getId());
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("We cant find a user with that id not found. ");
+		}
+		return ResponseEntity.ok(updatedUser);
 	}
 
 	// Establecer sucursal matriz de un cliente

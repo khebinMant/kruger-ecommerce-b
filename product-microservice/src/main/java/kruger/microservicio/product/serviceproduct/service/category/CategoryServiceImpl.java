@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import kruger.microservicio.product.serviceproduct.entity.Category;
 import kruger.microservicio.product.serviceproduct.repository.CategoryRepository;
 
-/**
- * This microservice was created by Kevin Mantilla
- */
+
 @Service
 public class CategoryServiceImpl implements ICategoryService{
 

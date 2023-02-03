@@ -139,7 +139,6 @@ public class CompanyController {
                 return error;
             }).collect(Collectors.toList());
         
-        //Aqui guardo utilizando la clase que creamos para gestionar el error
         ErrorMessage errorMessage = ErrorMessage.builder()
             .code("01")
             .messages(errors).build();

@@ -5,9 +5,6 @@ import java.util.List;
 import kruger.microservicio.product.serviceproduct.entity.Category;
 import kruger.microservicio.product.serviceproduct.entity.Product;
 
-/**
- * This microservice was created by Kevin Mantilla
- */
 public interface IProductService {
     
     public List<Product> listAllProducts();

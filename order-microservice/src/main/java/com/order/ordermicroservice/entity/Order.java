@@ -10,9 +10,6 @@ import lombok.NoArgsConstructor;
 import java.util.Date;
 import java.util.List;
 
-/**
- * This microservice was created by Kevin
- */
 @Data
 @Entity
 @Table(name="orders")
@@ -26,6 +23,9 @@ public class Order {
 
     @Column(name = "total_price")
     private Double totalPrice;
+    
+    @Column(name="subtotal")
+    private Double subTotal;
 
     @Temporal(TemporalType.DATE)
     private Date created;

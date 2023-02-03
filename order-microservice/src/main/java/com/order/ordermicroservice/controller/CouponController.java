@@ -40,12 +40,12 @@ public class CouponController {
     ICouponService couponService;
 
      //Obtener todos los cupones
-    //  @ApiResponses(value = { 
-	// 	@ApiResponse(responseCode = "200", description = "Successfully operation"),
-	// 	@ApiResponse(responseCode = "404", description = "No content")
-	// })
-    // @Operation(summary = "Return a list with all branchs", description = "Returns a JSON response with the branchs information")
-    // @Tag(name = "GET all branchs ", description = "Retrieve information of all branchs")
+     @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "No content")
+	})
+    @Operation(summary = "Return a list with all cou", description = "Returns a JSON response with the coupons information")
+    @Tag(name = "GET all coupons ", description = "Retrieve information of all coupons")
     @GetMapping
     public ResponseEntity<List<Coupon>> listCoupons(){
             List<Coupon> coupons = new ArrayList<>();
@@ -59,29 +59,60 @@ public class CouponController {
     }
 
     //Obtener coupon dado su id
-    // @ApiResponses(value = { 
-	// 	@ApiResponse(responseCode = "200", description = "Successfully operation"),
-	// 	@ApiResponse(responseCode = "404", description = "No content")
-	// })
-    // @Operation(summary = "Return a branch by Id", description = "Returns a JSON response branch information")
-    // @Tag(name = "GET branch by Id ", description = "Retrieve information of branch by Id")
+    @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "No content")
+	})
+    @Operation(summary = "Return a coupon by Id", description = "Returns a JSON response coupon information")
+    @Tag(name = "GET coupon by Id ", description = "Retrieve information of coupon by Id")
     @GetMapping(value="/{id}")
     public ResponseEntity<?> getCoupon(@PathVariable(name="id") Long id){
         Coupon coupon = couponService.getCoupon(id);
 
         if(coupon==null){
-            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("We cant find a branch with that id not found. ");
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("We cant find a coupon with that id not found. ");
         }
         return ResponseEntity.ok(coupon);
     }
+
+    //Obtener coupon dado el id del cliente
+    @ApiResponses(value = { 
+        @ApiResponse(responseCode = "200", description = "Successfully operation"),
+        @ApiResponse(responseCode = "404", description = "No content")
+    })
+    @Operation(summary = "Return a coupon by Id", description = "Returns a JSON response coupon information")
+    @Tag(name = "GET coupon by Id ", description = "Retrieve information of coupon by Id")
+    @GetMapping(value="user/{id}")
+    public ResponseEntity<?> getCouponByUserId(@PathVariable(name="id") Long id){
+        List<Coupon> coupons = couponService.findByUserId(id);
+
+        if(coupons.isEmpty()){
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(coupons);
+    }
     
-    //Crear coupon y adjuntar a cliente
-    // @ApiResponses(value = { 
-	// 	@ApiResponse(responseCode = "200", description = "Successfully operation"),
-	// 	@ApiResponse(responseCode = "404", description = "No content")
-	// })
-    // @Operation(summary = "Create a new branch to a customer", description = "Returns a JSON response with the branch information")
-    // @Tag(name = "POST branch", description = "Retrieve information of a created branch")
+    @GetMapping(value="/by-code/{code}")
+    public ResponseEntity<?> getCouponByCode(@PathVariable(name="code") String code){
+        	System.out.println("getting coupon with code "+code);
+    	Coupon c=couponService.getCouponByCode(code);
+    	
+        if(c==null){
+        	
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("We cant find a coupon with that id not found. ");
+        }
+        return ResponseEntity.ok(c);
+    }
+    
+    
+    // Crear coupon y adjuntar a cliente
+    @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "No content")
+	})
+    @Operation(summary = "Create a new coupon to a customer", description = "Returns a JSON response with the coupon information")
+    @Tag(name = "POST coupon", description = "Retrieve information of a created coupon")
     @PostMapping
     public ResponseEntity<Coupon> createCoupon(@Valid @RequestBody Coupon coupon, BindingResult result){
         
@@ -94,29 +125,29 @@ public class CouponController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCoupon);
     }
 
-    //Actualizar la información del cupon
-    // @ApiResponses(value = { 
-	// 	@ApiResponse(responseCode = "200", description = "Successfully operation"),
-	// 	@ApiResponse(responseCode = "404", description = "We cant find a branch with that id not found.")
-	// })
-    // @Operation(summary = "Update branch of a customer", description = "Returns a JSON response with the branch information")
-    // @Tag(name = "PUT update branch information", description = "Retrieve information of a created branch")
+    // Actualizar la información del cupon
+    @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "We cant find a coupon with that id not found.")
+	})
+    @Operation(summary = "Update coupon of a customer", description = "Returns a JSON response with the coupon information")
+    @Tag(name = "PUT update coupon information", description = "Retrieve information of a created coupon")
     @PutMapping(value="/{id}")
     public ResponseEntity<?> updateCoupon(@PathVariable(name="id") Long id, @RequestBody Coupon coupon){
         coupon.setId(id);
         Coupon couponDB = couponService.updateCoupon(coupon);
         if(couponDB == null){
-            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("We cant find a branch with that id not found. ");
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body("We cant find a coupon with that id not found. ");
         }
         return ResponseEntity.ok(couponDB);
     }
 
-    //Eliminar una coupon
-    // @ApiResponses(value = { 
-	// 	@ApiResponse(responseCode = "200", description = "Successfully operation"),
-	// 	@ApiResponse(responseCode = "404", description = "We cant find a branch with that id not found.")
-	// })
-    // @Operation(summary = "Delete branch of a customer", description = "Returna OK status")
+    // Eliminar una coupon
+    @ApiResponses(value = { 
+		@ApiResponse(responseCode = "200", description = "Successfully operation"),
+		@ApiResponse(responseCode = "404", description = "We cant find a coupon with that id not found.")
+	})
+    @Operation(summary = "Delete coupon of a customer", description = "Returna OK status")
     @DeleteMapping(value="/{id}")
     public ResponseEntity<?> deleteCoupon(@PathVariable(name="id") Long id){
         couponService.deleteCoupon(id);

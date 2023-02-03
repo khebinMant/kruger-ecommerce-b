@@ -12,13 +12,10 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.persistence.Transient;
 import kruger.microservicio.product.serviceproduct.model.User;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * This microservice was created by Kevin Mantilla
- */
+
 @NoArgsConstructor
 @Data
 @Entity

@@ -9,9 +9,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 import com.order.ordermicroservice.seeders.CouponSeeder;
 
-/**
- * This microservice was created by Kevin and David
- */
+
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients

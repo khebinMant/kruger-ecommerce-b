@@ -3,9 +3,7 @@ package krugers.microservicio.auth.authmicroservice.model;
 import java.util.Date;
 
 import lombok.Data;
-/**
- * This microservice was created by Kevin 
- */
+
 @Data
 public class Product {
 

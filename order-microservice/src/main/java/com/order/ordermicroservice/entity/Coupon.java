@@ -14,9 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * This microservice was created by Kevin
- */
+
 @Data
 @Entity
 @Table(name="coupons")
@@ -33,10 +31,14 @@ public class Coupon {
 
     private Integer quantity;
 
+    @Column(name="code",nullable = false,unique = true)
     private String code;
 
     private Status status;
 
+    @Column(name = "user_id")
+    private Long userId;
+    
     @Temporal(TemporalType.DATE)
     private Date created;
 }

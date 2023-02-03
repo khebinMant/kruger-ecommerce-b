@@ -7,19 +7,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.netflix.infix.lang.infix.antlr.EventFilterParser.null_predicate_return;
 
 import kruger.microservicio.product.serviceproduct.entity.Image;
 import kruger.microservicio.product.serviceproduct.entity.Product;
-import kruger.microservicio.product.serviceproduct.entity.Status;
 import kruger.microservicio.product.serviceproduct.entity.Type;
 import kruger.microservicio.product.serviceproduct.entity.Review;
 import kruger.microservicio.product.serviceproduct.service.category.CategoryServiceImpl;
 import kruger.microservicio.product.serviceproduct.service.product.ProductServiceImpl;
 
-/**
- * This microservice was created by Kevin Mantilla
- */
+
 @Component
 public class ProductClient {
 
@@ -120,6 +116,7 @@ public class ProductClient {
 
     public List<Image> fillImagesToP10(){
         List<Image> images = new ArrayList<>();
+        
         images.add(new Image(35L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-11-lite-ne/rosa/zoom/01-xiaomi-11-lite-ne-rosa-front.png", 10L,new Date()));
         images.add(new Image(36L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-11-lite-ne/rosa/zoom/03-xiaomi-11-lite-ne-rosa-back.png", 10L,new Date()));
         images.add(new Image(37L, null, "https://catalogo.claro.com.ec/uploads/imgs/productos/xiaomi-11-lite-ne/rosa/zoom/02-xiaomi-11-lite-ne-rosa-side.png", 10L,new Date()));
@@ -164,15 +161,16 @@ public class ProductClient {
             "https://www.youtube.com/embed/TBTgQbjRsqg",
             1162.62, 
             100.0,
-            Status.POPULAR, 
+            true, 
             Type.PRODUCT, 
             "Apple", 
             173.0, 
             "Chip A15 Bionic", 
             0.0, new Date(),
-            categoryServiceImpl.getCategory(1L),
+            categoryServiceImpl.getCategory(3L),
             reviews, fillImagesToP1()
         ));
+    
         productServiceImpl.createProduct(new Product(
             2L, 
             "IPHONE 13 (128 GB)",
@@ -180,13 +178,13 @@ public class ProductClient {
             "https://www.youtube.com/embed/TBTgQbjRsqg", 
             1009.90, 
             100.0,
-            Status.NOT_POPULAR, 
+            false, 
             Type.PRODUCT, 
             "Apple", 
             173.0, 
             "Chip A15 Bionic", 
             0.0, new Date(),
-            categoryServiceImpl.getCategory(1L),
+            categoryServiceImpl.getCategory(3L),
             emptyReviews, fillImagesToP2()
         ));
         productServiceImpl.createProduct(new Product(
@@ -196,13 +194,13 @@ public class ProductClient {
             "https://www.youtube.com/embed/TBTgQbjRsqg",
             1566.88, 
             100.0,
-            Status.POPULAR, 
+           true, 
             Type.PRODUCT, 
             "Samsung", 
             227.0, 
             "Exynos 2200 a 2,8GHz GPU AMD", 
             0.0, new Date(),
-            categoryServiceImpl.getCategory(1L),
+            categoryServiceImpl.getCategory(3L),
             emptyReviews, fillImagesToP3()
         ));
 
@@ -213,13 +211,13 @@ public class ProductClient {
             "https://www.youtube.com/embed/TBTgQbjRsqg",
             2368.42, 
             100.0,
-            Status.NOT_POPULAR, 
+            false, 
             Type.PRODUCT, 
             "Apple", 
             206.0, 
             "Chip A16 Bionic", 
             0.0, new Date(),
-            categoryServiceImpl.getCategory(1L),
+            categoryServiceImpl.getCategory(3L),
             emptyReviews, fillImagesToP4()
         ));
 
@@ -231,7 +229,7 @@ public class ProductClient {
             "https://www.youtube.com/embed/TBTgQbjRsqg",
             742.00, 
             100.0,
-            Status.POPULAR, 
+           true, 
             Type.PRODUCT, 
             "Huawei", 
             178.0, 
@@ -248,7 +246,7 @@ public class ProductClient {
             "https://www.youtube.com/embed/TBTgQbjRsqg",
             550.00, 
             100.0,
-            Status.NOT_POPULAR, 
+           true, 
             Type.PRODUCT, 
             "Xiaomi", 
             193.0, 
@@ -265,7 +263,7 @@ public class ProductClient {
             "https://www.youtube.com/embed/TBTgQbjRsqg",
             952.00, 
             100.0,
-            Status.NOT_POPULAR, 
+            false, 
             Type.PRODUCT, 
             "Samsumg", 
             177.0, 
@@ -282,7 +280,7 @@ public class ProductClient {
             "https://www.youtube.com/embed/TBTgQbjRsqg",
             644.00, 
             100.0,
-            Status.POPULAR, 
+            false, 
             Type.PRODUCT, 
             "Iphone", 
             194.0, 
@@ -300,13 +298,13 @@ public class ProductClient {
             "https://www.youtube.com/embed/TBTgQbjRsqg",
             220.00, 
             100.0,
-            Status.NOT_POPULAR, 
+           false, 
             Type.PRODUCT, 
             "The Creative Life", 
             150.0, 
             "Octa-Core Mediatek", 
             0.0, new Date(),
-            categoryServiceImpl.getCategory(3L),
+            categoryServiceImpl.getCategory(1L),
             emptyReviews, fillImagesToP9()
         ));
 
@@ -317,13 +315,13 @@ public class ProductClient {
             "https://www.youtube.com/embed/TBTgQbjRsqg",
             224.00, 
             100.0,
-            Status.POPULAR, 
+            true, 
             Type.PRODUCT, 
             "Xiaomi", 
             158.0, 
             "Qualcomm Snapdragon 778G", 
             0.0, new Date(),
-            categoryServiceImpl.getCategory(3L),
+            categoryServiceImpl.getCategory(1L),
             emptyReviews, fillImagesToP10()
         ));
 
@@ -334,13 +332,13 @@ public class ProductClient {
             "https://www.youtube.com/embed/TBTgQbjRsqg",
             200.00, 
             100.0,
-            Status.NOT_POPULAR, 
+            true, 
             Type.PRODUCT, 
             "Nokia", 
             194.0, 
             "MediaTek Helio G25 Octa-Core de 2GHz", 
             0.0, new Date(),
-            categoryServiceImpl.getCategory(3L),
+            categoryServiceImpl.getCategory(1L),
             emptyReviews, fillImagesToP11()
         ));
 
@@ -351,29 +349,29 @@ public class ProductClient {
             "https://www.youtube.com/embed/TBTgQbjRsqg",
             140.00, 
             100.0,
-            Status.NOT_POPULAR, 
+           false, 
             Type.PRODUCT, 
             "Samsumg", 
             160.0, 
             "Ocho núcleos a 1,6GHz", 
             0.0, new Date(),
-            categoryServiceImpl.getCategory(3L),
+            categoryServiceImpl.getCategory(1L),
             emptyReviews, fillImagesToP12()
         ));
 
         // 4 servicios para la categoria de servicio
         productServiceImpl.createProduct(new Product(
             13L, 
-            "Super servicio 1",
-            "3 Gigas + 3 Gigas para la noche por 15 dias",
+            "Foraneo",
+            "Por 15 dias",
             "https://www.youtube.com/embed/TBTgQbjRsqg",
             3.00, 
             100.0,
-            Status.NOT_POPULAR, 
+            true, 
             Type.SERVICE, 
+            "10GB", 
             null, 
-            null, 
-            null, 
+            "WhatsApp ilimitado", 
             0.0, new Date(),
             categoryServiceImpl.getCategory(4L),
             emptyReviews, 
@@ -382,16 +380,16 @@ public class ProductClient {
 
         productServiceImpl.createProduct(new Product(
             14L, 
-            "Super servicio 2",
-            "3 Gigas + 3 Gigas para la noche* + Llamadas Ilimitadas Por 3 Días",
+            "Profesional",
+            "Por 3 Días",
             "https://www.youtube.com/embed/TBTgQbjRsqg",
-            5.00, 
+            19.99, 
             100.0,
-            Status.POPULAR, 
+            true, 
             Type.SERVICE, 
+            "50GB", 
             null, 
-            null, 
-            null, 
+            "Redes ilimitadas", 
             0.0, new Date(),
             categoryServiceImpl.getCategory(4L),
             emptyReviews, 
@@ -400,16 +398,16 @@ public class ProductClient {
 
         productServiceImpl.createProduct(new Product(
             15L, 
-            "Super servicio 3",
-            "12 Gigas por 30 Días + 2 Gigas redes por 7 Días", 
+            "Estudiantil",
+            "Por 7 Días", 
             "https://www.youtube.com/embed/TBTgQbjRsqg",
-            12.00, 
+            10.99, 
             100.0,
-            Status.POPULAR, 
+            true, 
             Type.SERVICE, 
+            "12GB", 
             null, 
-            null, 
-            null, 
+            "Redes ilimitadas", 
             0.0, new Date(),
             categoryServiceImpl.getCategory(4L),
             emptyReviews, 
@@ -418,21 +416,23 @@ public class ProductClient {
 
         productServiceImpl.createProduct(new Product(
             16L, 
-            "Super servicio 4",
-            "3.5 Gigas + 3.5 Gigas Para La Noche Por 20 Días", 
+            "Ejecutivo",
+            "Por 20 Dias", 
             "https://www.youtube.com/embed/TBTgQbjRsqg",
-            7.00, 
+            15.99, 
             100.0,
-            Status.POPULAR, 
+            true, 
             Type.SERVICE, 
+            "50GB", 
             null, 
-            null, 
-            null, 
+            "Redes ilimitadas", 
             0.0, new Date(),
             categoryServiceImpl.getCategory(4L),
             emptyReviews, 
             null
         ));
+        
+    
 
     }
 }
