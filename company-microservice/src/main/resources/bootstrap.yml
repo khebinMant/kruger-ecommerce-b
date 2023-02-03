@@ -3,6 +3,6 @@ spring:
         name: company-microservice
     cloud:
         config:
-            uri: http://localhost:8080
+            uri: http://host.docker.internal:8080
             username: root
             password: s3cr3t
