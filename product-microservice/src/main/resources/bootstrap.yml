@@ -7,6 +7,6 @@ spring:
             retry:
                 maxAttempts: 200
                 maxInterval: 10000
-            uri: http://host.docker.internal:8080
+            uri: http://localhost:8080
             username: root
             password: s3cr3t
