@@ -3,7 +3,7 @@ server:
 
 eureka:
   instance:
-    # hostname: host.docker.internal
+    hostname: localhost
     prefer-ip-address: true
   client:
     registerWithEureka: false
