@@ -31,7 +31,7 @@ public class AuthFilter extends AbstractGatewayFilterFactory<AuthFilter.Config>{
                 return onError(exchange, HttpStatus.BAD_REQUEST);
             return webClient.build()
                     .post()
-                    .uri("http://auth-microservice/api/users/validate?token=" + chunks[1])
+                    .uri("http://host.docker.internal:9092/api/users/validate?token=" + chunks[1])
                     .retrieve().bodyToMono(TokenDto.class)
                     .map(tokenDto -> {
                         tokenDto.getToken();
