@@ -3,7 +3,7 @@ spring:
     name: gateway-microservice
   cloud:
     config:
-      uri: http://localhost:8080
+      uri: http://config-microservice:8080
       username: root
       password: s3cr3t
     gateway:
