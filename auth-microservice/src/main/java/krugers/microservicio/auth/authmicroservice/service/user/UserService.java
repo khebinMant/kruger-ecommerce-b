@@ -26,7 +26,7 @@ public interface UserService {
     List<User> findAllCustomers();
     
     
-    void sendRecoveryCode (String email);
+    void sendRecoveryCode (String email,User user);
     boolean validateRecoverycode (PasswordRecoveryRequest request);
     boolean resetNewPassword(ChangeCredentialsRequest request);
     
