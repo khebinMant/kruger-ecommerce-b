@@ -128,7 +128,7 @@ public class CartController {
     @Tag(name = "GET cart report by Id ", description = "Retrieve information PDF of cart by Id")
     @GetMapping(value="/{id}/report")
     public ResponseEntity<byte[]> getCartReport(@PathVariable(name="id") Long id) throws JRException{
-        System.out.println("Generating pdf---------------------------------------------------");
+       
     	JasperPrint report = cartServiceImpl.getCartReport(id);
 
         if(report == null){
