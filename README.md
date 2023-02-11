@@ -3,7 +3,7 @@
 #  Construccion de una API REST Proyecto final
 > Proyecto final de Back End contrucción completa de una API REST con estandares de desarrollo SOLID 
 
-<img src="./resources/img/photo.png" height="300px">
+<img src="" height="300px">
 
 
 ## Construido con 
@@ -69,10 +69,10 @@
 - LinkedIn: [Kenan  Al-jaber]()
 
 
- **David Lozada **
+ ** Jose Andres Gavilanes**
 
-- GitHub: [@DashCode47](https://github.com/DashCode47)
-- LinkedIn: [David Lozada]()
+- GitHub: [@joseandresgavilanes](https://github.com/joseandresgavilanes)
+- LinkedIn: [Jose Andres Gavilanes]()
 
 
 ## 🤲 Show your support
