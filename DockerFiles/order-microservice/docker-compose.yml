@@ -1,0 +1,9 @@
+version: '1'
+services:
+  order-microservice:
+    image: khebinsd/order-microservice:latest
+    networks:
+      - microservicios
+networks:
+  microservicios:
+    external: true

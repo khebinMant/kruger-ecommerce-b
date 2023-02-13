@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  front-service:
+    image: khebinsd/order-microservice:latest
+    networks:
+      - microservicios
+networks:
+  microservicios:
+    external: true

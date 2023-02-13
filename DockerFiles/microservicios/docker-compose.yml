@@ -1,0 +1,64 @@
+version: '1'
+services:
+  config-microservice:
+    image: khebinsd/config-microservice:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - microservicios
+  registry-microservice:
+    image: khebinsd/registry-microservice:latest
+    ports:
+      - "8081:8081"
+    depends_on:
+      - config-microservice
+    networks:
+      - microservicios
+  product-microservice:
+    image: khebinsd/product-microservice:latest
+    ports:
+      - "9090:9090"
+    depends_on:
+      - config-microservice
+      - registry-microservice
+    networks:
+      - microservicios
+  order-microservice:
+    image: khebinsd/order-microservice:latest
+    ports:
+      - "9091:9091"
+    depends_on:
+      - config-microservice
+      - registry-microservice
+    networks:
+      - microservicios
+  auth-microservice:
+    image: khebinsd/auth-microservice:latest
+    ports:
+      - "9092:9092"
+    depends_on:
+      - config-microservice
+      - registry-microservice
+    networks:
+      - microservicios
+  company-microservice:
+    image: khebinsd/company-microservice:latest
+    ports:
+      - "9093:9093"
+    depends_on:
+      - config-microservice
+      - registry-microservice
+    networks:
+      - microservicios
+  gateway-microservice:
+    image: khebinsd/gateway-microservice:latest
+    ports:
+      - "8082:8082"
+    depends_on:
+      - config-microservice
+      - registry-microservice
+    networks:
+      - microservicios
+networks:
+  microservicios:
+    external: true

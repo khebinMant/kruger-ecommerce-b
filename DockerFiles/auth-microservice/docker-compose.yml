@@ -1,0 +1,9 @@
+version: '1'
+services:
+  auth-microservice:
+    image: khebinsd/auth-microservice:latest
+    networks:
+      - microservicios
+networks:
+  microservicios:
+    external: true

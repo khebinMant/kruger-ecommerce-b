@@ -1,0 +1,10 @@
+version: '1'
+services:
+  postgres:
+    image: khebinsd/postgres:latest
+    networks:
+      - microservicios
+    command: postgres -c 'max_connections=1000'
+networks:
+  microservicios:
+    external: true

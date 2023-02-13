@@ -1,0 +1,9 @@
+version: '1'
+services:
+  company-microservice:
+    image: khebinsd/company-microservice:latest
+    networks:
+      - microservicios
+networks:
+  microservicios:
+    external: true

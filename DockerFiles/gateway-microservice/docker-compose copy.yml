@@ -1,0 +1,27 @@
+version: '1'
+services:
+  gateway-microservice:
+    image: khebinsd/gateway-microservice:latest
+    networks:
+      - microservicios
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2048M
+      labels:
+        - "traefik.docker.network=traefik-public"
+        - "traefik.enable=true"
+        - "traefik.http.middlewares.krugercell-service-https-redirect.redirectscheme.scheme=https"
+        - "traefik.http.routers.krugercell-service.entrypoints=http"
+        - "traefik.http.routers.krugercell-service.rule=Host(`krugercell-service.sistemaagil.net`)"
+        - "traefik.http.routers.krugercell-service-secure.service=krugercell"
+        - "traefik.http.routers.krugercell-service-secure.tls=true"
+        - "traefik.http.routers.krugercell-service-secure.tls.certresolver=http"
+        - "traefik.http.routers.krugercell-service-secure.entrypoints=https"
+        - "traefik.http.routers.krugercell-service.middlewares=krugercell-https-redirect"
+        - "traefik.http.routers.krugercell-service-secure.rule=Host(`krugercell-service.sistemaagil.net`)"
+        - "traefik.http.services.krugercell-service.loadbalancer.server.port=8082"
+networks:
+  microservicios:
+    external: true
