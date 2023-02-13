@@ -191,6 +191,7 @@ public class UserController {
 			log.error("Unable to update. user with id {} not found.", user.getId());
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("We cant find a user with that id not found. ");
 		}
+		log.info("Updating user personal info with id {}", user.getId());
 		return ResponseEntity.ok(updatedUser);
 	}
 
@@ -205,6 +206,7 @@ public class UserController {
 			log.error("Unable to update. user credentials.");
 			return new ResponseEntity(resp, HttpStatus.BAD_REQUEST);
 		}
+		log.info("Updating user credentials");
 		return ResponseEntity.ok(resp);
 	}
 
@@ -219,6 +221,7 @@ public class UserController {
 		if (users.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		} else {
+			log.info("Getting all users", users);
 			return ResponseEntity.ok(users);
 		}
 	}
@@ -264,8 +267,10 @@ public class UserController {
 	@GetMapping(value = "/email/{email}", produces = "application/json")
 	public ResponseEntity<?> getUserByEmail(@PathVariable("email") String email) {
 		User user = userServiceImpl.findByEmail(email);
-		if (user != null)
+		if (user != null){
+			log.info("Getting a user", user);
 			return ResponseEntity.ok(user);
+		}
 		else
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Please make sure the email is correct!!");
 	}
@@ -280,6 +285,7 @@ public class UserController {
 		List<Address> branchs = addressServiceImpl.findByUserId(id);
 
 		if (branchs == null) {
+			log.info("Getting a user branches", branchs);
 			return ResponseEntity.noContent().build();
 		}
 		return ResponseEntity.ok(branchs);
