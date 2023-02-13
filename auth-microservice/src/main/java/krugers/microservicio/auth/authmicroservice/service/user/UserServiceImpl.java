@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -190,9 +191,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void sendRecoveryCode(String email) {
-		try {
-			mailService.senRecoveryCode(email);
+	public void sendRecoveryCode(String email,User user) {
+		RecoveryCodesStore store=RecoveryCodesStore.getInstance();
+		String code=RandomStringUtils.random(6, "0123456789");
+        store.addCode(email, code);
+		try { 
+			mailService.senRecoveryCode(email,user,code);
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

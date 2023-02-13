@@ -1,6 +1,7 @@
 package krugers.microservicio.auth.authmicroservice.service.cart;
 
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +30,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 
@@ -160,13 +162,11 @@ public class CartServiceImpl implements CartService {
 
         JasperPrint reportJasperPrint = null;
         try{
-            reportJasperPrint = JasperFillManager.fillReport(
-                JasperCompileManager.compileReport(
-                    ResourceUtils.getFile("classpath:jrxml/ReciboCompra.jrxml")
-                    .getAbsolutePath())
-            , reportParameters
-            , new JREmptyDataSource());
-        }catch(FileNotFoundException | JRException e){
+            InputStream stream = this.getClass().getResourceAsStream("/jrxml/ReciboCompra.jrxml");
+            JasperReport jasperReport = JasperCompileManager.compileReport(stream);
+
+            reportJasperPrint = JasperFillManager.fillReport(jasperReport, reportParameters, new JREmptyDataSource());
+        }catch(JRException e){
             e.printStackTrace();
         }
 

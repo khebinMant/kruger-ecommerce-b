@@ -1,9 +1,15 @@
+server:
+  ssl:
+    key-alias: https-example
+    key-store-type: JKS
+    key-password: vengacoders
+    key-store: classpath:https-example.jks
 spring:
   application:
     name: gateway-microservice
   cloud:
     config:
-      uri: http://localhost:8080
+      uri: http://config-microservice:8080
       username: root
       password: s3cr3t
     gateway:
