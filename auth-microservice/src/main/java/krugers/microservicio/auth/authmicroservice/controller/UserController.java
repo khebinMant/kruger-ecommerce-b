@@ -68,14 +68,17 @@ public class UserController {
 		LoginResponse response = userServiceImpl.login(dto);
 		if (response == null)
 			return ResponseEntity.badRequest().build();
+		log.info("Login user");
 		return ResponseEntity.ok(response);
 	}
 
 	@PostMapping("/validate")
 	public ResponseEntity<TokenDto> validate(@RequestParam String token) {
 		TokenDto tokenDto = userServiceImpl.validate(token);
-		if (tokenDto == null)
+		if (tokenDto == null){
+			log.info("Validating token", token);
 			return ResponseEntity.badRequest().build();
+		}
 		return ResponseEntity.ok(tokenDto);
 	}
 	
@@ -90,6 +93,7 @@ public class UserController {
 		User user=userServiceImpl.findByEmail(email);
 		if(user!=null) {
 			userServiceImpl.sendRecoveryCode(email,user);
+			log.info("Sending recovery code to", user);
 			return new ResponseEntity("SUCCESS", HttpStatus.OK);
 		}else {
 			return ResponseEntity.badRequest().build();
@@ -107,6 +111,7 @@ public class UserController {
 	public ResponseEntity validateRecoverycode (@RequestBody PasswordRecoveryRequest request) throws MessagingException {
 		User user=userServiceImpl.findByEmail(request.getEmail());
 		if(user!=null) {
+			log.info("Validating recovery code");
 			return userServiceImpl.validateRecoverycode(request) ?  new ResponseEntity("SUCCESS", HttpStatus.OK) :
 				new ResponseEntity("INVALID_CODE", HttpStatus.BAD_REQUEST);
 		}
@@ -123,6 +128,7 @@ public class UserController {
 	public ResponseEntity resetPassword (@RequestBody ChangeCredentialsRequest request)  {
 		User user=userServiceImpl.findByEmail(request.getEmail());
 		if(user!=null) {
+			log.info("Reseting customer credentiasl");
 			return userServiceImpl.resetNewPassword(request) ?  new ResponseEntity("SUCCESS", HttpStatus.OK) :
 				new ResponseEntity("FAIELD", HttpStatus.BAD_REQUEST);
 		}
@@ -137,6 +143,7 @@ public class UserController {
 	public ResponseEntity getAllCusotmers() {
 		List<User> customers = userServiceImpl.findAllCustomers();
 		if (customers != null) {
+			log.info("Getting all customers", customers);
 			return ResponseEntity.ok(customers);
 		}
 		return new ResponseEntity("There is no customers found", HttpStatus.NO_CONTENT);
@@ -154,10 +161,11 @@ public class UserController {
 		} else {
 			User userDB = userServiceImpl.findByEmail(user.getEmail());
 			if (userDB != null) {
-				System.out.println(userDB);
+				log.info("Cant create a user was createad");
 				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El email ya esta en uso");
 			}
 			User authUserCreated = userServiceImpl.save(user);
+			log.info("New user was createad", user);
 			return ResponseEntity.ok(authUserCreated);
 		}
 
