@@ -67,10 +67,10 @@
 - LinkedIn: [Kenan  Al-jaber]()
 
 
- **David Lozada **
+** Jose Andres Gavilanes**
 
-- GitHub: [@DashCode47](https://github.com/DashCode47)
-- LinkedIn: [David Lozada]()
+GitHub: @joseandresgavilanes
+LinkedIn: Jose Andres Gavilanes
 
 
 ## 🤲 Show your support
