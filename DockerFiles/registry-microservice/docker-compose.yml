@@ -1,0 +1,9 @@
+version: '1'
+services:
+  registry-microservice:
+    image: khebinsd/registry-microservice:latest
+    networks:
+      - microservicios
+networks:
+  microservicios:
+    external: true

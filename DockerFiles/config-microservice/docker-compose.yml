@@ -1,0 +1,9 @@
+version: '1'
+services:
+  config-microservice:
+    image: khebinsd/config-microservice:latest
+    networks:
+      - microservicios
+networks:
+  microservicios:
+    external: true

@@ -1,0 +1,11 @@
+version: '1'
+services:
+  gateway-microservice:
+    image: khebinsd/gateway-microservice:latest
+    ports:
+      - "8082:8082"
+    networks:
+      - microservicios
+networks:
+  microservicios:
+    external: true

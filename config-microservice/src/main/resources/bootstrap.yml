@@ -2,11 +2,13 @@ server:
     port: 8080
 
 spring:
+    application:
+        name: config-microservice
     cloud:
         config:
             server:
                 git:
-                    default-label: development
+                    default-label: docker-microservices
                     uri: https://github.com/khebinSd/kruger-ecommerce-b
                     searchPaths: config-data
     security:
