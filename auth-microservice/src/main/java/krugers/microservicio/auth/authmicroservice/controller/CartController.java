@@ -26,6 +26,7 @@ import krugers.microservicio.auth.authmicroservice.dto.OrderRequest;
 import krugers.microservicio.auth.authmicroservice.entity.Cart;
 import krugers.microservicio.auth.authmicroservice.service.cart.CartServiceImpl;
 import krugers.microservicio.auth.authmicroservice.service.user.UserServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -33,6 +34,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 
+@Slf4j
 @RestController
 @RequestMapping("/api/carts")
 public class CartController {
@@ -52,6 +54,7 @@ public class CartController {
     public ResponseEntity<?> addCart(@RequestBody(required = true) OrderRequest request) throws MessagingException{
         Cart user= cartServiceImpl.addCart(request);
         if(user!=null){
+            log.info("Creating new cart to user ", user);
             return new ResponseEntity<>(user,HttpStatus.OK);
         }
         return new ResponseEntity<>("Could not find a user with the id provided"
@@ -73,6 +76,7 @@ public class CartController {
             cart.setUser(userServiceImpl.findById(cart.getUserId()));
             return cart;
         }).collect(Collectors.toList());
+    log.info("Getting user carts history ", carts);
      return ResponseEntity.ok(carts);
     }
 
@@ -96,7 +100,7 @@ public class CartController {
                 cart.setUser(userServiceImpl.findById(cart.getUserId()));
                 return cart;
             }).collect(Collectors.toList());
-
+        log.info("Getting all user carts", carts);
         return ResponseEntity.ok(carts);
     }
 
@@ -115,6 +119,7 @@ public class CartController {
         }
         cart.setOrder(orderClientF.getOrder(cart.getId()).getBody());
         cart.setUser(userServiceImpl.findById(cart.getUserId()));
+        log.info("Getting a sigle cart by Id", cart);
         return ResponseEntity.ok(cart);
     }
 
@@ -128,7 +133,8 @@ public class CartController {
     @Tag(name = "GET cart report by Id ", description = "Retrieve information PDF of cart by Id")
     @GetMapping(value="/{id}/report")
     public ResponseEntity<byte[]> getCartReport(@PathVariable(name="id") Long id) throws JRException{
-        JasperPrint report = cartServiceImpl.getCartReport(id);
+       
+    	JasperPrint report = cartServiceImpl.getCartReport(id);
 
         if(report == null){
             return new ResponseEntity<byte []>(null, null, HttpStatus.NOT_FOUND);
@@ -137,6 +143,7 @@ public class CartController {
         //set PDF format
         headers.setContentType(MediaType.APPLICATION_PDF);
         headers.setContentDispositionFormData("filename", "recibo.pdf");
+        log.info("Getting a sigle report cart ", report);
 
         //create the report in PDF format
         return new ResponseEntity<byte []>(JasperExportManager.exportReportToPdf(report), headers, HttpStatus.OK);

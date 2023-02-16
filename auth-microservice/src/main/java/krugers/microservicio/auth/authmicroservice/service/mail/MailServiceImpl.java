@@ -11,7 +11,6 @@ import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import java.util.Date;
 
-
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import krugers.microservicio.auth.authmicroservice.entity.Cart;
@@ -23,139 +22,134 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class MailServiceImpl implements MailService{
+public class MailServiceImpl implements MailService {
 
-    @Autowired
-    JavaMailSender javaMailSender;
+	@Autowired
+	JavaMailSender javaMailSender;
 
-    @Autowired
-    UserService userService;
+	@Autowired
+	UserService userService;
 
-    @Autowired
-    TemplateEngine templateEngine;
+	@Autowired
+	TemplateEngine templateEngine;
 
-    @Override
-    public String SendMailOrderCreated(Cart cart) throws MessagingException {
-        
-        MimeMessage message  = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+	@Override
+	public String SendMailOrderCreated(Cart cart) throws MessagingException {
 
-        User user = userService.findById(cart.getUserId());
-        Context context = new Context();
-        context.setVariable("user", user);
+		MimeMessage message = javaMailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+				StandardCharsets.UTF_8.name());
 
-        String html = templateEngine.process("purchase", context);
+		User user = userService.findById(cart.getUserId());
+		Context context = new Context();
+		context.setVariable("user", user);
 
-        helper.setFrom("krugercellmag@gmail.com");
-        helper.setTo(user.getEmail());
-        helper.setSubject("Orden de compra");
-        helper.setText(html, true);  
+		String html = templateEngine.process("purchase", context);
 
-        javaMailSender.send(message);
-        
-        log.info("Sending email: {} with html body: {}", cart, html);
-        return "Email Sended";
-    }
+		helper.setFrom("krugercellmag@gmail.com");
+		helper.setTo(user.getEmail());
+		helper.setSubject("Orden de compra");
+		helper.setText(html, true);
 
-    @Override
-    public String SendMailOrderCanceled(Cart cart) throws MessagingException {
-                
-        MimeMessage message  = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+		javaMailSender.send(message);
 
-        User user = userService.findById(cart.getUserId());
-        Context context = new Context();
-        context.setVariable("user", user);
+		log.info("Sending email: {} with html body: {}", cart, html);
+		return "Email Sended";
+	}
 
-        String html = templateEngine.process("cancel", context);
+	@Override
+	public String SendMailOrderCanceled(Cart cart) throws MessagingException {
 
-        helper.setFrom("krugercellmag@gmail.com");
-        helper.setTo(user.getEmail());
-        helper.setSubject("Cancelación de compra");
-        helper.setText(html, true);  
-    
+		MimeMessage message = javaMailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+				StandardCharsets.UTF_8.name());
 
-        javaMailSender.send(message);
-        log.info("Sending email: {} with html body: {}", cart, html);
-        return "Email Sended";
-    }
+		User user = userService.findById(cart.getUserId());
+		Context context = new Context();
+		context.setVariable("user", user);
 
-    @Override
-    public String SendMailOrderInTravel(Cart cart) throws MessagingException {
-        MimeMessage message  = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+		String html = templateEngine.process("cancel", context);
 
-        User user = userService.findById(cart.getUserId());
-        Context context = new Context();
-        context.setVariable("user", user);
-        context.setVariable("cart", cart);
-        context.setVariable("today", new Date());
+		helper.setFrom("krugercellmag@gmail.com");
+		helper.setTo(user.getEmail());
+		helper.setSubject("Cancelación de compra");
+		helper.setText(html, true);
 
-        
-        String html = templateEngine.process("order", context);
+		javaMailSender.send(message);
+		log.info("Sending email: {} with html body: {}", cart, html);
+		return "Email Sended";
+	}
 
-        helper.setFrom("krugercellmag@gmail.com");
-        helper.setTo(user.getEmail());
-        helper.setSubject("Tu compra esta en camino");
-        helper.setText(html, true);  
-    
+	@Override
+	public String SendMailOrderInTravel(Cart cart) throws MessagingException {
+		MimeMessage message = javaMailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+				StandardCharsets.UTF_8.name());
 
-        javaMailSender.send(message);
-        log.info("Sending email: {} with html body: {}", cart, html);
-        return "Email Sended";
-    }
+		User user = userService.findById(cart.getUserId());
+		Context context = new Context();
+		context.setVariable("user", user);
+		context.setVariable("cart", cart);
+		context.setVariable("today", new Date());
 
-    @Override
-    public String SendMailOrderInReceived(Cart cart) throws MessagingException {
-        MimeMessage message  = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+		String html = templateEngine.process("order", context);
 
-        User user = userService.findById(cart.getUserId());
-        Context context = new Context();
-        context.setVariable("user", user);
-        context.setVariable("cart", cart);
-        context.setVariable("today", new Date());
+		helper.setFrom("krugercellmag@gmail.com");
+		helper.setTo(user.getEmail());
+		helper.setSubject("Tu compra esta en camino");
+		helper.setText(html, true);
 
-        String html = templateEngine.process("arrived", context);
+		javaMailSender.send(message);
+		log.info("Sending email: {} with html body: {}", cart, html);
+		return "Email Sended";
+	}
 
-        helper.setFrom("krugercellmag@gmail.com");
-        helper.setTo(user.getEmail());
-        helper.setSubject("Sano y salvo!");
-        helper.setText(html, true);  
-    
+	@Override
+	public String SendMailOrderInReceived(Cart cart) throws MessagingException {
+		MimeMessage message = javaMailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+				StandardCharsets.UTF_8.name());
 
-        javaMailSender.send(message);
-        log.info("Sending email: {} with html body: {}", cart, html);
-        return "Email Sended";
-    }
-    
-    
-    
+		User user = userService.findById(cart.getUserId());
+		Context context = new Context();
+		context.setVariable("user", user);
+		context.setVariable("cart", cart);
+		context.setVariable("today", new Date());
 
-    @Override
-    public String senRecoveryCode(String email) throws MessagingException {
-        RecoveryCodesStore store=RecoveryCodesStore.getInstance();
-        MimeMessage message  = javaMailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED, StandardCharsets.UTF_8.name());
+		String html = templateEngine.process("arrived", context);
 
-        User user = userService.findByEmail(email);
-        Context context = new Context();
-        String code=RandomStringUtils.random(6, "0123456789");
-        store.addCode(email, code);
-        context.setVariable("recoveryCode", code);
-        context.setVariable("user", user);
-        
-        String html = templateEngine.process("recoveryCode", context);
+		helper.setFrom("krugercellmag@gmail.com");
+		helper.setTo(user.getEmail());
+		helper.setSubject("Sano y salvo!");
+		helper.setText(html, true);
 
-        helper.setFrom("krugercellmag@gmail.com");
-        helper.setTo(user.getEmail());
-        helper.setSubject("Recuperacion de contrraseña");
-        helper.setText(html, true);  
+		javaMailSender.send(message);
+		log.info("Sending email: {} with html body: {}", cart, html);
+		return "Email Sended";
+	}
 
-        javaMailSender.send(message);
-        
-        log.info("Sending email: {} with html body: {}", email, html);
-        return "Email Sended";
-    }
-    
+	@Override
+	public String senRecoveryCode(String email,User user,String code) throws MessagingException {
+
+		MimeMessage message = javaMailSender.createMimeMessage();
+		MimeMessageHelper helper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
+				StandardCharsets.UTF_8.name());
+		Context context = new Context();
+
+		context.setVariable("recoveryCode", code);
+		context.setVariable("user", user);
+
+		String html = templateEngine.process("recoveryCode", context);
+
+		helper.setFrom("krugercellmag@gmail.com");
+		helper.setTo(user.getEmail());
+		helper.setSubject("Recuperacion de contrraseña");
+		helper.setText(html, true);
+
+		javaMailSender.send(message);
+
+		log.info("Sending email: {} with html body: {}", email, html);
+		return "Email Sended";
+	}
+
 }
