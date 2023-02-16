@@ -93,7 +93,7 @@
 <table>
     <tbody>
         <tr>
-        <td align="center"><a href="https://github.com/joseandresgavilanes"><img src="./public/images/pepe.jpg" width="100px;" alt="Alexander Cangas"/><br /><sub><b>Jose Andres Gavilanes</b></sub></a><br /><a href="https://github.com/joseandresgavilanes" title="Code">💻 Desarrollador</a></td>
+        <td align="center"><a href="https://github.com/joseandresgavilanes"><img src="https://avatars.githubusercontent.com/u/76002851?v=4" width="100px;" alt="Jose Andres Gavilanes"/><br /><sub><b>Jose Andres Gavilanes</b></sub></a><br /><a href="https://github.com/joseandresgavilanes" title="Code">💻 Desarrollador</a></td>
         </tr>
 <tr>
         <td align="center"><a href="https://github.com/joseandresgavilanes"><img src="https://avatars.githubusercontent.com/u/33032880?v=4" width="100px;" alt="Alexander Cangas"/><br /><sub><b>Kevin Mantilla</b></sub></a><br /><a href="https://github.com/joseandresgavilanes" title="Code">💻 Desarrollador</a></td>
@@ -102,9 +102,6 @@
         <td align="center"><a href="https://github.com/joseandresgavilanes"><img src="https://avatars.githubusercontent.com/u/52118245?v=4" width="100px;" alt="Alexander Cangas"/><br /><sub><b>Kenan Al-jaber</b></sub></a><br /><a href="https://github.com/joseandresgavilanes" title="Code">💻 Desarrollador</a></td>
         </tr>
         <br/>
-        <tr>
-            <td align="center"><a href="https://github.com/Juanse7793"><img src="https://avatars.githubusercontent.com/u/96317674?v=4" width="100px;" alt="Yuval Hazaz"/><br /><sub><b>Juan Sebastian Sotomayor</b></sub></a><br /><a href="https://github.com/Juanse7793" title="Code">FrontEnd Kruger Mentor</a></td>
-        </tr>
     </tbody>
 </table>
 
