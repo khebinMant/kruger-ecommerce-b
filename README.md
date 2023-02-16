@@ -51,37 +51,51 @@
 
 
 
+# 📱 About The Project
 
-## Correlo localmente
+Este proyecto de programación se enfoca en el desarrollo de un ecommerce de celulares. El objetivo es crear una plataforma en línea fácil de usar y accesible para los clientes, donde puedan navegar y comprar dispositivos móviles de diferentes marcas y modelos.
+
+La plataforma incluirá una página principal que muestre los productos destacados y una sección de búsqueda avanzada para ayudar a los clientes a encontrar el teléfono que desean. Cada producto tendrá su propia página con detalles completos sobre las especificaciones técnicas, imágenes y opiniones de los clientes.
+
+Además, se implementará un carrito de compras para que los clientes puedan agregar los productos que desean comprar y proceder con el pago en línea a través de una pasarela segura. También se incluirán opciones de envío y seguimiento del paquete para que los clientes puedan monitorear el progreso de su compra.
+
+El proyecto también incluirá un panel de administración para que el equipo de ecommerce pueda administrar el catálogo de productos, procesar los pedidos y monitorear las estadísticas de la tienda en línea.
+
+En resumen, este proyecto de programación brindará a los clientes una experiencia de compra en línea fluida y segura para comprar sus dispositivos móviles, y al mismo tiempo, brindará una solución eficiente y fácil de usar para el equipo de ecommerce.
+
+# 💾 🗄️  Correlo localmente
 
  ### Configuración
 
- - Clona este reposiotrio utilizando `git clone https://github.com/khebinSd/KrugerSFinalTask`
+ - Clona este reposiotrio utilizando `git clone https://github.com/khebinSd/kruger-ecommerce-b`
  - Es necesario tener instalado el JDK para Java 17.
  - Postman u otra herramienta como Thunder Client o Insonmia para el test de la API
 
  ### Pasos
 
- - Primero abrir el proyecto `config-microservicio`, este tiene centralizado los archivos de configruación de cada microservicio, ejectuar el proyecto con el IDE de confianza o utilizando `gradle bootrun`, se ejecutará en el puerto `8080`
+ - Primero abrir el proyecto `config-microservice`, este tiene centralizado los archivos de configruación de cada microservicio, ejectuar el proyecto con el IDE de confianza o utilizando `gradle bootrun`, se ejecutará en el puerto `8080`
 
- - Segundo abrir el proyecto `registry-microservicio`, este microservicio mantiene el registro de los microservicios del proyecto a manos de Eureka, ejectuar el proyecto con el IDE de confianza o utilizando`gradle bootrun`, se ejecturá en el puerto `8081`
+ - Segundo abrir el proyecto `registry-microservice`, este microservicio mantiene el registro de los microservicios del proyecto a manos de Eureka, ejectuar el proyecto con el IDE de confianza o utilizando`gradle bootrun`, se ejecturá en el puerto `8081`
 
- - Tercero abrir el proyecto `gateway-microservicio`, este microservicio se conecta con Eureka para obtener la información de los microservicios registrados e implementar, circuit breaker utilizando resilience4j y feign client además de otorgar balanceo de carga a los microservicios, ejectuar el proyecto con el IDE de confianza o utilizando `gradle bootrun`, se ejecturá en el puerto `8082`
+ - Tercero abrir el proyecto `product-microservice`, este microservicio contiene la API  de los productos, reviews y categorias y se conecta con el microservicio `customer-microservice` mediante Feign client, ejectuar el proyecto con el IDE de confianza o utilizando`gradle bootrun`, se ejecturá en el puerto `9090`
 
- - Cuarto abrir el proyecto `product-microservicio`, este microservicio contiene la API  de los productos, reviews y categorias y se conecta con el microservicio `customer-microservicio` mediante Feign client, ejectuar el proyecto con el IDE de confianza o utilizando`gradle bootrun`, se ejecturá en el puerto `9090`
+ - Cuarto abrir el proyecto `order-microservice`, este microservicio contiene la API  de los productos y customers/admis y se conecta con el microservicio `´product-microservice` y `auth-microservice` mediante Feign client, ejectuar el proyecto con el IDE de confianza o utilizando`gradle bootrun`, se ejecturá en el puerto `9091`
 
- - Cuarto abrir el proyecto `order-microservicio`, este microservicio contiene la API  de los productos y customers/admis y se conecta con el microservicio `´product-microservicio` y `customer-microservicio` mediante Feign client, ejectuar el proyecto con el IDE de confianza o utilizando`gradle bootrun`, se ejecturá en el puerto `9091`
+ - Quinto abrir el proyecto `auth-microservice`, este microservicio contiene la API  de los usuarios y se conecta con el microservicio `order-microservice` mediante Feign client, ejectuar el proyecto con el IDE de confianza o utilizando`gradle bootrun`, se ejecturá en el puerto `9092`
 
- - Quinto abrir el proyecto `auth-microservicio`, este microservicio contiene la API  de los usuarios y se conecta con el microservicio `order-microservicio` mediante Feign client, ejectuar el proyecto con el IDE de confianza o utilizando`gradle bootrun`, se ejecturá en el puerto `9092`
+ - Sexto abrir el proyecto `company-microservice`, este microservicio contiene la API de la compañia, ejectuar el proyecto con el IDE de confianza o utilizando`gradle bootrun`, se ejecturá en el puerto `9093`
 
+ - Finalmente abrir el proyecto `gateway-microservice`, este microservicio se conecta con Eureka para obtener la información de los microservicios registrados e implementar, circuit breaker utilizando resilience4j con feign client además de otorgar balanceo de carga al resto de los microservicios levantados previamente, ejectuar el proyecto con el IDE de confianza o utilizando `gradle bootrun`, se ejecturá en el puerto `8082`
 
  ### Documentación
 
-  - Para probar la documentación del microservicio `customer-microservicio` utilizando swagger se ejecuta localmente en la siguiente ruta  [http://localhost:9090/swagger-ui/index.html#/](http://localhost:9090/swagger-ui/index.html#/)
+  - Para probar la documentación del microservicio `product-microservice` utilizando swagger se ejecuta localmente en la siguiente ruta  [http://localhost:9090/swagger-ui/index.html#/](http://localhost:9090/swagger-ui/index.html#/)
 
-  - Para probar la documentación del microservicio `company-microservicio` utilizando swagger se ejecuta localmente en la siguiente ruta  [http://localhost:9091/swagger-ui/index.html#/](http://localhost:9091/swagger-ui/index.html#/)
+  - Para probar la documentación del microservicio `order-microservice` utilizando swagger se ejecuta localmente en la siguiente ruta  [http://localhost:9091/swagger-ui/index.html#/](http://localhost:9091/swagger-ui/index.html#/)
 
-  - Para probar la documentación del microservicio `auth-microservicio` utilizando swagger se ejecuta localmente en la siguiente ruta  [http://localhost:9091/swagger-ui/index.html#/](http://localhost:9092/swagger-ui/index.html#/)
+  - Para probar la documentación del microservicio `auth-microservice` utilizando swagger se ejecuta localmente en la siguiente ruta  [http://localhost:9092/swagger-ui/index.html#/](http://localhost:9092/swagger-ui/index.html#/)
+
+  - Para probar la documentación del microservicio `company-microservice` utilizando swagger se ejecuta localmente en la siguiente ruta  [http://localhost:9093/swagger-ui/index.html#/](http://localhost:9092/swagger-ui/index.html#/)
 
 
 <!-- ACKNOWLEDGMENTS -->
